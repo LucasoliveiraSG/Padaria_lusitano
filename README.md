@@ -8,7 +8,11 @@
 
 | Nome completo do aluno | RGM | Usuário do GitHub |
 | :---- | :---- | :---- |
-| Nome | RGM | usuario |
+| Alex Christini dos Santos | 47919833 | vitoriachristini2019-oss |
+| Carolina Ayumi Kawakami Faria | 47927470| carolinaayumi02-stack |
+| Lucas Oliveira da Silva| 48323667| LucasoliveiraSG|
+| Lucas Silva de Morais| 48040843 | lucasmoraisstory |
+
 
 &nbsp;
 
