@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dicionário de Dados - Padaria Forno Lusitano</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 6rem;
+        }
+        body{
+            margin-top: 6rem;
+            margin-left: 8px;
+            margin-right: 6px;
+            padding: 0px;
+            background-color: #F2F2F2;
+        }
+        nav{
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 4rem;
+            border-bottom: 2px solid rgb(124, 124, 124);
+            background-color: #F2E6D8;
+            z-index: 10;
+        }
+        nav, ul{
+            display: flex;
+            justify-content:center;
+            align-items: center;
+            list-style-type: none;
+            height: 5rem;
+            margin: 0px;
+            padding: 0px;
+        }
+        a {
+            margin: 0px 20px 0px 0px;
+            padding: 0px 10px 10px 0px;
+            text-decoration: none;
+            font-size:  1.5rem;
+            color: black;
+            position: relative;
+        }
+        a::after{
+            content: " ";
+            width: 0%;
+            height: 4px;
+            background-color: black;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            transition: 0.5s ease-in-out;
+        }
+        li, a:hover::after{
+            width: 100%;
+        }
+        header{
+            text-align: center;
+            margin-bottom: 50px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 1.2rem;
+        }
+        header p{
+            text-align: center;
+            width: auto;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+        header h4{
+            text-align: center;
+            background-color: rgb(245, 251, 255);
+            border-radius: 10px;
+            padding: 10px;
+            width: 100%;
+            margin: auto;
+            max-width: 800px;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid rgb(124, 124, 124);
+        }
+        .Tabela{
+            font-family: Arial, Helvetica, sans-serif;
+            border: 2px solid rgb(124, 124, 124);
+            border-left: 6px solid rgb(124, 124, 124);
+
+            border-radius: 10px;
+            margin: 0px auto 50px auto;
+            width: 100%;
+            max-width: 1200px;
+            align-content: center;
+            overflow: hidden;
+        }
+        .Tabela:target {
+            animation: piscapisca 1.5s ease-out;
+        }
+        .Topo{
+            padding: 20px 10px 15px 20px;
+            background-color: #BF9B7A;
+            border-radius: 4px 8px 0px 0px;
+            border-bottom: 2px solid rgb(124, 124, 124);
+            width: 100%;
+        }
+        h3, p{
+            margin-left: 0.5rem;
+            text-align: left;
+            font-size: 1.25rem;
+        }
+        h3{
+            margin-bottom: 0.5rem;
+        }
+        table {
+            width: 100%;
+            border-top: 0px;
+            border-collapse: collapse;
+            margin-top: 0px;
+        }
+        thead {
+            background-color: #F2E6D8;
+        }
+        tbody {
+            background-color: rgb(245, 251, 255);
+        }
+        td, th {
+            text-align: left;
+            border-bottom: 2px solid rgb(124, 124, 124);
+            padding: 12px;
+            text-align: left;
+            height: 30px;
+        }
+        tr, td {
+            padding: 12px;
+            text-align: left;
+            margin: 0px;
+            height: 30px;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        code {
+            font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+            font-size: 0.9em;
+            background: #F3EFF6;
+            padding: 0.1rem 0.35rem;
+            border-radius: 4px;
+            border: 2px groove #e1d7e7;
+            box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 #e1d7e7;
+        }
+        code:hover {
+            background: #E1D7E7;
+            border: 2px groove #e1d7e7;
+            box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 #e1d7e7;
+        }
+        @keyframes piscapisca {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+            }
+            30% {
+                box-shadow: 0 0 20px #D97B66;
+                border-left-color: #D97B66;
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+                border-left-color: rgb(124, 124, 124);
+            }
+        }
+
+        /* Complementos para as seções textuais (mesma paleta do dicionário) */
+        .Corpo{
+            padding: 15px 20px;
+            background-color: rgb(245, 251, 255);
+            border-bottom: 2px solid rgb(124, 124, 124);
+        }
+        .Corpo p{
+            margin: 0px 0px 0.8rem 0px;
+            font-size: 1rem;
+            line-height: 1.55;
+        }
+        .Corpo p:last-child{
+            margin-bottom: 0px;
+        }
+        .Corpo a{
+            display: inline-block;
+            margin: 0px 14px 8px 0px;
+            font-size: 1.05rem;
+        }
+        .Rolagem{
+            overflow-x: auto;
+        }
+        .Rolagem td:last-child{
+            min-width: 280px;
+        }
+        .Indices{
+            padding: 12px 20px;
+            background-color: #F2E6D8;
+            border-top: 2px solid rgb(124, 124, 124);
+        }
+        .Indices p{
+            margin: 0px;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <a href="#Conceitual"><li>Conceitual</li></a>
+            <a href="#Fluxo"><li>Fluxo</li></a>
+            <a href="#Convencoes"><li>Convenções</li></a>
+            <a href="#Entidades"><li>Entidades</li></a>
+            <a href="#Log"><li>Log</li></a>
+            <a href="#Acesso"><li>Acesso e LGPD</li></a>
+        </ul>
+    </nav>
+
+    <main>
+    <header>
+        <h1>Dicionário de Dados - Padaria Forno Lusitano</h1>
+        <p>Dicionário de Dados do modelo lógico (v1.0) do sistema da Padaria Forno Lusitano: atributos, tipos físicos, restrições de integridade e regras de negócio, com notação formal por entidade.</p>
+        <h4>Lucas Oliveira, Carolina Ayumi, Vitoria Christini, Lucas Morais</h4>
+    </header>
+
+    <!-- 1. MODELO CONCEITUAL -->
+    <section id="Conceitual" class="Tabela">
+        <div class="Topo">
+            <h3>1. Modelo conceitual</h3>
+            <p>Este modelo representa a operação da padaria, confeitaria e restaurante self-service: o cliente recebe uma comanda numerada, o consumo é lançado em vendas compostas por itens, a venda gera nota fiscal e pagamento, e a reposição de insumos junto aos fornecedores gera contas a pagar.</p>
+        </div>
+        <div class="Rolagem">
+        <table>
+            <thead>
+            <tr>
+                <th>Entidade</th>
+                <th>Relaciona-se com</th>
+                <th>Cardinalidade</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr><td><code>CLIENTE</code></td><td><code>COMANDA</code></td><td>1:N — um cliente cadastrado pode abrir várias comandas; cada comanda tem no máximo um cliente cadastrado (consumo no salão pode ser anônimo)</td></tr>
+            <tr><td><code>FUNCIONARIO</code></td><td><code>COMANDA</code></td><td>1:N — um funcionário registra várias comandas; toda comanda é registrada por exatamente um funcionário</td></tr>
+            <tr><td><code>COMANDA</code></td><td><code>VENDA</code></td><td>1:N — uma comanda recebe vários lançamentos de venda; toda venda pertence a uma única comanda</td></tr>
+            <tr><td><code>VENDA</code></td><td><code>ITEM_VENDA</code></td><td>1:N — uma venda é composta por vários itens; todo item pertence a uma única venda</td></tr>
+            <tr><td><code>PRODUTO</code></td><td><code>ITEM_VENDA</code></td><td>1:N — um produto aparece em muitos itens vendidos; todo item refere-se a um único produto. ITEM_VENDA é a entidade associativa entre VENDA e PRODUTO</td></tr>
+            <tr><td><code>VENDA</code></td><td><code>NOTA_FISCAL</code></td><td>1:1 opcional — uma venda gera no máximo uma nota fiscal; toda nota fiscal pertence a exatamente uma venda</td></tr>
+            <tr><td><code>NOTA_FISCAL</code></td><td><code>PAGAMENTO</code></td><td>1:N — uma nota pode ser quitada em mais de um pagamento (formas diferentes); todo pagamento liga-se a uma única nota</td></tr>
+            <tr><td><code>CATEGORIA</code></td><td><code>PRODUTO</code></td><td>1:N — uma categoria agrupa vários produtos; o produto pode ficar sem categoria (0,1)</td></tr>
+            <tr><td><code>PRODUTO</code></td><td><code>INGREDIENTE</code></td><td>N:N — um produto usa vários ingredientes e um ingrediente entra em vários produtos; resolvida pela tabela associativa PRODUTO_INGREDIENTE (ficha técnica)</td></tr>
+            <tr><td><code>INGREDIENTE</code></td><td><code>FORNECEDOR</code></td><td>N:N — um ingrediente é comprado de vários fornecedores e um fornecedor vende vários ingredientes; ABASTECIMENTO é a entidade associativa</td></tr>
+            <tr><td><code>ABASTECIMENTO</code></td><td><code>CONTAS_PAGAR</code></td><td>1:N — uma compra recebida gera obrigações financeiras; toda conta a pagar origina-se de um abastecimento</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="Corpo">
+            <p><b>Cliente</b> é a pessoa física cadastrada para atendimentos de delivery ou encomenda. <b>Funcionário</b> é o colaborador da padaria (atendimento, caixa, cozinha, panificação ou limpeza) que registra as comandas. <b>Categoria</b> é o agrupamento comercial dos produtos (pães, doces, bebidas, laticínios e frios, self-service).</p>
+            <p><b>Comanda</b> é o documento transacional numerado que acompanha o cliente no salão até o pagamento. <b>Venda</b> é o lançamento de consumo feito em uma comanda, e <b>Item de venda</b> é cada produto lançado nela, com quantidade (ou peso) e preço praticado. <b>Nota fiscal</b> é o documento fiscal emitido sobre a venda, e <b>Pagamento</b> é a liquidação financeira da nota (dinheiro, cartão ou PIX).</p>
+            <p><b>Produto</b> é a mercadoria vendida (de produção própria ou de revenda). <b>Ingrediente</b> é a matéria-prima consumida na produção. <b>Fornecedor</b> é a empresa que fornece insumos e mercadorias. <b>Abastecimento</b> é o evento de compra e recebimento de um ingrediente de um fornecedor. <b>Contas a pagar</b> é a obrigação financeira gerada pelo abastecimento, com vencimento e situação de pagamento.</p>
+        </div>
+    </section>
+
+    <!-- 2. FLUXO DE DADOS -->
+    <section id="Fluxo" class="Tabela">
+        <div class="Topo">
+            <h3>2. Fluxo de dados (visão de DFD)</h3>
+            <p>Caminho percorrido pelos dados nas principais rotinas da padaria.</p>
+        </div>
+        <div class="Corpo">
+            <p><b>Atendimento:</b> o cliente entra e recebe uma comanda → o funcionário abre a <code>COMANDA</code> (vinculada a um <code>FUNCIONARIO</code> e, se houver cadastro, a um <code>CLIENTE</code>) → cada lançamento de consumo gera uma <code>VENDA</code> com seus <code>ITEM_VENDA</code>, ligando a venda aos <code>PRODUTO</code> consumidos → na saída, o caixa emite a <code>NOTA_FISCAL</code> da venda e registra um ou mais <code>PAGAMENTO</code> → com o pagamento total, a comanda é encerrada e liberada para um novo cliente.</p>
+            <p><b>Produção e estoque:</b> a ficha técnica em <code>PRODUTO_INGREDIENTE</code> define quanto de cada <code>INGREDIENTE</code> um produto consome → vendas reduzem a quantidade de <code>PRODUTO</code>; quando produto ou ingrediente chega ao <code>estoque_minimo</code>, entra na lista de reposição (RN15).</p>
+            <p><b>Compras:</b> a necessidade de reposição leva a um <code>ABASTECIMENTO</code>, que liga um <code>INGREDIENTE</code> a um <code>FORNECEDOR</code> → o recebimento da mercadoria atualiza o estoque do ingrediente e gera registros em <code>CONTAS_PAGAR</code>, com vencimento e situação.</p>
+            <p>Toda leitura ou escrita nessas tabelas é registrada pelo log de acesso do SGBD (§5), o que sustenta a auditoria e a conformidade com a LGPD (§6).</p>
+        </div>
+    </section>
+
+    <!-- 3. CONVENÇÕES -->
+    <section id="Convencoes" class="Tabela">
+        <div class="Topo">
+            <h3>3. Convenções do dicionário</h3>
+            <p>SGBD, codificação, notação formal e padrão de nomes.</p>
+        </div>
+        <div class="Corpo">
+            <p><b>SGBD:</b> MySQL 8 (8.0.16 ou superior, versão em que as restrições <code>CHECK</code> passam a ser aplicadas), mecanismo de armazenamento InnoDB — cuida da persistência dos dados, do log de transações (redo/undo), das chaves estrangeiras e mantém o índice primário clusterizado por chave.</p>
+            <p><b>Codificação de caracteres:</b> utf8mb4 com collation utf8mb4_0900_ai_ci. Escolhida em vez de latin1 por cobrir a acentuação do português sem perda em nomes, endereços e descrições.</p>
+            <p><b>Integridade referencial:</b> todas as chaves estrangeiras usam <code>ON DELETE RESTRICT</code>, que impede excluir um registro pai que tenha dependentes e preserva o histórico. Produto e fornecedor saem de circulação por exclusão lógica (coluna <code>ativo</code>).</p>
+            <p><b>Notação formal</b> (símbolos usados neste dicionário):</p>
+        </div>
+        <div class="Rolagem">
+        <table>
+            <thead>
+            <tr>
+                <th>Símbolo</th>
+                <th>Significado</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr><td><code>=</code></td><td>é composto de</td></tr>
+            <tr><td><code>+</code></td><td>e (conecta elementos obrigatórios)</td></tr>
+            <tr><td><code>( )</code></td><td>opcional</td></tr>
+            <tr><td><code>{ }</code>, <code>n{ }m</code></td><td>iteração, com limite mínimo n e máximo m</td></tr>
+            <tr><td><code>[ | ]</code></td><td>escolha obrigatória entre alternativas</td></tr>
+            <tr><td><code>/ /</code></td><td>rótulo de um grupo repetitivo ou composto</td></tr>
+            <tr><td><code>@</code></td><td>identificador (chave primária)</td></tr>
+            <tr><td><code>* *</code></td><td>comentário, fora da estrutura formal</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="Corpo">
+            <p><b>Padrão de nomes:</b> os nomes das colunas seguem o modelo lógico e o script SQL (minúsculas, com sublinhado). Prefixos e sufixos recorrentes: <code>id_</code> identificador ou chave estrangeira, que não sofre operação matemática e mantém o mesmo nome da chave primária que referencia; <code>nome_</code> nome; <code>data_</code> data; <code>horario_</code> e <code>data_hora_</code> data com hora; <code>quantidade_</code> quantidade ou peso; <code>preco</code>, <code>preco_unitario</code> e <code>valor_</code> valores monetários; <code>status</code> situação do registro; <code>ativo</code> indicador booleano de registro em uso.</p>
+            <p><b>Tipos físicos:</b> o BRModelo exibe tipos genéricos (<code>FLOAT</code>, <code>INT</code>); este dicionário registra os tipos definidos no DDL. Valores monetários usam <code>DECIMAL(10,2)</code>, para evitar aproximações de ponto flutuante. <code>CPF</code>, <code>CNPJ</code>, <code>cep</code>, <code>codigo_barra</code> e <code>chave_acesso</code> são texto porque são identificadores: podem começar com zero e não entram em cálculos.</p>
+            <p><b>Versão deste dicionário:</b> v1.0, 8/novembro/2026. Qualquer alteração de estrutura deve gerar nova revisão registrada nesta seção; a prática atende, ela própria, ao princípio de rastreabilidade exigido pela LGPD (art. 6º, X).</p>
+        </div>
+    </section>
+
+    <!-- 4. DICIONÁRIO POR ENTIDADE -->
+    <section id="Entidades" class="Tabela">
+        <div class="Topo">
+            <h3>4. Dicionário de dados por entidade</h3>
+            <p>Estrutura formal, leitura, atributos e índices das 14 tabelas do modelo lógico.</p>
+        </div>
+        <div class="Corpo">
+            <p>
+                <a href="#Cliente">Cliente</a>
+                <a href="#Funcionario">Funcionário</a>
+                <a href="#Categoria">Categoria</a>
+                <a href="#Produto">Produto</a>
+                <a href="#Comanda">Comanda</a>
+                <a href="#Venda">Venda</a>
+                <a href="#ItemVenda">Item_venda</a>
+                <a href="#NotaFiscal">Nota_Fiscal</a>
+                <a href="#Pagamento">Pagamento</a>
+                <a href="#Ingrediente">Ingrediente</a>
+                <a href="#ProdutoIngrediente">Produto_Ingrediente</a>
+                <a href="#Fornecedor">Fornecedor</a>
+                <a href="#Abastecimento">Abastecimento</a>
+                <a href="#ContasPagar">Contas_pagar</a>
+            </p>
+        </div>
+    </section>
+
+    <section id="Cliente" class="Tabela">
+        <div class="Topo">
+            <h3>CLIENTE</h3>
+            <p>tabela de cadastro dos clientes para delivery e encomendas.</p>
+        </div>
+        <div class="Corpo">
+            <p><code>CLIENTE = @id_cliente + nome + telefone + /ENDERECO/ = cep + cidade + logradouro + bairro + numero</code></p>
+            <p><b>Leitura:</b> <code>id_cliente</code> é o identificador único; <code>nome</code> e <code>telefone</code> são obrigatórios; o grupo <code>/ENDERECO/</code> é o atributo composto do conceitual, decomposto em cinco colunas simples (1FN). O consumo no salão pode ocorrer sem cadastro, por isso a ligação de <code>COMANDA</code> com <code>CLIENTE</code> é opcional.</p>
+        </div>
+        <div class="Rolagem">
+        <table>
+            <thead>
+            <tr>
+                <th>Atributo</th>
+                <th>Tipo físico</th>
+                <th>Obrigatório</th>
+                <th>Significado e relevância</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr><td><code>id_cliente</code></td><td><code>INT</code></td><td>Sim (PK)</td><td>Código de localização do registro, gerado pelo sistema (<code>AUTO_INCREMENT</code>); não sofre operação matemática.</td></tr>
+            <tr><td><code>nome</code></td><td><code>VARCHAR(120)</code></td><td>Sim</td><td>Nome completo do cliente; identifica o pedido de delivery ou encomenda.</td></tr>
+            <tr><td><code>telefone</code></td><td><code>VARCHAR(20)</code></td><td>Sim</td><td>Telefone de contato para confirmar entregas e encomendas. Dado pessoal, protegido conforme a RN13.</td></tr>
+            <tr><td><code>cep</code></td><td><code>VARCHAR(9)</code></td><td>Sim</td><td>Código de Endereçamento Postal; texto, pois pode começar com zero. Usado para verificar o raio de entrega (RN09).</td></tr>
+            <tr><td><code>cidade</code></td><td><code>VARCHAR(80)</code></td><td>Sim</td><td>Nome da cidade do endereço de entrega.</td></tr>
+            <tr><td><code>logradouro</code></td><td><code>VARCHAR(120)</code></td><td>Sim</td><td>Rua, avenida ou estrada do endereço de entrega.</td></tr>
+            <tr><td><code>bairro</code></td><td><code>VARCHAR(80)</code></td><td>Sim</td><td>Bairro do endereço; apoia análises de entrega por região.</td></tr>
+            <tr><td><code>numero</code></td><td><code>INT</code></td><td>Sim</td><td>Número do imóvel no logradouro. Dado pessoal, protegido conforme a RN13.</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="Indices">
+            <p><b>Índices:</b> PK <code>id_cliente</code> (clusterizado); índice secundário em <code>nome</code> e em <code>telefone</code> (localizar o cliente ao receber um pedido).</p>
+        </div>
+    </section>
+
+    <section id="Funcionario" class="Tabela">
+        <div class="Topo">
+            <h3>FUNCIONARIO</h3>
+            <p>tabela de cadastro dos colaboradores da padaria.</p>
+        </div>
+        <div class="Corpo">
+            <p><code>FUNCIONARIO = @id_funcionario + nome_funcionario + CPF + cargo + telefone</code></p>
+            <p><b>Leitura:</b> todos os campos são obrigatórios; <code>CPF</code> é único e garante que o mesmo colaborador não seja cadastrado duas vezes, sem servir de chave primária, pois documentos podem ser corrigidos.</p>
+        </div>
+        <div class="Rolagem">
+        <table>
+            <thead>
+            <tr>
+                <th>Atributo</th>
+                <th>Tipo físico</th>
+                <th>Obrigatório</th>
+                <th>Significado e relevância</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr><td><code>id_funcionario</code></td><td><code>INT</code></td><td>Sim (PK)</td><td>Identificador do funcionário, gerado pelo sistema.</td></tr>
+            <tr><td><code>nome_funcionario</code></td><td><code>VARCHAR(120)</code></td><td>Sim</td><td>Nome completo do colaborador; permite saber quem registrou cada comanda.</td></tr>
+            <tr><td><code>CPF</code></td><td><code>VARCHAR(11)</code></td><td>Sim (único)</td><td>Cadastro de Pessoa Física, somente dígitos. Dado pessoal protegido (RN13).</td></tr>
+            <tr><td><code>cargo</code></td><td><code>VARCHAR(60)</code></td><td>Sim</td><td>Função exercida (atendente, operador de caixa, cozinheiro, padeiro, gerente etc.); base para o acesso por perfil e para a escala de turnos.</td></tr>
+            <tr><td><code>telefone</code></td><td><code>VARCHAR(20)</code></td><td>Sim</td><td>Telefone de contato do colaborador. Dado pessoal protegido (RN13).</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="Indices">
+            <p><b>Índices:</b> PK <code>id_funcionario</code>; índice único em <code>CPF</code> (evita duplicidade e agiliza a validação do cadastro).</p>
+        </div>
+    </section>
+
+    <section id="Categoria" class="Tabela">
+        <div class="Topo">
+            <h3>CATEGORIA</h3>
+            <p>tabela de cadastro das categorias de produtos.</p>
+        </div>
+        <div class="Corpo">
+            <p><code>CATEGORIA = @id_categoria + descricao</code></p>
+            <p><b>Leitura:</b> a categoria é identificada apenas pelo código e pela descrição; ela agrupa produtos de um setor da padaria (pães, doces, bebidas, laticínios e frios, self-service).</p>
+        </div>
+        <div class="Rolagem">
+        <table>
+            <thead>
+            <tr>
+                <th>Atributo</th>
+                <th>Tipo físico</th>
+                <th>Obrigatório</th>
+                <th>Significado e relevância</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr><td><code>id_categoria</code></td><td><code>INT</code></td><td>Sim (PK)</td><td>Identificador da categoria, gerado pelo sistema.</td></tr>
+            <tr><td><code>descricao</code></td><td><code>VARCHAR(60)</code></td><td>Sim</td><td>Nome da categoria; sustenta relatórios de faturamento por setor.</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="Indices">
+            <p><b>Índices:</b> PK <code>id_categoria</code>.</p>
+        </div>
+    </section>
+
+    <section id="Produto" class="Tabela">
+        <div class="Topo">
+            <h3>PRODUTO</h3>
+            <p>tabela de cadastro dos produtos vendidos, com preço atual e saldo em estoque.</p>
+        </div>
+        <div class="Corpo">
+            <p><code>PRODUTO = @id_produto + nome_produto + preco + quantidade + estoque_minimo + unidade_medida + (id_categoria) + (codigo_barra) + ativo</code></p>
+            <p><b>Leitura:</b> <code>id_categoria</code> e <code>codigo_barra</code> vêm entre ( ) porque nem todo produto é classificado ou possui código de barras (itens produzidos na casa e itens do self-service). Produto só pode ser lançado se estiver cadastrado, e só é vendido se houver saldo suficiente (RN05).</p>
+        </div>
+        <div class="Rolagem">
+        <table>
+            <thead>
+            <tr>
+                <th>Atributo</th>
+                <th>Tipo físico</th>
+                <th>Obrigatório</th>
+                <th>Significado e relevância</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr><td><code>id_produto</code></td><td><code>INT</code></td><td>Sim (PK)</td><td>Identificador do produto, gerado pelo sistema.</td></tr>
+            <tr><td><code>nome_produto</code></td><td><code>VARCHAR(100)</code></td><td>Sim</td><td>Nome comercial do produto, exibido no lançamento da comanda.</td></tr>
+            <tr><td><code>preco</code></td><td><code>DECIMAL(10,2)</code></td><td>Sim</td><td>Preço atual de venda (por unidade ou por quilo, conforme <code>unidade_medida</code>); deve ser maior que zero. O preço praticado em cada venda fica em <code>ITEM_VENDA.preco_unitario</code>, então reajustes não alteram vendas passadas.</td></tr>
+            <tr><td><code>quantidade</code></td><td><code>INT</code></td><td>Sim</td><td>Saldo atual em estoque; não pode ser negativo (RN05). Valor padrão 0.</td></tr>
+            <tr><td><code>estoque_minimo</code></td><td><code>INT</code></td><td>Sim</td><td>Saldo mínimo desejado; ao atingi-lo, o produto entra na lista de reposição (RN15, RF03).</td></tr>
+            <tr><td><code>unidade_medida</code></td><td><code>VARCHAR(10)</code></td><td>Sim</td><td>Unidade de comercialização (ex.: <code>un</code>, <code>kg</code>); no self-service o valor é calculado pelo peso líquido vezes o preço por quilo (RN08).</td></tr>
+            <tr><td><code>id_categoria</code></td><td><code>INT</code></td><td>Não (FK)</td><td>Referência à categoria do produto; aceita nulo (cardinalidade 0,1).</td></tr>
+            <tr><td><code>codigo_barra</code></td><td><code>VARCHAR(20)</code></td><td>Não (único)</td><td>Código para escaneamento rápido no registro do consumo; texto, pois pode começar com zero. Aceita nulo.</td></tr>
+            <tr><td><code>ativo</code></td><td><code>BOOLEAN</code></td><td>Sim</td><td>Indicador de produto em linha; produto inativo some do lançamento sem perder o histórico (exclusão lógica). Valor padrão verdadeiro.</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="Indices">
+            <p><b>Índices:</b> PK <code>id_produto</code>; índice único em <code>codigo_barra</code>; índice em <code>id_categoria</code> (FK) e em <code>nome_produto</code> (busca no lançamento).</p>
+        </div>
+    </section>
+
+    <section id="Comanda" class="Tabela">
+        <div class="Topo">
+            <h3>COMANDA</h3>
+            <p>tabela de registro das comandas abertas no salão e no balcão.</p>
+        </div>
+        <div class="Corpo">
+            <p><code>COMANDA = @id_comanda + [aberta | paga] + horario_abertura + (horario_fechamento) + id_funcionario + (id_cliente)</code></p>
+            <p><b>Leitura:</b> <code>[aberta | paga]</code> exige escolher exatamente uma situação para <code>status_comanda</code>; <code>horario_fechamento</code> é opcional porque a comanda aberta ainda não foi encerrada (RN04); <code>id_cliente</code> é opcional porque o cliente do salão não precisa estar cadastrado. <code>id_comanda</code> é o registro do sistema, e não o número impresso na comanda física, que é reaproveitada após o pagamento total (RN06).</p>
+        </div>
+        <div class="Rolagem">
+        <table>
+            <thead>
+            <tr>
+                <th>Atributo</th>
+                <th>Tipo físico</th>
+                <th>Obrigatório</th>
+                <th>Significado e relevância</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr><td><code>id_comanda</code></td><td><code>INT</code></td><td>Sim (PK)</td><td>Identificador do registro da comanda, gerado pelo sistema.</td></tr>
+            <tr><td><code>status_comanda</code></td><td><code>VARCHAR(10)</code></td><td>Sim (escolha)</td><td>Situação da comanda: <code>aberta</code> ou <code>paga</code> (<code>CHECK</code>); a saída do cliente só é liberada após o pagamento (RN01). Valor padrão <code>aberta</code>.</td></tr>
+            <tr><td><code>horario_abertura</code></td><td><code>DATETIME</code></td><td>Sim</td><td>Data e hora em que a comanda foi entregue ao cliente; gerado automaticamente. Base para o tempo médio de permanência.</td></tr>
+            <tr><td><code>horario_fechamento</code></td><td><code>DATETIME</code></td><td>Não</td><td>Data e hora do pagamento total; deve ficar nulo enquanto a comanda estiver aberta e ser preenchido ao encerrá-la (RN04).</td></tr>
+            <tr><td><code>id_funcionario</code></td><td><code>INT</code></td><td>Sim (FK)</td><td>Funcionário que registrou a comanda.</td></tr>
+            <tr><td><code>id_cliente</code></td><td><code>INT</code></td><td>Não (FK)</td><td>Cliente cadastrado associado à comanda, quando houver.</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="Indices">
+            <p><b>Índices:</b> PK <code>id_comanda</code>; índices em <code>id_funcionario</code> e <code>id_cliente</code> (FK) e em <code>status_comanda</code> (listar comandas abertas no fechamento do caixa).</p>
+        </div>
+    </section>
+
+    <section id="Venda" class="Tabela">
+        <div class="Topo">
+            <h3>VENDA</h3>
+            <p>tabela de registro dos lançamentos de consumo feitos em cada comanda.</p>
+        </div>
+        <div class="Corpo">
+            <p><code>VENDA = @id_venda + id_comanda + data_hora_lancamento + 1{/ITEM_VENDA/}n</code></p>
+            <p><b>Leitura:</b> <code>id_comanda</code> liga a venda à comanda que a recebeu; <code>1{/ITEM_VENDA/}n</code> indica que toda venda tem ao menos um item, detalhado na entidade <code>ITEM_VENDA</code>. A tabela guarda apenas o cabeçalho do lançamento; o total é obtido pela soma dos itens.</p>
+        </div>
+        <div class="Rolagem">
+        <table>
+            <thead>
+            <tr>
+                <th>Atributo</th>
+                <th>Tipo físico</th>
+                <th>Obrigatório</th>
+                <th>Significado e relevância</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr><td><code>id_venda</code></td><td><code>INT</code></td><td>Sim (PK)</td><td>Identificador da venda, gerado pelo sistema.</td></tr>
+            <tr><td><code>id_comanda</code></td><td><code>INT</code></td><td>Sim (FK)</td><td>Comanda em que o consumo foi lançado.</td></tr>
+            <tr><td><code>data_hora_lancamento</code></td><td><code>DATETIME</code></td><td>Sim</td><td>Momento do lançamento; gerado automaticamente (valor padrão: data e hora atuais). Base para o faturamento por período e por horário.</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="Indices">
+            <p><b>Índices:</b> PK <code>id_venda</code>; índice em <code>id_comanda</code> (FK) e em <code>data_hora_lancamento</code> (relatórios por período).</p>
+        </div>
+    </section>
+
+    <section id="ItemVenda" class="Tabela">
+        <div class="Topo">
+            <h3>ITEM_VENDA</h3>
+            <p>tabela associativa que registra cada produto lançado em uma venda.</p>
+        </div>
+        <div class="Corpo">
+            <p><code>ITEM_VENDA = @id_item_venda + id_venda + id_produto + quantidade_vendida + preco_unitario</code></p>
+            <p><b>Leitura:</b> resolve a relação entre <code>VENDA</code> e <code>PRODUTO</code>. Possui chave própria para permitir lançar o mesmo produto mais de uma vez na mesma venda; <code>quantidade_vendida</code> e <code>preco_unitario</code> são atributos da própria associação.</p>
+        </div>
+        <div class="Rolagem">
+        <table>
+            <thead>
+            <tr>
+                <th>Atributo</th>
+                <th>Tipo físico</th>
+                <th>Obrigatório</th>
+                <th>Significado e relevância</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr><td><code>id_item_venda</code></td><td><code>INT</code></td><td>Sim (PK)</td><td>Identificador do item, gerado pelo sistema.</td></tr>
+            <tr><td><code>id_venda</code></td><td><code>INT</code></td><td>Sim (FK)</td><td>Venda à qual o item pertence.</td></tr>
+            <tr><td><code>id_produto</code></td><td><code>INT</code></td><td>Sim (FK)</td><td>Produto lançado; só produtos cadastrados podem ser lançados (RN05).</td></tr>
+            <tr><td><code>quantidade_vendida</code></td><td><code>DECIMAL(10,3)</code></td><td>Sim</td><td>Quantidade ou peso líquido vendido (três casas decimais atendem o self-service, RN08); deve ser maior que zero.</td></tr>
+            <tr><td><code>preco_unitario</code></td><td><code>DECIMAL(10,2)</code></td><td>Sim</td><td>Preço praticado no momento da venda, copiado de <code>PRODUTO.preco</code>; preserva o histórico mesmo com reajustes. O subtotal do item é calculado (<code>quantidade_vendida</code> × <code>preco_unitario</code>) e não é armazenado.</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="Indices">
+            <p><b>Índices:</b> PK <code>id_item_venda</code>; índices em <code>id_venda</code> e <code>id_produto</code> (FKs; este último acelera relatórios de produtos mais vendidos).</p>
+        </div>
+    </section>
+
+    <section id="NotaFiscal" class="Tabela">
+        <div class="Topo">
+            <h3>NOTA_FISCAL</h3>
+            <p>tabela de registro dos documentos fiscais emitidos sobre as vendas.</p>
+        </div>
+        <div class="Corpo">
+            <p><code>NOTA_FISCAL = @id_nota_fiscal + id_venda + numero_nota + serie + chave_acesso + data_emissao + valor_total + [emitida | cancelada]</code></p>
+            <p><b>Leitura:</b> <code>id_venda</code> é obrigatório e único, o que garante o 1:1 com <code>VENDA</code> (uma nota por venda); <code>[emitida | cancelada]</code> exige escolher a situação da nota, pois nota emitida não é excluída, apenas cancelada (RN16). Toda venda paga gera cupom fiscal (RN12).</p>
+        </div>
+        <div class="Rolagem">
+        <table>
+            <thead>
+            <tr>
+                <th>Atributo</th>
+                <th>Tipo físico</th>
+                <th>Obrigatório</th>
+                <th>Significado e relevância</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr><td><code>id_nota_fiscal</code></td><td><code>INT</code></td><td>Sim (PK)</td><td>Identificador interno da nota, gerado pelo sistema; não depende do número fiscal, que pode ser corrigido ou reiniciado.</td></tr>
+            <tr><td><code>id_venda</code></td><td><code>INT</code></td><td>Sim (FK, único)</td><td>Venda que originou a nota; a unicidade é o que garante o 1:1.</td></tr>
+            <tr><td><code>numero_nota</code></td><td><code>INT</code></td><td>Sim</td><td>Número sequencial do documento fiscal; o par (<code>numero_nota</code>, <code>serie</code>) é único.</td></tr>
+            <tr><td><code>serie</code></td><td><code>INT</code></td><td>Sim</td><td>Série do documento fiscal.</td></tr>
+            <tr><td><code>chave_acesso</code></td><td><code>VARCHAR(44)</code></td><td>Sim (único)</td><td>Chave de acesso de 44 dígitos que identifica a nota; texto, pois pode começar com zero.</td></tr>
+            <tr><td><code>data_emissao</code></td><td><code>DATETIME</code></td><td>Sim</td><td>Data e hora de emissão; gerado automaticamente.</td></tr>
+            <tr><td><code>valor_total</code></td><td><code>DECIMAL(10,2)</code></td><td>Sim</td><td>Valor total da nota, igual à soma dos itens da venda; deve ser maior que zero. Atributo derivado, mantido para registro fiscal.</td></tr>
+            <tr><td><code>status</code></td><td><code>VARCHAR(10)</code></td><td>Sim (escolha)</td><td>Situação da nota: <code>emitida</code> ou <code>cancelada</code> (<code>CHECK</code>). Valor padrão <code>emitida</code>.</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="Indices">
+            <p><b>Índices:</b> PK <code>id_nota_fiscal</code>; índice único em <code>id_venda</code>, em <code>chave_acesso</code> e no par (<code>numero_nota</code>, <code>serie</code>); índice em <code>data_emissao</code> (relatórios por período).</p>
+        </div>
+    </section>
+
+    <section id="Pagamento" class="Tabela">
+        <div class="Topo">
+            <h3>PAGAMENTO</h3>
+            <p>tabela de registro das liquidações financeiras das notas fiscais.</p>
+        </div>
+        <div class="Corpo">
+            <p><code>PAGAMENTO = @id_pagamento + id_nota_fiscal + [dinheiro | cartao_credito | cartao_debito | pix] + valor_pago + (valor_troco) + data_hora_pagamento + [pendente | confirmado | cancelado]</code></p>
+            <p><b>Leitura:</b> <code>[dinheiro | cartao_credito | cartao_debito | pix]</code> exige escolher a forma de pagamento em <code>forma_pagamento</code>; <code>valor_troco</code> só se aplica a pagamentos em dinheiro; a soma dos pagamentos confirmados deve cobrir o total da nota antes de liberar a comanda (RN06).</p>
+        </div>
+        <div class="Rolagem">
+        <table>
+            <thead>
+            <tr>
+                <th>Atributo</th>
+                <th>Tipo físico</th>
+                <th>Obrigatório</th>
+                <th>Significado e relevância</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr><td><code>id_pagamento</code></td><td><code>INT</code></td><td>Sim (PK)</td><td>Identificador do pagamento, gerado pelo sistema.</td></tr>
+            <tr><td><code>id_nota_fiscal</code></td><td><code>INT</code></td><td>Sim (FK)</td><td>Nota fiscal quitada por este pagamento.</td></tr>
+            <tr><td><code>forma_pagamento</code></td><td><code>VARCHAR(20)</code></td><td>Sim (escolha)</td><td>Meio de pagamento: <code>dinheiro</code>, <code>cartao_credito</code>, <code>cartao_debito</code> ou <code>pix</code> (<code>CHECK</code>); base para análise do perfil de pagamento.</td></tr>
+            <tr><td><code>valor_pago</code></td><td><code>DECIMAL(10,2)</code></td><td>Sim</td><td>Valor entregue pelo cliente nesta forma de pagamento; deve ser maior que zero.</td></tr>
+            <tr><td><code>valor_troco</code></td><td><code>DECIMAL(10,2)</code></td><td>Não</td><td>Troco devolvido, nos pagamentos em dinheiro; não pode ser negativo. Valor padrão 0. Atributo derivado (valor pago menos valor devido).</td></tr>
+            <tr><td><code>data_hora_pagamento</code></td><td><code>DATETIME</code></td><td>Sim</td><td>Momento da liquidação; gerado automaticamente.</td></tr>
+            <tr><td><code>status_pagamento</code></td><td><code>VARCHAR(15)</code></td><td>Sim (escolha)</td><td>Situação: <code>pendente</code>, <code>confirmado</code> ou <code>cancelado</code> (<code>CHECK</code>). Valor padrão <code>confirmado</code>.</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="Indices">
+            <p><b>Índices:</b> PK <code>id_pagamento</code>; índice em <code>id_nota_fiscal</code> (FK) e em <code>data_hora_pagamento</code> (conciliação do fechamento do caixa e faturamento por período).</p>
+        </div>
+    </section>
+
+    <section id="Ingrediente" class="Tabela">
+        <div class="Topo">
+            <h3>INGREDIENTE</h3>
+            <p>tabela de cadastro das matérias-primas e insumos de produção.</p>
+        </div>
+        <div class="Corpo">
+            <p><code>INGREDIENTE = @id_ingrediente + nome_ingrediente + unidade_medida + quantidade_estoque + estoque_minimo</code></p>
+            <p><b>Leitura:</b> todos os campos são obrigatórios; <code>quantidade_estoque</code> acompanha o saldo do insumo e <code>estoque_minimo</code> define o ponto de reposição (RN15).</p>
+        </div>
+        <div class="Rolagem">
+        <table>
+            <thead>
+            <tr>
+                <th>Atributo</th>
+                <th>Tipo físico</th>
+                <th>Obrigatório</th>
+                <th>Significado e relevância</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr><td><code>id_ingrediente</code></td><td><code>INT</code></td><td>Sim (PK)</td><td>Identificador do ingrediente, gerado pelo sistema.</td></tr>
+            <tr><td><code>nome_ingrediente</code></td><td><code>VARCHAR(100)</code></td><td>Sim</td><td>Nome do insumo (farinha, manteiga, leite etc.).</td></tr>
+            <tr><td><code>unidade_medida</code></td><td><code>VARCHAR(10)</code></td><td>Sim</td><td>Unidade em que o saldo e as receitas são expressos (ex.: <code>g</code>, <code>ml</code>, <code>un</code>); evita confundir quilos com gramas.</td></tr>
+            <tr><td><code>quantidade_estoque</code></td><td><code>INT</code></td><td>Sim</td><td>Saldo atual do insumo, na unidade de medida; não pode ser negativo. Valor padrão 0.</td></tr>
+            <tr><td><code>estoque_minimo</code></td><td><code>INT</code></td><td>Sim</td><td>Saldo mínimo; ao atingi-lo, o insumo entra na lista de reposição (RN15).</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="Indices">
+            <p><b>Índices:</b> PK <code>id_ingrediente</code>; índice em <code>nome_ingrediente</code> (busca no controle de estoque).</p>
+        </div>
+    </section>
+
+    <section id="ProdutoIngrediente" class="Tabela">
+        <div class="Topo">
+            <h3>PRODUTO_INGREDIENTE</h3>
+            <p>tabela associativa com a ficha técnica (receita) de cada produto.</p>
+        </div>
+        <div class="Corpo">
+            <p><code>PRODUTO_INGREDIENTE = @(id_produto + id_ingrediente) + quantidade_utilizada</code></p>
+            <p><b>Leitura:</b> resolve a relação N:N entre <code>PRODUTO</code> e <code>INGREDIENTE</code>. A chave primária é composta pelas duas chaves estrangeiras, o que impede repetir o mesmo ingrediente no mesmo produto; <code>quantidade_utilizada</code> registra quanto de cada ingrediente o produto consome.</p>
+        </div>
+        <div class="Rolagem">
+        <table>
+            <thead>
+            <tr>
+                <th>Atributo</th>
+                <th>Tipo físico</th>
+                <th>Obrigatório</th>
+                <th>Significado e relevância</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr><td><code>id_produto</code></td><td><code>INT</code></td><td>Sim (PK, FK)</td><td>Produto fabricado, que usa o ingrediente.</td></tr>
+            <tr><td><code>id_ingrediente</code></td><td><code>INT</code></td><td>Sim (PK, FK)</td><td>Ingrediente consumido na fabricação do produto.</td></tr>
+            <tr><td><code>quantidade_utilizada</code></td><td><code>DECIMAL(10,3)</code></td><td>Sim</td><td>Quantidade do ingrediente por unidade produzida, na unidade de medida do ingrediente; deve ser maior que zero. Permite baixar o estoque conforme a produção.</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="Indices">
+            <p><b>Índices:</b> PK composta (<code>id_produto</code>, <code>id_ingrediente</code>); índice em <code>id_ingrediente</code> (descobrir em quais produtos um insumo é usado).</p>
+        </div>
+    </section>
+
+    <section id="Fornecedor" class="Tabela">
+        <div class="Topo">
+            <h3>FORNECEDOR</h3>
+            <p>tabela de cadastro dos fornecedores de insumos e mercadorias.</p>
+        </div>
+        <div class="Corpo">
+            <p><code>FORNECEDOR = @id_fornecedor + nome_fornecedor + CNPJ + telefone + (email) + ativo</code></p>
+            <p><b>Leitura:</b> o fornecedor é cadastrado antes da primeira compra; <code>email</code> é opcional; <code>CNPJ</code> é único. Fornecedor que deixa de ser usado é desativado, não excluído.</p>
+        </div>
+        <div class="Rolagem">
+        <table>
+            <thead>
+            <tr>
+                <th>Atributo</th>
+                <th>Tipo físico</th>
+                <th>Obrigatório</th>
+                <th>Significado e relevância</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr><td><code>id_fornecedor</code></td><td><code>INT</code></td><td>Sim (PK)</td><td>Identificador do fornecedor, gerado pelo sistema.</td></tr>
+            <tr><td><code>nome_fornecedor</code></td><td><code>VARCHAR(120)</code></td><td>Sim</td><td>Razão social ou nome do fornecedor.</td></tr>
+            <tr><td><code>CNPJ</code></td><td><code>VARCHAR(14)</code></td><td>Sim (único)</td><td>Cadastro Nacional da Pessoa Jurídica, somente dígitos; texto, pois pode começar com zero.</td></tr>
+            <tr><td><code>telefone</code></td><td><code>VARCHAR(20)</code></td><td>Sim</td><td>Telefone de contato para pedidos e reclamações.</td></tr>
+            <tr><td><code>email</code></td><td><code>VARCHAR(120)</code></td><td>Não</td><td>E-mail de contato para o envio de pedidos de compra.</td></tr>
+            <tr><td><code>ativo</code></td><td><code>BOOLEAN</code></td><td>Sim</td><td>Indicador de fornecedor em uso; exclusão lógica que preserva o histórico de compras. Valor padrão verdadeiro.</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="Indices">
+            <p><b>Índices:</b> PK <code>id_fornecedor</code>; índice único em <code>CNPJ</code> (evita duplicidade e agiliza a validação do cadastro).</p>
+        </div>
+    </section>
+
+    <section id="Abastecimento" class="Tabela">
+        <div class="Topo">
+            <h3>ABASTECIMENTO</h3>
+            <p>tabela associativa que registra cada compra de ingrediente junto a um fornecedor.</p>
+        </div>
+        <div class="Corpo">
+            <p><code>ABASTECIMENTO = @id_abastecimento + id_ingrediente + id_fornecedor + quantidade + preco_unitario + valor_total + data_abastecimento</code></p>
+            <p><b>Leitura:</b> resolve a relação N:N entre <code>INGREDIENTE</code> e <code>FORNECEDOR</code>. Cada linha é uma compra recebida; a chave própria permite comprar o mesmo ingrediente do mesmo fornecedor várias vezes. O recebimento conforme lança o estoque; divergências são tratadas fora desta tabela.</p>
+        </div>
+        <div class="Rolagem">
+        <table>
+            <thead>
+            <tr>
+                <th>Atributo</th>
+                <th>Tipo físico</th>
+                <th>Obrigatório</th>
+                <th>Significado e relevância</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr><td><code>id_abastecimento</code></td><td><code>INT</code></td><td>Sim (PK)</td><td>Identificador da compra, gerado pelo sistema.</td></tr>
+            <tr><td><code>id_ingrediente</code></td><td><code>INT</code></td><td>Sim (FK)</td><td>Ingrediente comprado.</td></tr>
+            <tr><td><code>id_fornecedor</code></td><td><code>INT</code></td><td>Sim (FK)</td><td>Fornecedor que entregou a mercadoria.</td></tr>
+            <tr><td><code>quantidade</code></td><td><code>INT</code></td><td>Sim</td><td>Quantidade recebida, na unidade de medida do ingrediente; deve ser maior que zero.</td></tr>
+            <tr><td><code>preco_unitario</code></td><td><code>DECIMAL(10,2)</code></td><td>Sim</td><td>Preço pago por unidade no momento da compra; deve ser maior que zero. Acompanha a variação de custo ao longo do tempo.</td></tr>
+            <tr><td><code>valor_total</code></td><td><code>DECIMAL(10,2)</code></td><td>Sim</td><td>Valor da compra (<code>quantidade</code> × <code>preco_unitario</code>); atributo derivado que serve de base para a conta a pagar.</td></tr>
+            <tr><td><code>data_abastecimento</code></td><td><code>DATE</code></td><td>Sim</td><td>Data do recebimento da mercadoria.</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="Indices">
+            <p><b>Índices:</b> PK <code>id_abastecimento</code>; índices em <code>id_ingrediente</code> e <code>id_fornecedor</code> (FKs) e em <code>data_abastecimento</code> (gasto com compras por período).</p>
+        </div>
+    </section>
+
+    <section id="ContasPagar" class="Tabela">
+        <div class="Topo">
+            <h3>CONTAS_PAGAR</h3>
+            <p>tabela de registro das obrigações financeiras geradas pelas compras.</p>
+        </div>
+        <div class="Corpo">
+            <p><code>CONTAS_PAGAR = @id_conta + id_abastecimento + valor + data_emissao + data_vencimento + (data_pagamento) + [pendente | paga] + (forma_pagamento)</code></p>
+            <p><b>Leitura:</b> <code>data_pagamento</code> e <code>forma_pagamento</code> são opcionais porque só existem depois que a conta é paga; <code>[pendente | paga]</code> exige escolher a situação em <code>status</code>. O vencimento não pode ser anterior à emissão (RN14).</p>
+        </div>
+        <div class="Rolagem">
+        <table>
+            <thead>
+            <tr>
+                <th>Atributo</th>
+                <th>Tipo físico</th>
+                <th>Obrigatório</th>
+                <th>Significado e relevância</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr><td><code>id_conta</code></td><td><code>INT</code></td><td>Sim (PK)</td><td>Identificador da conta a pagar, gerado pelo sistema.</td></tr>
+            <tr><td><code>id_abastecimento</code></td><td><code>INT</code></td><td>Sim (FK)</td><td>Compra que originou a obrigação (RN14).</td></tr>
+            <tr><td><code>valor</code></td><td><code>DECIMAL(10,2)</code></td><td>Sim</td><td>Valor da parcela ou da conta; deve ser maior que zero.</td></tr>
+            <tr><td><code>data_emissao</code></td><td><code>DATE</code></td><td>Sim</td><td>Data de emissão da obrigação.</td></tr>
+            <tr><td><code>data_vencimento</code></td><td><code>DATE</code></td><td>Sim</td><td>Data limite de pagamento; não pode ser anterior à emissão (<code>CHECK</code>). Base para o controle de contas vencidas.</td></tr>
+            <tr><td><code>data_pagamento</code></td><td><code>DATE</code></td><td>Não</td><td>Data em que a conta foi paga; nulo enquanto estiver pendente.</td></tr>
+            <tr><td><code>status</code></td><td><code>VARCHAR(10)</code></td><td>Sim (escolha)</td><td>Situação: <code>pendente</code> ou <code>paga</code> (<code>CHECK</code>). Valor padrão <code>pendente</code>.</td></tr>
+            <tr><td><code>forma_pagamento</code></td><td><code>VARCHAR(20)</code></td><td>Não</td><td>Meio usado para quitar a conta (boleto, PIX, transferência etc.); preenchido no pagamento.</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="Indices">
+            <p><b>Índices:</b> PK <code>id_conta</code>; índice em <code>id_abastecimento</code> (FK) e em (<code>status</code>, <code>data_vencimento</code>) (listar contas pendentes e vencidas).</p>
+        </div>
+    </section>
+
+    <!-- 5. LOG DE ACESSO -->
+    <section id="Log" class="Tabela">
+        <div class="Topo">
+            <h3>5. Log de acesso (metadado operacional)</h3>
+            <p>Registro de quem leu ou alterou os dados.</p>
+        </div>
+        <div class="Corpo">
+            <p>As 14 tabelas ficam sob o mesmo mecanismo de auditoria do SGBD. Na edição Enterprise do MySQL, o plugin <code>audit_log</code> grava os eventos em formato JSON no caminho definido pela variável de sistema <code>audit_log_file</code>. Na edição Community, que não inclui o plugin, a alternativa é o log geral (<code>general_log=ON</code>, <code>log_output=TABLE</code>), consultável em <code>mysql.general_log</code>.</p>
+            <p>Retenção e rotação do log seguem política própria, independente da retenção dos dados de negócio. O log cobre as consultas de auditoria do script (códigos <code>A01</code>, <code>A02</code>…), mas não substitui o histórico de negócio: alterações feitas diretamente no banco não geram registro automático dentro das tabelas.</p>
+        </div>
+    </section>
+
+    <!-- 6. ACESSO E LGPD -->
+    <section id="Acesso" class="Tabela">
+        <div class="Topo">
+            <h3>6. Acesso por operação e conformidade com a LGPD (metadado administrativo)</h3>
+            <p>Perfis de usuário do banco (<code>GRANT</code>): Atendimento, Caixa, Estoque/Cozinha, Gerência e Auditoria.</p>
+        </div>
+        <div class="Rolagem">
+        <table>
+            <thead>
+            <tr>
+                <th>Tabela</th>
+                <th>LER</th>
+                <th>INSERIR</th>
+                <th>ATUALIZAR</th>
+                <th>APAGAR</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr><td><code>CLIENTE</code></td><td>Atendimento, Caixa, Gerência, Auditoria</td><td>Atendimento, Gerência</td><td>Atendimento, Gerência</td><td>Nenhum papel — apenas anonimização ao fim da finalidade ou a pedido do titular</td></tr>
+            <tr><td><code>FUNCIONARIO</code></td><td>Gerência, Auditoria</td><td>Gerência</td><td>Gerência</td><td>Nenhum papel — o histórico de comandas depende do registro (<code>RESTRICT</code>)</td></tr>
+            <tr><td><code>CATEGORIA</code></td><td>Todos os papéis</td><td>Gerência</td><td>Gerência</td><td>Gerência (somente categoria sem produtos)</td></tr>
+            <tr><td><code>PRODUTO</code></td><td>Atendimento, Caixa, Estoque, Gerência, Auditoria</td><td>Gerência, Estoque</td><td>Gerência (preço), Estoque (quantidade)</td><td>Nenhum papel — exclusão lógica pela coluna <code>ativo</code></td></tr>
+            <tr><td><code>COMANDA</code></td><td>Atendimento, Caixa, Gerência, Auditoria</td><td>Atendimento</td><td>Atendimento (itens), Caixa (fechamento)</td><td>Nenhum papel</td></tr>
+            <tr><td><code>VENDA</code></td><td>Atendimento, Caixa, Gerência, Auditoria</td><td>Atendimento</td><td>Nenhum papel — correção por novo lançamento</td><td>Nenhum papel</td></tr>
+            <tr><td><code>ITEM_VENDA</code></td><td>Atendimento, Caixa, Gerência, Auditoria</td><td>Atendimento</td><td>Nenhum papel — correção por novo lançamento</td><td>Nenhum papel</td></tr>
+            <tr><td><code>NOTA_FISCAL</code></td><td>Caixa, Gerência, Auditoria</td><td>Caixa</td><td>Caixa (somente <code>status</code>, para cancelamento)</td><td>Nenhum papel — nota emitida é apenas cancelada (RN16)</td></tr>
+            <tr><td><code>PAGAMENTO</code></td><td>Caixa, Gerência, Auditoria</td><td>Caixa</td><td>Caixa (somente <code>status_pagamento</code>)</td><td>Nenhum papel</td></tr>
+            <tr><td><code>INGREDIENTE</code></td><td>Estoque, Gerência, Auditoria</td><td>Estoque, Gerência</td><td>Estoque, Gerência</td><td>Nenhum papel</td></tr>
+            <tr><td><code>PRODUTO_INGREDIENTE</code></td><td>Estoque, Gerência, Auditoria</td><td>Gerência</td><td>Gerência</td><td>Gerência</td></tr>
+            <tr><td><code>FORNECEDOR</code></td><td>Estoque, Gerência, Auditoria</td><td>Gerência</td><td>Gerência</td><td>Nenhum papel — exclusão lógica pela coluna <code>ativo</code></td></tr>
+            <tr><td><code>ABASTECIMENTO</code></td><td>Estoque, Gerência, Auditoria</td><td>Estoque, Gerência</td><td>Gerência</td><td>Nenhum papel</td></tr>
+            <tr><td><code>CONTAS_PAGAR</code></td><td>Gerência, Auditoria</td><td>Gerência (gerada no recebimento da compra, RN14)</td><td>Gerência (baixa do pagamento)</td><td>Nenhum papel</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="Corpo">
+            <p><code>CLIENTE</code> (nome, telefone e endereço) e <code>FUNCIONARIO</code> (nome, CPF e telefone) concentram os dados pessoais do modelo (LGPD art. 5º, I). Nenhuma das tabelas guarda dado pessoal sensível (art. 5º, II). O tratamento de clientes se ampara na execução do serviço solicitado (delivery ou encomenda), e o de funcionários, na relação de trabalho e em obrigações legais; a finalidade é definida e o acesso é restrito aos papéis envolvidos, conforme a RN13.</p>
+            <p>O CPF do consumidor só entra na nota fiscal se ele solicitar (RN12). <code>NOTA_FISCAL</code> e <code>PAGAMENTO</code> seguem o prazo legal de guarda fiscal e não são apagadas; encerrada a finalidade, os dados pessoais de clientes são anonimizados — nunca apagados fisicamente quando houver histórico dependente — preservando a estatística sem identificar a pessoa. <code>FORNECEDOR</code> é dado cadastral de pessoa jurídica e segue as mesmas regras gerais de acesso e log.</p>
+            <p>Toda consulta fica registrada no log de acesso (§5), o que sustenta o princípio de responsabilização (art. 6º, X). Este dicionário não equivale a conformidade completa com a LGPD, que também depende de finalidade, consentimento e retenção definidos na operação do sistema.</p>
+        </div>
+    </section>
+    </main>
+
+    <footer></footer>
+</body>
+</html>
