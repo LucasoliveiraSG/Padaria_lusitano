@@ -170,17 +170,22 @@ Nesta seção, descrevem-se os principais fluxos operacionais mapeados na rotina
 | Contas_pagar | `id_conta` |	id_abastecimento → Abastecimento |
 
 ### 1.4 Processo de Normalização (1FN, 2FN e 3FN)
+----
+### 1FN: Eliminação de grupos repetitivos/atributos multivalorados.
+- O atributo composto `endereco` foi separado por colunas `numero`, `CEP`,  `logradouro`,    `cidade`, `bairro`. Sua separação ocorreu pois a inserção dos elementos em novas colunas permite uma consulta mais eficiente e rápida.
 
-*(vale 7,5%)*
 
-- **1FN:** *eliminação de grupos repetitivos/atributos multivalorados.*  
-- **2FN:** *eliminação de dependências parciais.*  
-- **3FN:** *eliminação de dependências transitivas.*  
-- **Justificativa do processo:** *por que cada forma normal foi necessária no seu caso.*
+### 2FN: Eliminação de dependências parciais.
+- Foi criada a tabela `item_venda` com atributos: `id_venda`, `id_produto`, `quantidade_vendida`, `preco_unitario` e `id_item_venda`. A criação ocorreu para que em sua tabela uma venda possa conter vários produtos.
+
+- Foi criada a tabela `produto_ingrediente` com atributos: `id_produto`,`ìd_ingrediente` e `quantidade_utilizada`. A criação ocorreu pela possibilidade de um produto conter vários ingredientes diferentes.
+
+### 3FN: Eliminação de dependências transitivas.
+- Não foi identificado elementos que estivessem fora da 3FN
 
 ### 1.5 Justificativas Técnicas das Decisões
 
-*(vale 7,5%)*
+
 
 - Justificar as **chaves primárias** escolhidas.  
 - Justificar as **chaves estrangeiras** e os relacionamentos que elas implementam.  
