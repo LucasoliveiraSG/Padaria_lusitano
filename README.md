@@ -51,17 +51,6 @@
 - **Comprovação:** ao menos uma foto da entrevista no local, como arquivo JPG ou PNG no repositório.  
 - **O que foi levantado:** o que foi perguntado, o que foi confirmado e, se houve nova visita, o que mudou em relação à Entrega 1 (processos, regras, volumes, problemas). O levantamento completo fica em **um arquivo Markdown (`.md`) à parte no repositório**, com link no README — **recomenda-se fortemente** colocá-lo numa pasta chamada **`levantamento`** (ex.: `levantamento/levantamento.md`). Esse arquivo é um **texto organizado, escrito pelo grupo**, sobre o que foi levantado — **não** é um vídeo ou áudio da entrevista, nem a transcrição crua de formulários ou de perguntas e respostas. **No README, apresente um resumo do levantamento.**
 
-**Nível de detalhe — processos, requisitos e regras de negócio (todos os grupos)**
-
-*Frases genéricas como "o sistema deve permitir cadastrar cliente" são **superficiais** e não bastam. Em processos, requisitos e regras, indique **quais dados** estão envolvidos — todos os campos que aparecem no trabalho (DER, dicionário de dados, modelo lógico):*
-
-| Superficial | Detalhado |
-| :---- | :---- |
-| *O sistema deve permitir cadastrar cliente.* | *RF03 — O sistema deve permitir cadastrar cliente com nome completo, CPF, telefone, e-mail e endereço (logradouro, número, bairro, CEP).* |
-| *O cliente faz o pedido.* | *O garçom anota no pedido a mesa, o número da pulseira do cliente e, para cada item, o produto, a quantidade e as observações.* |
-| *O cliente precisa estar cadastrado.* | *RN05 — Todo cliente deve ter CPF válido e único; telefone e nome completo são obrigatórios.* |
-
-&nbsp;
 
 **Processos de negócio (todos os grupos)**
 
@@ -85,15 +74,20 @@ Nesta seção, descrevem-se os principais fluxos operacionais mapeados na rotina
 6. **Cadastro de Clientes para Entregas:**
    Processo voltado para o atendimento na modalidade de *delivery* ou encomendas externas. Quando o cliente solicita um pedido fora do salão, a equipe realiza o registro dos dados cadastrais essenciais: **nome, telefone de contato e endereço completo**, garantindo a rastreabilidade logística e o histórico de atendimento.
 
-7. **Produção própria de pães e doces**
+7. **Produção própria de pães e doces:**
+   Processo operacional realizado na cozinha e na área de panificação, responsável por transformar insumos em produtos prontos para venda. A produção segue receitas padronizadas que definem os ingredientes e as quantidades necessárias para cada item. A equipe registra o que foi produzido, a quantidade e a data, e os ingredientes consumidos são baixados do estoque. Os produtos fabricados entram no estoque de pães e doces, ficando disponíveis para o atendimento no salão e no balcão.
 
-8. **Compra de insumos e cadastro de fornecedores**
+8. **Compra de insumos e cadastro de fornecedores:**
+   Processo administrativo de reposição de matérias-primas e mercadorias de revenda (farinha, laticínios, frios, bebidas, entre outros). Antes da primeira compra, cada fornecedor é cadastrado com razão social, CNPJ, telefone, e-mail e endereço. A necessidade de compra é identificada a partir do controle de estoque, e o pedido é emitido ao fornecedor com os itens, as quantidades e o valor negociado. O valor da compra gera uma obrigação financeira, registrada em contas a pagar com vencimento e situação de pagamento.
 
-9. **Recebimento da mercadoria**
+9. **Recebimento da mercadoria:**
+   Rotina de conferência das entregas realizadas pelos fornecedores. No ato da entrega, o responsável compara os itens recebidos com o pedido de compra e a nota fiscal do fornecedor, verificando quantidade, qualidade, temperatura (quando aplicável) e prazo de validade. Mercadorias conformes são lançadas no estoque, e divergências ou avarias são registradas para devolução ou reclamação. Esse processo liga o pedido de compra à entrada efetiva de produtos no estoque.
 
-10. **Escala de turnos dos 25 colaboradores**
+10. **Escala de turnos dos 25 colaboradores:**
+   Processo de gestão de pessoal que organiza a jornada dos 25 colaboradores de modo a cobrir as 15 horas diárias de funcionamento (07:00h às 22:00h). A escala define, para cada colaborador, o setor (atendimento, caixa, cozinha, panificação, limpeza), o dia, o turno e o horário de entrada e saída. Ela é elaborada previamente, considerando folgas e a demanda de cada período, e permite identificar quem estava responsável por cada setor em determinado horário.
 
-11. **Controle de validade e perdas**
+11. **Controle de validade e perdas:**
+   Rotina de verificação periódica das datas de validade dos produtos e insumos estocados, com atenção especial aos perecíveis (laticínios, frios, pães e doces). Itens vencidos, danificados ou produzidos em excesso e não vendidos são retirados de circulação e registrados como perda, com produto, quantidade, data e motivo. Esse registro dá baixa no estoque e fornece dados para ajustar compras e produção, reduzindo o desperdício.
 
 **Requisitos (todos os grupos)**
 
@@ -117,27 +111,24 @@ Nesta seção, descrevem-se os principais fluxos operacionais mapeados na rotina
 
 - **Regras operacionais:** 
 
-  - Um cliente só pode entrar no estabelecimento se estiver com a comanda em mãos, e só pode pagar a comanda no caixa.
-  - O caixa só pode ser aberto por um funcionário autorizado, e só pode ser fechado quando não houver nenhum cliente dentro da loja.
-  - Todas as comandas devem ser registradas no sistema, e só podem ser fechadas quando o cliente for pagar a comanda.
-  - Um produto só pode ser registrado no sistema se estiver cadastrado no estoque, e só pode ser vendido se houver quantidade suficiente em estoque.
-  - Uma comanda só pode ser liberada para um novo cliente após o pagamento total dos itens consumidos.
-  - Multa por perda da comanda.
-  - Preço por quilo no self-service.
-  - Taxa e raio de entrega.
-  - Descarte de produtos vencidos.
-  - Normas sanitárias de manipulação.
-  - Emissão de cupom fiscal.
-  - LGPD para CPF e endereço de clientes.
-- **Restrições organizacionais:** 
-
-  - Política de Controle de Acesso e Auditoria: O sistema deve implementar um mecanismo de autenticação robusto, garantindo que apenas funcionários autorizados possam acessar funcionalidades críticas, como abertura e fechamento de caixa, registro de vendas e alterações de estoque.
-  - Política de Liquidação Integral (Bloqueio de Reuso de Comanda): O sistema deve impedir que uma comanda seja reutilizada ou reaberta para um novo cliente até que o pagamento integral de todos os itens registrados tenha sido confirmado e processado, assegurando a integridade financeira das transações.
+ - RN01: Cliente só circula no salão com a comanda numerada; a saída só é liberada após o pagamento.
+ - RN02: Caixa só é aberto por funcionário autorizado, com registro do fundo de troco.
+ - RN03: Caixa só é fechado sem comandas abertas pendentes; o fechamento exige conciliação do valor apurado.
+ - RN04: Todo consumo é registrado no sistema; a comanda só é encerrada no momento do pagamento.
+ - RN05: Produto só é lançado se estiver cadastrado, e só é vendido se houver saldo suficiente em estoque.
+ - RN06: Comanda só é liberada para novo cliente após o pagamento total dos itens.
+ - RN07: Perda da comanda gera multa, registrada com motivo e funcionário responsável.
+ - RN08: No self-service, o valor é calculado pelo peso líquido multiplicado pelo preço por quilo vigente.
+ - RN09: Delivery só atende endereços dentro do raio definido, com cobrança de taxa de entrega.
+ - RN10: Produto vencido ou avariado é descartado, registrado como perda e baixado do estoque.
+ - RN11: Manipulação de alimentos segue as normas sanitárias (higiene, temperatura e rastreio de lotes).
+ - RN12: Toda venda paga gera cupom fiscal, com CPF na nota somente se o cliente solicitar.
+ - RN13: CPF e endereço de clientes são tratados conforme a LGPD, com finalidade definida e acesso restrito.
 ---
 
 | Apontamento da correção da E1 | O que mudou no trabalho | Por quê |
 | :---- | :---- | :---- |
-| *ex.: N:N entre PEDIDO e PRODUTO sem quantidade* | *criada a entidade associativa ITEM\_PEDIDO com quantidade e preço praticado* | *sem ela não é possível saber quanto de cada produto foi vendido* |
+| *a* | *criada a entidade associativa ITEM\_PEDIDO com quantidade e preço praticado* | *sem ela não é possível saber quanto de cada produto foi vendido* |
 | *ex.: chaves estrangeiras desenhadas no DER* | *removidas — passam a aparecer só no modelo lógico (seção 2\)* | *FK é decisão do modelo lógico, não do conceitual* |
 
 &nbsp;
@@ -164,19 +155,19 @@ Nesta seção, descrevem-se os principais fluxos operacionais mapeados na rotina
 
 | Tabela	| Chave primária | Chaves estrangeiras |
 | :---- | :---- | :---- |
-| Cliente |	id_cliente | nenhuma |	
-| Categoria | id_categoria | nenhuma |	
-| Funcionário |	id_funcionario | nenhuma |
-| Fornecedor | id_fornecedor | nenhuma |	
-| Ingrediente |	id_ingrediente | nenhuma |	
-| Comanda |	id_comanda | id_cliente → Cliente, id_funcionario → Funcionário |
-| Produto |	id_produto | id_categoria → Categoria |
-| Venda	| (id_comanda, id_produto) | id_comanda → Comanda, id_produto → Produto	|
-| Nota Fiscal |	id_nota_fiscal | id_venda → Venda (1:1, com UNIQUE) |
-| Pagamento | id_pagamento | id_nota_fiscal → Nota Fiscal |
-| Produto_Ingrediente |	(id_produto, id_ingrediente) | id_produto → Produto, id_ingrediente → Ingrediente |
-| Abastecimento | id_abastecimento | id_ingrediente → Ingrediente, id_fornecedor → Fornecedor |
-| Contas_pagar | id_conta |	id_abastecimento → Abastecimento |
+| Cliente |	`id_cliente` | nenhuma |	
+| Categoria | `id_categoria` | nenhuma |	
+| Funcionário |	`id_funcionario` | nenhuma |
+| Fornecedor | `id_fornecedor` | nenhuma |	
+| Ingrediente |	`id_ingrediente` | nenhuma |	
+| Comanda |	`id_comanda` | id_cliente → Cliente, id_funcionario → Funcionário |
+| Produto |	`id_produto` | id_categoria → Categoria |
+| Venda	| `(id_comanda, id_produto)` | id_comanda → Comanda, id_produto → Produto	|
+| Nota Fiscal |	`id_nota_fiscal` | id_venda → Venda (1:1, com UNIQUE) |
+| Pagamento | `id_pagamento` | id_nota_fiscal → Nota Fiscal |
+| Produto_Ingrediente |	`(id_produto, id_ingrediente)` | id_produto → Produto, id_ingrediente → Ingrediente |
+| Abastecimento | `id_abastecimento` | id_ingrediente → Ingrediente, id_fornecedor → Fornecedor |
+| Contas_pagar | `id_conta` |	id_abastecimento → Abastecimento |
 
 ### 1.4 Processo de Normalização (1FN, 2FN e 3FN)
 
@@ -224,33 +215,9 @@ Nesta seção, descrevem-se os principais fluxos operacionais mapeados na rotina
 
 ## 2\. Modelo Lógico Relacional
 
-*(diagrama separado — vale 10% na Dimensão Procedimental)*
+O modelo lógico foi desenvolvido com o Brmodelo.
 
-O modelo lógico deve seguir a **notação visual do brModelo** para o modelo lógico, como no exemplo abaixo. Informe no README **em qual software ou aplicativo ele foi criado**.
-
-![Exemplo de modelo lógico na notação do brModelo](Exemplo_Logico.png)
-
-| Elemento | Como aparece | No exemplo |
-| :---- | :---- | :---- |
-| **Tabela** | retângulo com o nome da tabela no topo e uma linha por coluna | `Entity 1`, `Entity 5` |
-| **Coluna** | nome da coluna, à esquerda, com o tipo de dado à direita | `Attribute 30` — `INT` |
-| **Chave primária** | marca `PK` ao lado do tipo | `Chave 1`, em `Entity 1`; `Chave 50` \+ `Chave 51`, em `Entity 5` (chave primária composta) |
-| **Chave estrangeira** | marca `FK` ao lado do tipo | `Chave 3`, em `Entity 4` |
-| **Coluna que é chave primária e estrangeira** | marcas `PK, FK` | `Chave 1`, em `Entity 2` |
-| **Ligação entre tabelas** | linha entre a tabela da FK e a tabela referenciada, com a cardinalidade `(mín, máx)` em cada ponta | `Entity 3` — `Entity 4`: `(1, 1)` e `(0, n)` |
-
-&nbsp;
-
-Deve apresentar claramente:
-
-- Tabelas  
-- Atributos (colunas), com seus tipos de dados  
-- Chaves primárias  
-- Chaves estrangeiras  
-- Cardinalidades já convertidas
-
-As **demais restrições de integridade** — obrigatoriedade (`NOT NULL`), unicidade (`UNIQUE`), valores permitidos (`CHECK`), valores padrão (`DEFAULT`) — não aparecem no diagrama do brModelo e devem ser documentadas no **dicionário de dados** (seção 5\) e implementadas no **script SQL** (seção 3).
-
+<img width="500" height="350" alt="Image" src="modelo_logico.jpg"/>
 ---
 
 ## 3\. Script SQL Completo
