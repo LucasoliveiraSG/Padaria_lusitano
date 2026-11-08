@@ -272,12 +272,17 @@ O modelo conceitual **não possui** generalização nem especialização: todas 
 
 ### 1.5 Justificativas Técnicas das Decisões
 
-*(vale 7,5%)*
-
-- Justificar as **chaves primárias** escolhidas.  
-- Justificar as **chaves estrangeiras** e os relacionamentos que elas implementam.  
-- Justificar as **restrições** aplicadas (unicidade, obrigatoriedade, valores permitidos etc.), citando o código da regra de negócio (`RNxx`) que cada restrição implementa, quando houver.  
-- Justificar **decisões arquiteturais** gerais do modelo.
+- **PKs:** identificadores inteiros próprios (`id_<entidade>`) nas entidades principais e chave composta em `Produto_Ingrediente`, evitando depender de CPF, CNPJ, número de nota ou código de barras, que podem mudar ou faltar. `Comanda` tem id próprio porque a comanda física numerada é reaproveitada após o pagamento total (RN06). `Venda` e `Abastecimento` têm chave própria para permitir o mesmo produto ou ingrediente repetido.
+- **FKs:** implementam as correspondências entre cliente, funcionário e comanda; comanda, produto e venda (RN04, RN05); venda e nota fiscal (RN12); nota fiscal e pagamento; categoria e produto; produto e ingrediente; ingrediente, fornecedor e abastecimento; abastecimento e conta a pagar. `ON DELETE RESTRICT` impede excluir um registro pai que tenha dependentes, o que preserva o histórico.
+- **Obrigatoriedade e domínios:** `NOT NULL` nas chaves estrangeiras de participação obrigatória e nos atributos essenciais, e `CHECK` para situação, valores positivos e datas coerentes. Exemplos: `ck_comanda_status` (aberta ou paga, RN01), `ck_comanda_fechamento` (comanda aberta não tem horário de fechamento, RN04), `ck_venda_quantidade` (maior que zero), `ck_produto_quantidade` (estoque não negativo, RN05) e `ck_contas_pagar_datas` (vencimento não anterior à emissão). Os `CHECK` requerem.
+- **Unicidade:** `Nota_Fiscal.id_venda` é `UNIQUE` (uma nota por venda, RN12), assim como `chave_acesso`, o par (`numero_nota`, `serie`), `Funcionario.CPF`, `Fornecedor.CNPJ` e `Produto.codigo_barra`, que aceita nulo.
+- **Valores monetários e peso:** `DECIMAL(10,2)` evita aproximações de ponto flutuante nos valores financeiros, e `quantidade_vendida` em `DECIMAL(10,3)` guarda o peso líquido do self-service (RN08). O BRModelo exibe tipos genéricos (`FLOAT`, `INT`), mas o DDL define os tipos implementados.
+- **Nulidade intencional:** `Produto.id_categoria` (produto sem categoria), `horario_fechamento` (comanda ainda aberta) e `Contas_pagar.data_pagamento` (conta ainda não paga) admitem ausência quando o evento correspondente não ocorreu.
+- **Preço histórico:** `preco_unitario` em `Venda` e `Abastecimento` guarda o valor do momento, e `Produto.preco` guarda só o atual, então reajustar o preço não altera vendas passadas.
+- **Histórico:** a coluna `ativo` (`Produto` e `Fornecedor`) faz a exclusão lógica, e situação e datas mantêm a trilha do negócio, embora não haja registro automático para mudanças feitas direto no banco.
+- **Segurança e LGPD (RN13):** CPF, endereço e telefone ficam concentrados em `Cliente` e `Funcionario`, o CPF do consumidor só entra na nota se ele solicitar (RN12), e o acesso é por perfis de usuário (`GRANT`). Isso não equivale a conformidade completa com a LGPD, que também depende de finalidade, consentimento e retenção definidos no sistema.
+- **Regras que dependem de rotina:** RN05 (baixa do estoque na mesma transação da venda) e RN06 (soma dos pagamentos igual ao total antes de liberar a comanda) exigem transação ou gatilho, porque um `CHECK` não compara tabelas diferentes.
+- **Regras sem tabela no modelo atual:** RN02 e RN03 (caixa), RN07 (multa), RN09 (entrega) e RN10 e RN11 (perdas, validade e lotes) só ficam garantidas pelo banco com as tabelas propostas `Caixa`, `Multa`, `Entrega` e `Perda`, mais `lote` e `data_validade` em `Abastecimento`.
 
 ### 1.6 Proposta de Arquitetura Analítica para BI e IA
 
