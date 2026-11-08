@@ -1,8 +1,4 @@
-## 1\. Relatório Técnico Final
-
-*(arquivo Markdown — reúne a maior parte da Dimensão Conceitual, 30%)*
-
-**O Relatório Técnico Final deve ser o próprio `README.md` da raiz da branch `main`**, seguindo a estrutura deste esqueleto. Relatório entregue em outro arquivo (PDF, Word, outro `.md`, Google Docs, wiki do GitHub etc.) **não será corrigido**. Os demais artefatos (DER, modelo lógico, dicionário de dados, levantamento, script SQL, massa de dados, slides) ficam em arquivos separados no repositório, com link a partir do README.
+## 1\. Padaria Forno Lusitano
 
 ### Integrantes
 
@@ -124,6 +120,9 @@ Nesta seção, descrevem-se os principais fluxos operacionais mapeados na rotina
  - RN11: Manipulação de alimentos segue as normas sanitárias (higiene, temperatura e rastreio de lotes).
  - RN12: Toda venda paga gera cupom fiscal, com CPF na nota somente se o cliente solicitar.
  - RN13: CPF e endereço de clientes são tratados conforme a LGPD, com finalidade definida e acesso restrito.
+ - RN14: Compra recebida gera conta a pagar com vencimento não anterior à emissão.
+ - RN15: estoque no mínimo entra na lista de reposição.
+ - RN16: nota fiscal emitida não é excluída, apenas cancelada.
 ---
 
 | Apontamento da correção da E1 | O que mudou no trabalho | Por quê |
@@ -143,13 +142,101 @@ Nesta seção, descrevem-se os principais fluxos operacionais mapeados na rotina
 
 ### 1.2 Conversão do Modelo Conceitual para o Modelo Lógico
 
-*(vale 7,5%)*
+O modelo lógico foi obtido no BRModelo a partir do modelo conceitual da padaria e depois revisado, para que cada atributo, relacionamento e cardinalidade do conceitual tenha correspondência exata em colunas, chaves e tabelas.
 
-- **Entidades → Tabelas:** *como cada entidade virou tabela.*  
-- **Atributos → Colunas:** *conversão correta dos atributos.*  
-- **Relacionamentos → Chaves:** *como os relacionamentos foram traduzidos.*  
-- **Cardinalidades:** *como cada cardinalidade (1:1, 1:N, N:N) foi tratada (inclusive tabelas associativas, se houver).*  
-- **Generalização/especialização:** *se o DER tiver, qual estratégia de conversão foi usada (tabela única, uma tabela por entidade ou só as especializadas) e por quê.*
+O resultado tem **13 tabelas**: as 12 entidades do conceitual (incluindo as associativas `Venda` e `Abastecimento`) mais `Produto_Ingrediente`, que surge da conversão de uma relação N:N.
+
+A conversão seguiu três regras:
+
+- cada atributo vira uma coluna e cada identificador vira chave primária;
+- cada relacionamento 1:N vira uma chave estrangeira no lado N;
+- cada relacionamento N:N vira uma tabela associativa com duas chaves estrangeiras.
+
+ |Entidade | Tabela |
+ | :---- | :----|
+ | Cliente | Cliente |
+ | Comanda | Comanda |
+ | Funcionario | Funcionario |
+ | Venda | Venda|
+ | Nota fiscal | Nota fiscal |
+ | Pagamento | Pagamento |
+ | Produto | Produto |
+ | Categoria | Categoria |
+ | Ingrediente | Ingrediente |
+ | Abastecimento | Abastecimento |
+ | Conta pagar | Conta pagar |
+
+- **Atributos → Colunas:** 
+
+Todo atributo simples do conceitual virou uma coluna da tabela da sua entidade, e todo atributo identificador virou chave primária (`id_cliente`, `id_comanda`, `id_produto`, `id_nota_fiscal` e assim por diante).
+
+- **Atributo composto:** `endereço`, de Cliente, deixou de existir como coluna e foi decomposto nos atributos que o formam: `cep`, `cidade`, `logradouro`, `bairro` e `numero`.
+- **Atributo multivalorado:** o modelo não possui nenhum. Os campos `telefone` e `email` guardam um valor por pessoa, então não geram tabelas extras.
+- **Identificador de Abastecimento:** o atributo `estoque_abastecimento` foi renomeado para `id_abastecimento`, seguindo o padrão `id_<entidade>` das demais tabelas.
+- **Atributos calculados:** `subtotal`, `valor_total` e `valor_troco` foram convertidos como colunas, e a seção 1.4 trata a sua eliminação.
+
+Os tipos de dados foram escolhidos pelo domínio de cada atributo:
+
+| Tipo | Atributos |
+| --- | --- |
+| `INT` | chaves primárias e estrangeiras, `quantidade`, `estoque_minimo`, `numero_nota`, `serie` |
+| `VARCHAR` | nomes, `telefone`, `email`, `cep`, `CPF`, `CNPJ`, `codigo_barra`, `chave_acesso`, `unidade_medida`, `status` e `forma_pagamento` |
+| `DECIMAL(10,2)` | valores monetários: `preco`, `preco_unitario`, `subtotal`, `valor_total`, `valor_pago`, `valor_troco`, `valor` |
+| `DATE` e `DATETIME` | datas (`data_abastecimento`, `data_vencimento`) e data com hora (`horario_abertura`, `data_hora_lancamento`) |
+| `BOOLEAN` | `ativo` |
+
+`CPF`, `CNPJ`, `codigo_barra` e `chave_acesso` ficam como texto porque são identificadores, não quantidades: podem começar com zero e não entram em cálculos.
+
+- **Relacionamentos → Chaves:** 
+
+Cada relacionamento do conceitual foi traduzido em uma chave estrangeira (FK) que referencia a chave primária da outra tabela. Nos relacionamentos 1:N, a FK fica na tabela do lado N, e a FK tem o mesmo nome da chave primária que referencia.
+
+| Relacionamento | Entidades | Tradução no modelo lógico |
+| --- | --- | --- |
+| abre | Cliente 1:N Comanda | `Comanda.id_cliente` |
+| registra | Funcionário 1:N Comanda | `Comanda.id_funcionario` |
+| Venda (associativa) | Comanda 1:N Venda | `Venda.id_comanda` |
+| Venda (associativa) | Produto 1:N Venda | `Venda.id_produto` |
+| possui | Categoria 1:N Produto | `Produto.id_categoria` (aceita nulo, pois a cardinalidade é (0,1)) |
+| gera | Venda 1:1 Nota Fiscal | `Nota_Fiscal.id_venda`, com restrição `UNIQUE` |
+| contém | Nota Fiscal 1:N Pagamento | `Pagamento.id_nota_fiscal` |
+| contém | Produto N:N Ingrediente | tabela `Produto_Ingrediente` |
+| Abastecimento (associativa) | Ingrediente 1:N Abastecimento | `Abastecimento.id_ingrediente` |
+| Abastecimento (associativa) | Fornecedor 1:N Abastecimento | `Abastecimento.id_fornecedor` |
+| gera | Abastecimento 1:N Contas_pagar | `Contas_pagar.id_abastecimento` |
+
+Nas entidades associativas `Venda` e `Abastecimento`, as duas FKs ficam na própria tabela, e não nas tabelas `Produto` e `Ingrediente`. Um produto aparece em muitas vendas, e um ingrediente é comprado muitas vezes; a FK na tabela de origem limitaria cada um a uma única venda ou compra.
+
+- **Cardinalidades:**
+
+O modelo tem cinco relacionamentos 1:N, um 1:1 e três N:N; cada tipo recebeu um tratamento diferente.
+
+### 1:N
+
+A chave estrangeira fica no lado N: `Comanda` (`id_cliente` e `id_funcionario`), `Produto` (`id_categoria`), `Pagamento` (`id_nota_fiscal`) e `Contas_pagar` (`id_abastecimento`). Quando a participação do lado N é opcional, como em Produto–Categoria (0,1), a FK aceita nulo.
+
+### 1:1
+
+Na relação Venda–Nota Fiscal, a FK `id_venda` fica em `Nota_Fiscal`, que depende da venda para existir. A restrição `UNIQUE` nessa coluna impede mais de uma nota por venda, o que mantém a cardinalidade 1:1.
+
+### N:N
+
+Uma relação N:N não pode ser representada por uma única FK, então cada uma virou uma tabela com duas chaves estrangeiras:
+
+| N:N | Tabela associativa | Chave primária | Chaves estrangeiras | Atributos próprios |
+| --- | --- | --- | --- | --- |
+| Comanda ↔ Produto | `Venda` | `id_venda` | `id_comanda`, `id_produto` | `data_hora_lancamento`, `quantidade_vendida`, `preco_unitario` |
+| Ingrediente ↔ Fornecedor | `Abastecimento` | `id_abastecimento` | `id_ingrediente`, `id_fornecedor` | `quantidade`, `preco_unitario`, `data_abastecimento` |
+| Produto ↔ Ingrediente | `Produto_Ingrediente` | `id_produto` + `id_ingrediente` | `id_produto`, `id_ingrediente` | `quantidade_utilizada` |
+
+- **Venda:** cada linha é um item lançado na comanda. A chave própria permite lançar o mesmo produto mais de uma vez na mesma comanda.
+- **Abastecimento:** cada linha é uma compra de um ingrediente de um fornecedor.
+- **Produto_Ingrediente:** guarda a ficha técnica do produto. A chave primária composta impede repetir o mesmo ingrediente no mesmo produto, e `quantidade_utilizada` registra quanto de cada ingrediente o produto usa.
+
+
+- **Generalização/especialização:**
+
+O modelo conceitual **não possui** generalização nem especialização: todas as entidades são independentes e nenhuma herda atributos de outra. Por isso não foi necessário escolher uma estratégia de conversão (tabela única, uma tabela por entidade ou apenas as especializadas), e cada entidade virou uma tabela própria.
 
 ### 1.3 Definição de Chaves Primárias e Estrangeiras
 
@@ -185,7 +272,7 @@ Nesta seção, descrevem-se os principais fluxos operacionais mapeados na rotina
 
 ### 1.5 Justificativas Técnicas das Decisões
 
-
+*(vale 7,5%)*
 
 - Justificar as **chaves primárias** escolhidas.  
 - Justificar as **chaves estrangeiras** e os relacionamentos que elas implementam.  
