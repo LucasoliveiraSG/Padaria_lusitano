@@ -356,7 +356,7 @@ Arquivo para a branch `main`: [`docs/script.sql`](docs/script.sql).
 ### Consulta gerencial e regra de auditoria
 
 | Código | Pergunta respondida / verificação |
-| :--- | :--- | :--- |
+| :--- | :--- |
 | `G01` | Qual o faturamento total e a quantidade de pagamentos por forma de pagamento? |
 | `G02` | Quais produtos e ingredientes estão abaixo do estoque mínimo hoje? |
 | `G03` | Qual o número de comandas atendidas e o valor total vendido por funcionário? |
@@ -366,7 +366,7 @@ Arquivo para a branch `main`: [`docs/script.sql`](docs/script.sql).
 Auditorias de integridade:
 
 | Código | Inconsistência pesquisada |
-| :--- | :--- | :--- |
+| :--- | :--- |
 | `A01` | Existe venda registrada sem nenhum item vinculado? |
 | `A02` | O valor total da Nota Fiscal diverge da soma dos itens da venda? |
 | `A03` | Existem notas fiscais emitidas cujo valor pago (descontando troco) diverge do valor da nota? |
