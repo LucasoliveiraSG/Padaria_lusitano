@@ -38,17 +38,29 @@
 
 
 
-**Relato da entrevista (todos os grupos)**
+### 1.2 Relato da Entrevista
 
-*Relate a entrevista com o responsável pela organização. A entrevista da Entrega 1 pode ser reaproveitada se atender a todos os itens abaixo — inclusive ter sido feita no ambiente da organização, com foto — e se tiver levantado o necessário para os processos, requisitos e regras desta etapa. Se algo precisou ser confirmado depois (ex.: processos típicos levantados por pesquisa), relate também a nova visita.*
+### 1. Quem
+- **Entrevistado:** Severino (Gerente da Padaria Forno Lusitano)
+- **Integrantes Participantes:** Alex (Vitória) Christini dos Santos e Lucas Oliveira da Silva
 
-- **Quem:** nome e função do entrevistado e quais integrantes do grupo participaram.  
-- **Quando e onde:** data e local — a entrevista deve ser realizada **no ambiente da organização**. A **observação presencial** da rotina é parte importante do levantamento de requisitos: o que o grupo vê acontecer no local (como um pedido é anotado, onde o estoque é controlado, que papéis e planilhas circulam) muitas vezes difere do que é dito na entrevista. **Destaque os achados obtidos pela observação**, separados dos obtidos pelas respostas do entrevistado.  
-- **Comprovação:** ao menos uma foto da entrevista no local, como arquivo JPG ou PNG no repositório.  
-- **O que foi levantado:** o que foi perguntado, o que foi confirmado e, se houve nova visita, o que mudou em relação à Entrega 1 (processos, regras, volumes, problemas). O levantamento completo fica em **um arquivo Markdown (`.md`) à parte no repositório**, com link no README — **recomenda-se fortemente** colocá-lo numa pasta chamada **`levantamento`** (ex.: `levantamento/levantamento.md`). Esse arquivo é um **texto organizado, escrito pelo grupo**, sobre o que foi levantado — **não** é um vídeo ou áudio da entrevista, nem a transcrição crua de formulários ou de perguntas e respostas. **No README, apresente um resumo do levantamento.**
+### 2. Quando e Onde (Observação no Local)
+- **Data e Local:** Entrevista realizada presencialmente nas dependências da **Padaria Forno Lusitano**, durante o horário de atendimento da equipe.
+- **Achados da Observação Presencial vs. Respostas:**
+  - *O que foi dito:* O gerente explicou a rotina geral de atendimento, fluxo de comandas e divisão dos turnos dos colaboradores.
+  - *O que foi observado:* A equipe presenciou o alto movimento no balcão e no buffet de almoço self-service, a dependência de anotações manuais em blocos de papel para controle interno secundário, e a agilidade necessária no leitor de código de barras das comandas para evitar filas no caixa.
+
+### 3. Comprovação
+- **Foto da Visita:**  
+  ![Foto da Entrevista no Local](comprovante_visita.jpg)  
+
+### 4. O Que Foi Levantado
+O levantamento de requisitos mapeou os processos operacionais, regras de negócio, volumetria diária e os gargalos do estabelecimento.
+
+**Documento Completo:** [Acesse o Relatório de Levantamento Detalhado](./levantamento/levantamento.md)
 
 
-**Processos de negócio (todos os grupos)**
+### 1.3 Processos de negócio (todos os grupos)
 
 Nesta seção, descrevem-se os principais fluxos operacionais mapeados na rotina da **Forno Lusitano**, os quais servem como base empírica para a modelagem relacional do banco de dados:
 
@@ -85,7 +97,7 @@ Nesta seção, descrevem-se os principais fluxos operacionais mapeados na rotina
 11. **Controle de validade e perdas:**
    Rotina de verificação periódica das datas de validade dos produtos e insumos estocados, com atenção especial aos perecíveis (laticínios, frios, pães e doces). Itens vencidos, danificados ou produzidos em excesso e não vendidos são retirados de circulação e registrados como perda, com produto, quantidade, data e motivo. Esse registro dá baixa no estoque e fornece dados para ajustar compras e produção, reduzindo o desperdício.
 
-**Requisitos (todos os grupos)**
+### 1.4 Requisitos (todos os grupos)
 
 ### Requisitos Funcionais
 - **RF01- Cadastrar o cliente:** O sistema deve permitir que haja o cadastro de informações dos clientes, com CPF, endereço, nome. 
@@ -103,7 +115,7 @@ Nesta seção, descrevem-se os principais fluxos operacionais mapeados na rotina
 - **RFN04- Portabilidade:** O sistema deve ser compatível com o navegador utilizado. 
 - **RFN05- Disponibilidade:** O sistema deve funcionar em horários comerciais e em caso de manutenções exibir informações prévias aos usuários. 
 
-**Regras de negócio (todos os grupos)**
+### 1.5 Regras de negócio (todos os grupos)
 
 - **Regras operacionais:** 
 
@@ -140,7 +152,7 @@ Nesta seção, descrevem-se os principais fluxos operacionais mapeados na rotina
 
 *Use a correção da Entrega 1 do grupo como guia dos erros a não repetir, mesmo sendo outra organização.*
 
-### 1.2 Conversão do Modelo Conceitual para o Modelo Lógico
+### 1.6 Conversão do Modelo Conceitual para o Modelo Lógico
 
 O modelo lógico foi obtido no BRModelo a partir do modelo conceitual da padaria e depois revisado, para que cada atributo, relacionamento e cardinalidade do conceitual tenha correspondência exata em colunas, chaves e tabelas.
 
@@ -238,7 +250,7 @@ Uma relação N:N não pode ser representada por uma única FK, então cada uma 
 
 O modelo conceitual **não possui** generalização nem especialização: todas as entidades são independentes e nenhuma herda atributos de outra. Por isso não foi necessário escolher uma estratégia de conversão (tabela única, uma tabela por entidade ou apenas as especializadas), e cada entidade virou uma tabela própria.
 
-### 1.3 Definição de Chaves Primárias e Estrangeiras
+### 1.7 Definição de Chaves Primárias e Estrangeiras
 
 | Tabela	| Chave primária | Chaves estrangeiras |
 | :---- | :---- | :---- |
@@ -256,7 +268,7 @@ O modelo conceitual **não possui** generalização nem especialização: todas 
 | Abastecimento | `id_abastecimento` | id_ingrediente → Ingrediente, id_fornecedor → Fornecedor |
 | Contas_pagar | `id_conta` |	id_abastecimento → Abastecimento |
 
-### 1.4 Processo de Normalização (1FN, 2FN e 3FN)
+### 1.8 Processo de Normalização (1FN, 2FN e 3FN)
 ----
 ### 1FN: Eliminação de grupos repetitivos/atributos multivalorados.
 - O atributo composto `endereco` foi separado por colunas `numero`, `CEP`,  `logradouro`,    `cidade`, `bairro`. Sua separação ocorreu pois a inserção dos elementos em novas colunas permite uma consulta mais eficiente e rápida.
@@ -270,7 +282,7 @@ O modelo conceitual **não possui** generalização nem especialização: todas 
 ### 3FN: Eliminação de dependências transitivas.
 - Não foi identificado elementos que estivessem fora da 3FN
 
-### 1.5 Justificativas Técnicas das Decisões
+### 1.9 Justificativas Técnicas das Decisões
 
 - **PKs:** identificadores inteiros próprios (`id_<entidade>`) nas entidades principais e chave composta em `Produto_Ingrediente`, evitando depender de CPF, CNPJ, número de nota ou código de barras, que podem mudar ou faltar. `Comanda` tem id próprio porque a comanda física numerada é reaproveitada após o pagamento total (RN06). `Venda` e `Abastecimento` têm chave própria para permitir o mesmo produto ou ingrediente repetido.
 - **FKs:** implementam as correspondências entre cliente, funcionário e comanda; comanda, produto e venda (RN04, RN05); venda e nota fiscal (RN12); nota fiscal e pagamento; categoria e produto; produto e ingrediente; ingrediente, fornecedor e abastecimento; abastecimento e conta a pagar. `ON DELETE RESTRICT` impede excluir um registro pai que tenha dependentes, o que preserva o histórico.
@@ -284,29 +296,59 @@ O modelo conceitual **não possui** generalização nem especialização: todas 
 - **Regras que dependem de rotina:** RN05 (baixa do estoque na mesma transação da venda) e RN06 (soma dos pagamentos igual ao total antes de liberar a comanda) exigem transação ou gatilho, porque um `CHECK` não compara tabelas diferentes.
 - **Regras sem tabela no modelo atual:** RN02 e RN03 (caixa), RN07 (multa), RN09 (entrega) e RN10 e RN11 (perdas, validade e lotes) só ficam garantidas pelo banco com as tabelas propostas `Caixa`, `Multa`, `Entrega` e `Perda`, mais `lote` e `data_validade` em `Abastecimento`.
 
-### 1.6 Proposta de Arquitetura Analítica para BI e IA
+### 1.10 Proposta de Arquitetura Analítica para BI e IA
 
-*(vale 7,5%)*
+**1.10.1 — Problemas identificados**
 
-- **Informações estratégicas** que podem ser extraídas dos dados para a gestão da organização.  
-- **Indicadores e métricas gerenciais** propostos (KPIs).  
-- **Potencial dos dados para BI:** como a estrutura apoia dashboards/relatórios.  
-- **Aplicações analíticas e de IA:** como o modelo pode alimentar análises preditivas, recomendações etc.
+Com base na caracterização organizacional da Padaria Forno Lusitano, foram identificados os seguintes problemas operacionais:
 
-**Rastreabilidade:** inclua uma tabela que ligue cada problema declarado na caracterização da organização e cada KPI proposto às tabelas que o sustentam e à consulta do script SQL que o responde (pelo código da consulta — ver seção 3):
+- P01 — Controle manual de comandas: utilização de comandas físicas e registros em papel para controlar pedidos e consumo dos clientes.
+- P02 — Dificuldade no acompanhamento do faturamento: dificuldade para centralizar e analisar as receitas e os resultados financeiros.
+- P03 — Inconsistências no controle de estoque: dificuldades para acompanhar as quantidades disponíveis e identificar necessidades de reposição.
+- P04 — Dificuldade no controle de compras e fornecedores: necessidade de melhorar o acompanhamento das compras, dos fornecedores e das contas a pagar.
+- P05 — Sobrecarga operacional: quadro reduzido de funcionários, ocasionando acúmulo de atividades e necessidade de apoio do gerente em outras funções.
+- P06 — Informações descentralizadas: utilização de documentos físicos e planilhas separadas, aumentando o risco de erros e inconsistências nos registros.
 
-| Problema ou KPI | Tabelas envolvidas | Consulta no script |
-| :---- | :---- | :---- |
-| *ex.: P1 — ruptura de estoque de bebidas* | *PRODUTO, MOVIMENTACAO\_ESTOQUE* | *G03* |
-| *ex.: ticket médio por ambiente* | *PEDIDO, ITEM\_PEDIDO, AMBIENTE* | *G05* |
+**1.10.2 — Indicadores-chave de desempenho (KPIs)**
 
-&nbsp;
+Para apoiar a gestão da Padaria Forno Lusitano, foram propostos os seguintes indicadores:
 
-*KPI sem consulta no script que o calcule não é considerado KPI. Cada problema declarado deve ter pelo menos uma consulta que o responda.*
+- G01 — Faturamento por período: permite acompanhar o valor total das vendas em períodos específicos.
+- G02 — Quantidade de vendas realizadas: permite identificar o volume de vendas em determinado período.
+- G03 — Ticket médio: representa o valor médio obtido por venda, auxiliando na análise do consumo dos clientes.
+- G04 — Produtos mais vendidos: identifica os produtos com maior quantidade comercializada.
+- G05 — Faturamento por categoria: permite comparar a receita gerada pelas diferentes categorias de produtos.
+- G06 — Compras por fornecedor: permite acompanhar os valores gastos com cada fornecedor.
+- G07 — Produtos no estoque mínimo: identifica produtos cuja quantidade disponível está igual ou abaixo do estoque mínimo definido.
+- G08 — Contas a pagar em aberto: permite acompanhar o valor das obrigações financeiras ainda pendentes.
 
-> **O que é KPI:** *Key Performance Indicator* (indicador-chave de desempenho) é um número que mostra, de forma objetiva, se a organização está indo bem em algo que importa para a gestão dela. Um KPI tem **fórmula** (como é calculado), **período** (por dia, semana, mês) e, de preferência, uma **meta** para comparação. Exemplos: ticket médio por venda, taxa de cancelamento de pedidos, produtos abaixo do estoque mínimo, tempo médio de atendimento, número de beneficiários atendidos por mês, percentual de doações recorrentes. "Melhorar o atendimento" não é KPI; "tempo médio entre o pedido e a entrega, por semana" é.
+**1.10.3 — Potencial de Business Intelligence (BI)**
 
-> **Como levantar:** é recomendável usar pesquisas e ferramentas de IA para descobrir quais indicadores são usados por organizações do mesmo tipo (ex.: "principais KPIs de uma pizzaria", "indicadores de gestão de uma ONG de doação de alimentos") e quais análises de BI e de IA costumam ser aplicadas a elas. Depois, **filtre pelo que o seu banco consegue calcular**: um KPI só vale se as tabelas do modelo tiverem os dados necessários e se houver uma consulta no script que o calcule (ver *Rastreabilidade*, abaixo). Se possível, confirme com o responsável pela organização quais indicadores seriam úteis para ele. Registre esse uso de IA na seção 6\.
+A estrutura do banco de dados possibilita a utilização de ferramentas de Business Intelligence (BI) para transformar os dados operacionais da Padaria Forno Lusitano em informações estratégicas.
+
+Com os dados de vendas, produtos, categorias, estoque, fornecedores e contas a pagar, será possível desenvolver dashboards e relatórios gerenciais.
+
+Esses recursos poderão apresentar indicadores como faturamento por período, ticket médio, produtos mais vendidos, níveis de estoque e despesas com fornecedores, facilitando o acompanhamento dos resultados e apoiando a tomada de decisões da gestão.
+
+**1.10.4 — Aplicações de Analytics e Inteligência Artificial**
+
+A utilização de Analytics e Inteligência Artificial poderá contribuir para melhorar o planejamento e a eficiência operacional da Padaria Forno Lusitano.
+
+A partir do histórico de vendas, será possível aplicar análises preditivas para estimar a demanda de produtos e identificar períodos de maior movimento.
+
+Também poderão ser desenvolvidas recomendações para reposição de estoque, identificação de padrões de consumo e planejamento de compras, contribuindo para reduzir desperdícios e evitar a falta de produtos.
+
+Essas aplicações dependem da disponibilidade de dados históricos consistentes e de uma futura implementação de ferramentas analíticas.
+
+**1.10.5 — Tabela de Rastreabilidade**
+
+**1.10.6 —  Utilização de Inteligência Artificial (IA)**
+
+Foi utilizada a ferramenta ChatGPT como apoio na identificação e análise de indicadores-chave de desempenho (KPIs) aplicáveis ao contexto da Padaria Forno Lusitano, considerando indicadores utilizados em estabelecimentos do mesmo segmento.
+
+A ferramenta também auxiliou no levantamento de possibilidades de aplicação de Business Intelligence (BI), Analytics e Inteligência Artificial (IA), como análise de vendas, previsão de demanda e recomendações para reposição de estoque.
+
+As sugestões foram avaliadas considerando as necessidades operacionais da padaria e os dados disponíveis no modelo de banco de dados. A equipe também considerou a necessidade de validar cada KPI por meio de consultas SQL, garantindo que os indicadores propostos possam ser efetivamente calculados.
 
 ---
 
