@@ -38,17 +38,29 @@
 
 
 
-**Relato da entrevista (todos os grupos)**
+### 1.2 Relato da Entrevista
 
-*Relate a entrevista com o responsável pela organização. A entrevista da Entrega 1 pode ser reaproveitada se atender a todos os itens abaixo — inclusive ter sido feita no ambiente da organização, com foto — e se tiver levantado o necessário para os processos, requisitos e regras desta etapa. Se algo precisou ser confirmado depois (ex.: processos típicos levantados por pesquisa), relate também a nova visita.*
+### 1. Quem
+- **Entrevistado:** Severino (Gerente da Padaria Forno Lusitano)
+- **Integrantes Participantes:** Alex (Vitória) Christini dos Santos e Lucas Oliveira da Silva
 
-- **Quem:** nome e função do entrevistado e quais integrantes do grupo participaram.  
-- **Quando e onde:** data e local — a entrevista deve ser realizada **no ambiente da organização**. A **observação presencial** da rotina é parte importante do levantamento de requisitos: o que o grupo vê acontecer no local (como um pedido é anotado, onde o estoque é controlado, que papéis e planilhas circulam) muitas vezes difere do que é dito na entrevista. **Destaque os achados obtidos pela observação**, separados dos obtidos pelas respostas do entrevistado.  
-- **Comprovação:** ao menos uma foto da entrevista no local, como arquivo JPG ou PNG no repositório.  
-- **O que foi levantado:** o que foi perguntado, o que foi confirmado e, se houve nova visita, o que mudou em relação à Entrega 1 (processos, regras, volumes, problemas). O levantamento completo fica em **um arquivo Markdown (`.md`) à parte no repositório**, com link no README — **recomenda-se fortemente** colocá-lo numa pasta chamada **`levantamento`** (ex.: `levantamento/levantamento.md`). Esse arquivo é um **texto organizado, escrito pelo grupo**, sobre o que foi levantado — **não** é um vídeo ou áudio da entrevista, nem a transcrição crua de formulários ou de perguntas e respostas. **No README, apresente um resumo do levantamento.**
+### 2. Quando e Onde (Observação no Local)
+- **Data e Local:** Entrevista realizada presencialmente nas dependências da **Padaria Forno Lusitano**, durante o horário de atendimento da equipe.
+- **Achados da Observação Presencial vs. Respostas:**
+  - *O que foi dito:* O gerente explicou a rotina geral de atendimento, fluxo de comandas e divisão dos turnos dos colaboradores.
+  - *O que foi observado:* A equipe presenciou o alto movimento no balcão e no buffet de almoço self-service, a dependência de anotações manuais em blocos de papel para controle interno secundário, e a agilidade necessária no leitor de código de barras das comandas para evitar filas no caixa.
+
+### 3. Comprovação
+- **Foto da Visita:**  
+  ![Foto da Entrevista no Local](comprovante_visita.jpg)  
+
+### 4. O Que Foi Levantado
+O levantamento de requisitos mapeou os processos operacionais, regras de negócio, volumetria diária e os gargalos do estabelecimento.
+
+**Documento Completo:** [Acesse o Relatório de Levantamento Detalhado](./levantamento/levantamento.md)
 
 
-**Processos de negócio (todos os grupos)**
+### 1.3 Processos de negócio (todos os grupos)
 
 Nesta seção, descrevem-se os principais fluxos operacionais mapeados na rotina da **Forno Lusitano**, os quais servem como base empírica para a modelagem relacional do banco de dados:
 
@@ -85,7 +97,7 @@ Nesta seção, descrevem-se os principais fluxos operacionais mapeados na rotina
 11. **Controle de validade e perdas:**
    Rotina de verificação periódica das datas de validade dos produtos e insumos estocados, com atenção especial aos perecíveis (laticínios, frios, pães e doces). Itens vencidos, danificados ou produzidos em excesso e não vendidos são retirados de circulação e registrados como perda, com produto, quantidade, data e motivo. Esse registro dá baixa no estoque e fornece dados para ajustar compras e produção, reduzindo o desperdício.
 
-**Requisitos (todos os grupos)**
+### 1.4 Requisitos (todos os grupos)
 
 ### Requisitos Funcionais
 - **RF01- Cadastrar o cliente:** O sistema deve permitir que haja o cadastro de informações dos clientes, com CPF, endereço, nome. 
@@ -103,7 +115,7 @@ Nesta seção, descrevem-se os principais fluxos operacionais mapeados na rotina
 - **RFN04- Portabilidade:** O sistema deve ser compatível com o navegador utilizado. 
 - **RFN05- Disponibilidade:** O sistema deve funcionar em horários comerciais e em caso de manutenções exibir informações prévias aos usuários. 
 
-**Regras de negócio (todos os grupos)**
+### 1.5 Regras de negócio (todos os grupos)
 
 - **Regras operacionais:** 
 
@@ -141,7 +153,7 @@ Nesta seção, descrevem-se os principais fluxos operacionais mapeados na rotina
 
 *Use a correção da Entrega 1 do grupo como guia dos erros a não repetir, mesmo sendo outra organização.*
 
-### 1.2 Conversão do Modelo Conceitual para o Modelo Lógico
+### 1.6 Conversão do Modelo Conceitual para o Modelo Lógico
 
 O modelo lógico foi obtido no BRModelo a partir do modelo conceitual da padaria e depois revisado, para que cada atributo, relacionamento e cardinalidade do conceitual tenha correspondência exata em colunas, chaves e tabelas.
 
@@ -239,7 +251,7 @@ Uma relação N:N não pode ser representada por uma única FK, então cada uma 
 
 O modelo conceitual **não possui** generalização nem especialização: todas as entidades são independentes e nenhuma herda atributos de outra. Por isso não foi necessário escolher uma estratégia de conversão (tabela única, uma tabela por entidade ou apenas as especializadas), e cada entidade virou uma tabela própria.
 
-### 1.3 Definição de Chaves Primárias e Estrangeiras
+### 1.7 Definição de Chaves Primárias e Estrangeiras
 
 | Tabela	| Chave primária | Chaves estrangeiras |
 | :---- | :---- | :---- |
@@ -257,7 +269,7 @@ O modelo conceitual **não possui** generalização nem especialização: todas 
 | Abastecimento | `id_abastecimento` | id_ingrediente → Ingrediente, id_fornecedor → Fornecedor |
 | Contas_pagar | `id_conta` |	id_abastecimento → Abastecimento |
 
-### 1.4 Processo de Normalização (1FN, 2FN e 3FN)
+### 1.8 Processo de Normalização (1FN, 2FN e 3FN)
 ----
 ### 1FN: Eliminação de grupos repetitivos/atributos multivalorados.
 - O atributo composto `endereco` foi separado por colunas `numero`, `CEP`,  `logradouro`,    `cidade`, `bairro`. Sua separação ocorreu pois a inserção dos elementos em novas colunas permite uma consulta mais eficiente e rápida.
@@ -271,38 +283,84 @@ O modelo conceitual **não possui** generalização nem especialização: todas 
 ### 3FN: Eliminação de dependências transitivas.
 - Não foi identificado elementos que estivessem fora da 3FN
 
-### 1.5 Justificativas Técnicas das Decisões
+### 1.9 Justificativas Técnicas das Decisões
 
-*(vale 7,5%)*
+- **PKs:** identificadores inteiros próprios (`id_<entidade>`) nas entidades principais e chave composta em `Produto_Ingrediente`, evitando depender de CPF, CNPJ, número de nota ou código de barras, que podem mudar ou faltar. `Comanda` tem id próprio porque a comanda física numerada é reaproveitada após o pagamento total (RN06). `Venda` e `Abastecimento` têm chave própria para permitir o mesmo produto ou ingrediente repetido.
+- **FKs:** implementam as correspondências entre cliente, funcionário e comanda; comanda, produto e venda (RN04, RN05); venda e nota fiscal (RN12); nota fiscal e pagamento; categoria e produto; produto e ingrediente; ingrediente, fornecedor e abastecimento; abastecimento e conta a pagar. `ON DELETE RESTRICT` impede excluir um registro pai que tenha dependentes, o que preserva o histórico.
+- **Obrigatoriedade e domínios:** `NOT NULL` nas chaves estrangeiras de participação obrigatória e nos atributos essenciais, e `CHECK` para situação, valores positivos e datas coerentes. Exemplos: `ck_comanda_status` (aberta ou paga, RN01), `ck_comanda_fechamento` (comanda aberta não tem horário de fechamento, RN04), `ck_venda_quantidade` (maior que zero), `ck_produto_quantidade` (estoque não negativo, RN05) e `ck_contas_pagar_datas` (vencimento não anterior à emissão). Os `CHECK` requerem.
+- **Unicidade:** `Nota_Fiscal.id_venda` é `UNIQUE` (uma nota por venda, RN12), assim como `chave_acesso`, o par (`numero_nota`, `serie`), `Funcionario.CPF`, `Fornecedor.CNPJ` e `Produto.codigo_barra`, que aceita nulo.
+- **Valores monetários e peso:** `DECIMAL(10,2)` evita aproximações de ponto flutuante nos valores financeiros, e `quantidade_vendida` em `DECIMAL(10,3)` guarda o peso líquido do self-service (RN08). O BRModelo exibe tipos genéricos (`FLOAT`, `INT`), mas o DDL define os tipos implementados.
+- **Nulidade intencional:** `Produto.id_categoria` (produto sem categoria), `horario_fechamento` (comanda ainda aberta) e `Contas_pagar.data_pagamento` (conta ainda não paga) admitem ausência quando o evento correspondente não ocorreu.
+- **Preço histórico:** `preco_unitario` em `Venda` e `Abastecimento` guarda o valor do momento, e `Produto.preco` guarda só o atual, então reajustar o preço não altera vendas passadas.
+- **Histórico:** a coluna `ativo` (`Produto` e `Fornecedor`) faz a exclusão lógica, e situação e datas mantêm a trilha do negócio, embora não haja registro automático para mudanças feitas direto no banco.
+- **Segurança e LGPD (RN13):** CPF, endereço e telefone ficam concentrados em `Cliente` e `Funcionario`, o CPF do consumidor só entra na nota se ele solicitar (RN12), e o acesso é por perfis de usuário (`GRANT`). Isso não equivale a conformidade completa com a LGPD, que também depende de finalidade, consentimento e retenção definidos no sistema.
+- **Regras que dependem de rotina:** RN05 (baixa do estoque na mesma transação da venda) e RN06 (soma dos pagamentos igual ao total antes de liberar a comanda) exigem transação ou gatilho, porque um `CHECK` não compara tabelas diferentes.
+- **Regras sem tabela no modelo atual:** RN02 e RN03 (caixa), RN07 (multa), RN09 (entrega) e RN10 e RN11 (perdas, validade e lotes) só ficam garantidas pelo banco com as tabelas propostas `Caixa`, `Multa`, `Entrega` e `Perda`, mais `lote` e `data_validade` em `Abastecimento`.
 
-- Justificar as **chaves primárias** escolhidas.  
-- Justificar as **chaves estrangeiras** e os relacionamentos que elas implementam.  
-- Justificar as **restrições** aplicadas (unicidade, obrigatoriedade, valores permitidos etc.), citando o código da regra de negócio (`RNxx`) que cada restrição implementa, quando houver.  
-- Justificar **decisões arquiteturais** gerais do modelo.
+### 1.10 Proposta de Arquitetura Analítica para BI e IA
 
-### 1.6 Proposta de Arquitetura Analítica para BI e IA
+**1.10.1 — Problemas identificados**
 
-*(vale 7,5%)*
+Com base na caracterização organizacional da Padaria Forno Lusitano, foram identificados os seguintes problemas operacionais:
 
-- **Informações estratégicas** que podem ser extraídas dos dados para a gestão da organização.  
-- **Indicadores e métricas gerenciais** propostos (KPIs).  
-- **Potencial dos dados para BI:** como a estrutura apoia dashboards/relatórios.  
-- **Aplicações analíticas e de IA:** como o modelo pode alimentar análises preditivas, recomendações etc.
+- P01 — Controle manual de comandas: utilização de comandas físicas e registros em papel para controlar pedidos e consumo dos clientes.
+- P02 — Dificuldade no acompanhamento do faturamento: dificuldade para centralizar e analisar as receitas e os resultados financeiros.
+- P03 — Inconsistências no controle de estoque: dificuldades para acompanhar as quantidades disponíveis e identificar necessidades de reposição.
+- P04 — Dificuldade no controle de compras e fornecedores: necessidade de melhorar o acompanhamento das compras, dos fornecedores e das contas a pagar.
+- P05 — Sobrecarga operacional: quadro reduzido de funcionários, ocasionando acúmulo de atividades e necessidade de apoio do gerente em outras funções.
+- P06 — Informações descentralizadas: utilização de documentos físicos e planilhas separadas, aumentando o risco de erros e inconsistências nos registros.
 
-**Rastreabilidade:** inclua uma tabela que ligue cada problema declarado na caracterização da organização e cada KPI proposto às tabelas que o sustentam e à consulta do script SQL que o responde (pelo código da consulta — ver seção 3):
+**1.10.2 — Indicadores-chave de desempenho (KPIs)**
 
-| Problema ou KPI | Tabelas envolvidas | Consulta no script |
-| :---- | :---- | :---- |
-| *ex.: P1 — ruptura de estoque de bebidas* | *PRODUTO, MOVIMENTACAO\_ESTOQUE* | *G03* |
-| *ex.: ticket médio por ambiente* | *PEDIDO, ITEM\_PEDIDO, AMBIENTE* | *G05* |
+Para apoiar a gestão da Padaria Forno Lusitano, foram propostos os seguintes indicadores:
 
-&nbsp;
+- G01 — Faturamento por período: permite acompanhar o valor total das vendas em períodos específicos.
+- G02 — Quantidade de vendas realizadas: permite identificar o volume de vendas em determinado período.
+- G03 — Ticket médio: representa o valor médio obtido por venda, auxiliando na análise do consumo dos clientes.
+- G04 — Produtos mais vendidos: identifica os produtos com maior quantidade comercializada.
+- G05 — Faturamento por categoria: permite comparar a receita gerada pelas diferentes categorias de produtos.
+- G06 — Compras por fornecedor: permite acompanhar os valores gastos com cada fornecedor.
+- G07 — Produtos no estoque mínimo: identifica produtos cuja quantidade disponível está igual ou abaixo do estoque mínimo definido.
+- G08 — Contas a pagar em aberto: permite acompanhar o valor das obrigações financeiras ainda pendentes.
 
-*KPI sem consulta no script que o calcule não é considerado KPI. Cada problema declarado deve ter pelo menos uma consulta que o responda.*
+**1.10.3 — Potencial de Business Intelligence (BI)**
 
-> **O que é KPI:** *Key Performance Indicator* (indicador-chave de desempenho) é um número que mostra, de forma objetiva, se a organização está indo bem em algo que importa para a gestão dela. Um KPI tem **fórmula** (como é calculado), **período** (por dia, semana, mês) e, de preferência, uma **meta** para comparação. Exemplos: ticket médio por venda, taxa de cancelamento de pedidos, produtos abaixo do estoque mínimo, tempo médio de atendimento, número de beneficiários atendidos por mês, percentual de doações recorrentes. "Melhorar o atendimento" não é KPI; "tempo médio entre o pedido e a entrega, por semana" é.
+A estrutura do banco de dados possibilita a utilização de ferramentas de Business Intelligence (BI) para transformar os dados operacionais da Padaria Forno Lusitano em informações estratégicas.
 
-> **Como levantar:** é recomendável usar pesquisas e ferramentas de IA para descobrir quais indicadores são usados por organizações do mesmo tipo (ex.: "principais KPIs de uma pizzaria", "indicadores de gestão de uma ONG de doação de alimentos") e quais análises de BI e de IA costumam ser aplicadas a elas. Depois, **filtre pelo que o seu banco consegue calcular**: um KPI só vale se as tabelas do modelo tiverem os dados necessários e se houver uma consulta no script que o calcule (ver *Rastreabilidade*, abaixo). Se possível, confirme com o responsável pela organização quais indicadores seriam úteis para ele. Registre esse uso de IA na seção 6\.
+Com os dados de vendas, produtos, categorias, estoque, fornecedores e contas a pagar, será possível desenvolver dashboards e relatórios gerenciais.
+
+Esses recursos poderão apresentar indicadores como faturamento por período, ticket médio, produtos mais vendidos, níveis de estoque e despesas com fornecedores, facilitando o acompanhamento dos resultados e apoiando a tomada de decisões da gestão.
+
+**1.10.4 — Aplicações de Analytics e Inteligência Artificial**
+
+A utilização de Analytics e Inteligência Artificial poderá contribuir para melhorar o planejamento e a eficiência operacional da Padaria Forno Lusitano.
+
+A partir do histórico de vendas, será possível aplicar análises preditivas para estimar a demanda de produtos e identificar períodos de maior movimento.
+
+Também poderão ser desenvolvidas recomendações para reposição de estoque, identificação de padrões de consumo e planejamento de compras, contribuindo para reduzir desperdícios e evitar a falta de produtos.
+
+Essas aplicações dependem da disponibilidade de dados históricos consistentes e de uma futura implementação de ferramentas analíticas.
+
+### 1.10.5 — Tabela de Rastreabilidade
+
+A tabela a seguir relaciona os problemas identificados na Padaria Forno Lusitano aos indicadores propostos e às estruturas do banco de dados que permitem acompanhar cada situação.
+
+| Problema identificado | KPI relacionado | Evidência no banco de dados e nas consultas |
+|---|---|---|
+| **P01 — Controle manual de comandas** | G02 — Quantidade de vendas realizadas | As tabelas `Comanda`, `Venda` e `Item_venda` permitem registrar e consultar as vendas realizadas. |
+| **P02 — Dificuldade no acompanhamento do faturamento** | G01 — Faturamento por período; G03 — Ticket médio; G05 — Faturamento por categoria | As tabelas `Nota_Fiscal`, `Pagamento`, `Venda`, `Item_venda`, `Produto` e `Categoria` permitem analisar receitas e valores de vendas. |
+| **P03 — Inconsistências no controle de estoque** | G07 — Produtos no estoque mínimo | A consulta gerencial G02 identifica produtos e ingredientes abaixo do estoque mínimo, utilizando as tabelas `Produto` e `Ingrediente`. |
+| **P04 — Dificuldade no controle de compras e fornecedores** | G06 — Compras por fornecedor; G08 — Contas a pagar em aberto | As tabelas `Abastecimento`, `Fornecedor`, e `Contas_pagar` permitem acompanhar compras, fornecedores e obrigações financeiras. |
+| **P05 — Sobrecarga operacional** | Sem KPI específico definido | A consulta gerencial G03 permite acompanhar as comandas atendidas e o faturamento gerado por funcionário. |
+| **P06 — Informações descentralizadas** | Sem KPI específico definido | Os relacionamentos entre as tabelas permitem centralizar informações de vendas, clientes, funcionários, produtos, fornecedores e registros financeiros. |
+
+**1.10.6 —  Utilização de Inteligência Artificial (IA)**
+
+Foi utilizada a ferramenta ChatGPT como apoio na identificação e análise de indicadores-chave de desempenho (KPIs) aplicáveis ao contexto da Padaria Forno Lusitano, considerando indicadores utilizados em estabelecimentos do mesmo segmento.
+
+A ferramenta também auxiliou no levantamento de possibilidades de aplicação de Business Intelligence (BI), Analytics e Inteligência Artificial (IA), como análise de vendas, previsão de demanda e recomendações para reposição de estoque.
+
+As sugestões foram avaliadas considerando as necessidades operacionais da padaria e os dados disponíveis no modelo de banco de dados. A equipe também considerou a necessidade de validar cada KPI por meio de consultas SQL, garantindo que os indicadores propostos possam ser efetivamente calculados.
 
 ---
 
@@ -315,74 +373,69 @@ O modelo lógico foi desenvolvido com o Brmodelo.
 
 ## 3\. Script SQL Completo
 
-*(arquivo `.sql` — vale 12% na Dimensão Procedimental)*
+**SGBD:** MySQL 8.0.16+ (`utf8mb4`). O SQL contém, em sequência, `DROP DATABASE IF EXISTS`, `CREATE DATABASE`, 14 `CREATE TABLE`, PK/FK/`CHECK`/`UNIQUE`, dados fictícios, exemplos `SELECT` com `JOIN`, operações `UPDATE` e `DELETE` demonstradas em transação com `ROLLBACK`, 5 consultas gerenciais `G01`–`G05`, 5 consultas de auditoria `A01`–`A05` e contagens de registros.
 
-O script completo é **um arquivo no formato `.sql` disponível no repositório**, de preferência numa pasta chamada **`docs`** (ex.: `docs/script.sql`), com link no README. Script colado só no README, em PDF, em imagem ou em outro formato não é aceito.
+Arquivo para a branch `main`: [`docs/script.sql`](docs/script.sql).
 
-**SGBD:** MySQL — o disponível no laboratório ou outra instalação equivalente a que o grupo tenha acesso. O script deve executar no MySQL.
+### Consulta gerencial e regra de auditoria
 
-O script deve conter, nesta ordem lógica:
+| Código | Pergunta respondida / verificação |
+| :--- | :--- | :--- |
+| `G01` | Qual o faturamento total e a quantidade de pagamentos por forma de pagamento? |
+| `G02` | Quais produtos e ingredientes estão abaixo do estoque mínimo hoje? |
+| `G03` | Qual o número de comandas atendidas e o valor total vendido por funcionário? |
+| `G04` | Quais são os 5 produtos mais vendidos em receita e volume? |
+| `G05` | Qual o montante de contas a pagar vencidas por fornecedor? |
 
-1. `CREATE DATABASE`  
-2. `CREATE TABLE` (todas as tabelas, com tipos de dados adequados)  
-3. **Constraints** (PK, FK, `NOT NULL`, `UNIQUE`, `CHECK` etc.)  
-4. `INSERT INTO` (carga da massa de dados — ver seção 4\)  
-5. `SELECT` com `JOIN` (consultas que cruzam múltiplas tabelas)  
-6. `UPDATE`  
-7. `DELETE`  
-8. **Consultas gerenciais** (que respondem perguntas de gestão, ex.: faturamento/arrecadação por período, número de atendimentos/beneficiários)  
-9. **Consultas de auditoria** (que verificam consistência/integridade dos dados)
+Auditorias de integridade:
 
-Cada **consulta gerencial** e cada **consulta de auditoria** deve ter um cabeçalho em comentário com um código (`G01`, `G02`… para gerenciais; `A01`, `A02`… para auditoria), a pergunta que ela responde em português e o que ela atende:
-
-```sql
--- G03 — Quais bebidas estão abaixo do estoque mínimo hoje?
--- Atende: P1 (ruptura de estoque de bebidas)
-SELECT ...
-
--- A02 — Existe pedido registrado sem nenhum item?
--- Verifica: RN04 (todo pedido tem ao menos um item)
-SELECT ...
-```
-
-&nbsp;
-
-- **Consultas gerenciais** respondem aos problemas declarados e aos KPIs da seção 1.6 — pelo menos uma por problema declarado e por KPI.  
-- **Consultas de auditoria** verificam regras de negócio, citando o código da regra (`RNxx`) que cada uma confere.  
-- Essas mesmas consultas são as usadas na demonstração da apresentação final (seção 7).
-
-*Teste o script do zero (banco vazio) antes de entregar, para garantir que ele executa sem erros.*
-
----
+| Código | Inconsistência pesquisada |
+| :--- | :--- | :--- |
+| `A01` | Existe venda registrada sem nenhum item vinculado? |
+| `A02` | O valor total da Nota Fiscal diverge da soma dos itens da venda? |
+| `A03` | Existem notas fiscais emitidas cujo valor pago (descontando troco) diverge do valor da nota? |
+| `A04` | Existem comandas marcadas como `aberta` que já possuem pagamento confirmado? |
+| `A05` | O valor da Conta a Pagar diverge do valor total registrado no Abastecimento? |
 
 ## 4\. Massa de Dados
 
-*(incluída no script ou em arquivo separado — parte da nota de Implementação SQL, 12%)*
+**Arquivo na branch `main`:** [`docs/massa_de_dados.sql`](./docs/massa_de_dados.sql) *(compatível com MySQL 8.0+ / `utf8mb4`, executado na sequência direta da criação das tabelas do [`docs/script.sql`](./docs/script.sql))*.
 
-Se a massa de dados ficar em arquivo separado, ele deve seguir a mesma regra do script: **um arquivo no formato `.sql` no repositório**, de preferência na pasta **`docs`** (ex.: `docs/massa_de_dados.sql`), com link no README.
+> **Conformidade e Privacidade (LGPD — RN13):** Todos os dados inseridos neste script são **integralmente fictícios**. Nomes de clientes e colaboradores, CPFs, CNPJs, telefones, endereços, e-mails e chaves de acesso de notas fiscais foram gerados sinteticamente para fins acadêmicos, sem utilizar dados reais de clientes, funcionários ou fornecedores da Padaria Forno Lusitano.
 
-- **Dados reais da organização (nomes de clientes, fiéis, beneficiários, doadores, valores reais etc.) não devem ser utilizados, em respeito à privacidade dessas informações.** A massa de dados deve ser **fictícia**, mas **coerente com as operações modeladas** (mesmos tipos de processo, volumes e regras observados na organização real).  
-- Volume de registros **coerente com a realidade da organização** (nada de 3 linhas de exemplo — mas também nada artificialmente inflado sem sentido).  
-- **Explique como o volume real da organização** — os números informados em *Contexto e porte* (seção 1.1), como clientes ativos, pedidos por mês, atendimentos por semana, itens no estoque — **justifica a quantidade de registros de cada tabela** da massa de dados.  
-- Dados consistentes o suficiente para validar os processos organizacionais modelados (ex.: pedidos que referenciam clientes e produtos existentes, ou doações que referenciam doadores e campanhas existentes).  
-- **Variedade e quantidade coerentes com a organização, para que os testes sejam possíveis:** os dados devem cobrir as situações reais — não só o caso comum, mas também pedidos cancelados, clientes sem compras, produtos abaixo do estoque mínimo, pagamentos em formas diferentes, registros em períodos diferentes. Sem essa variedade, as consultas gerenciais e de auditoria (seção 3\) não têm o que mostrar: uma consulta de produtos abaixo do estoque mínimo que retorna vazio não demonstra nada.  
-- **Documente o uso de LLMs** para gerar essa massa de dados na seção 6 (**Uso de Inteligência Artificial**), incluindo ferramentas, prompts e ajustes feitos manualmente.
+A quantidade de registros em cada uma das tabelas foi dimensionada diretamente a partir do levantamento de campo realizado na **Padaria Forno Lusitano** (Seções 1.1 e 1.3), refletindo a operação diária de 15 horas ininterruptas (07:00h às 22:00h):
+
+| Ordem de Carga | Tabela | Qtd. de Registros | Justificativa baseada no contexto e porte real da organização |
+| :--- | :--- | :---: | :--- |
+| **1º** | `Funcionario` | **25** | Espelha exatamente o quadro efetivo real de **25 colaboradores** levantado na entrevista (Seção 1.1 e Processo 10), distribuídos em: 1 gerente, 6 atendentes (IDs 2 a 7), 4 operadores de caixa (IDs 8 a 11), 3 padeiros, 2 confeiteiros, 3 cozinheiros, 2 auxiliares de cozinha, 2 auxiliares de limpeza e 2 estoquistas. |
+| **2º** | `Categoria` | **10** | Representa a compartimentação física dos setores da padaria e restaurante (Seção 1.1 e Processo 4): *Pães, Bolos e Tortas, Doces e Confeitaria, Salgados, Bebidas, Laticínios e Frios, Self-service, Café da Manhã, Mercearia* e *Sobremesas Geladas*. |
+| **3º** | `Fornecedor` | **30** | Dimensionado para cobrir a carteira de distribuidores e atacadistas de farinhas, laticínios, frios, carnes, embalagens e bebidas de revenda (Processo 8). |
+| **4º** | `Ingrediente` | **50** | Contempla os insumos básicos e perecíveis estocados para a produção própria de panificação, confeitaria e cozinha do buffet *self-service* (Processos 5 e 7). |
+| **5º** | `Produto` | **60** | Abrange o catálogo comercial ativo e histórico de itens produzidos internamente e mercadorias de revenda nos balcões, copa e buffet (Processo 4). |
+| **6º** | `Produto_Ingrediente` | **40** | Mapeia as fichas técnicas (receitas padronizadas) que relacionam os produtos de fabricação própria aos seus respectivos insumos e frações consumidas (Processo 7). |
+| **7º** | `Abastecimento` | **40** | Simula o histórico de entradas de notas de compra e reposição de lotes de insumos ao longo de quatro meses (agosto a novembro de 2026 — Processos 8 e 9). |
+| **8º** | `Contas_pagar` | **40** | Reflete a geração obrigatória de um título financeiro para cada abastecimento recebido (relação 1:1 com `Abastecimento`, conforme **RN14**). |
+| **9º** | `Cliente` | **Média de 500** | Baseado diretamente na circulação diária estimada de **500 pessoas** no estabelecimento (Seção 1.1) e na base acumulada de consumidores cadastrados para *delivery* e encomendas (Processo 6 e **RF01**). |
+| **10º** | `Comanda` | **Média de 500** | Coerente com o fluxo diário de aproximadamente **350 atendimentos efetivos por dia** (Seção 1.1), representando uma amostra consolidada de múltiplos turnos operacionais entre novembro e dezembro de 2026 (Processos 1 e 2, **RF05**). |
+| **11º** | `Venda` | **Média de 500** | Registra os lançamentos de consumo vinculados às comandas abertas no salão e balcão ao longo dos turnos da manhã, almoço e tarde/noite (**RN04** e **RF06**). |
+| **12º** | `Item_venda` | **Média de 500** | Detalha os produtos comercializados em cada venda, com suporte a quantidades inteiras (unidades) e pesagem fracionada em quilos para pães e *self-service* (**RN08**). |
+| **13º** | `Nota_Fiscal` | **Média de 500** | Comprova o faturamento fiscal emitido para cada venda finalizada (cardinalidade 1:1 com `Venda`, atendendo à **RN12** e **RN16**). |
+| **14º** | `Pagamento` | **Média de 500** | Registra a liquidação financeira das notas fiscais no caixa nas quatro modalidades aceitas pela casa (Processo 3, **RN03** e **RN06**). |
 
 ---
 
 ## 5\. Repositório GitHub
 
-*(vale 13% — Documentação e Repositório)*
-
-O repositório deve conter:
-
-- Relatório Técnico (no `README.md`)  
-- **Dicionário de Dados** atualizado, no modelo do arquivo `02-03g_Exemplo_Dicionario_Dados.pdf` e com as restrições de integridade de cada coluna (obrigatoriedade, unicidade, valores permitidos, valor padrão), em **um único arquivo HTML** no repositório. **Exceção — turma de GTI:** o dicionário é apresentado em **um único arquivo Markdown (`.md`) separado do README**, seguindo o mesmo modelo do `02-03g_Exemplo_Dicionario_Dados.pdf`.  
-- Diagramas (DER revisado e modelo lógico)  
-- Levantamento (pasta `levantamento`, recomendada) e evidências da organização e da entrevista (fotos JPG ou PNG)  
-- Script SQL completo em arquivo `.sql` (de preferência na pasta `docs`)  
-- **Histórico de commits** que evidencie o desenvolvimento ao longo do tempo (evite um único commit final)  
-- **Evidências de colaboração entre os membros do grupo:** é a listagem de commits do repositório, que deve estar **equilibrada entre os integrantes** — a quantidade de commits deve se distribuir de forma proporcional entre todos os membros do grupo, cada um fazendo commits com a própria conta do GitHub. O integrante precisa ser **identificável na conta do GitHub**: o nome configurado na conta deve ser compatível com o nome do aluno na tabela de Integrantes, onde também deve constar o usuário do GitHub de cada um
+| Artefato | Arquivo |
+| :--- | :--- |
+|Relatório Técnico final | [`README.md`](README.md) |
+| DER conceitual, criado no brModelo | [`modelo_conceitual.jpg`](modelo_conceitual.jpg) |
+| Modelo lógico, criado no brModelo | [`modelo_logico.jpeg`](modelo_logico.jpg) |
+| Dicionário de dados | [`dicionario_dados_petshop.html`](Dicionario.html) |
+| Levantamento da entrevista | [`levantamento/levantamento.md`](levantamento/levantamento.md) |
+| Script SQL completo e massa de dados | [`Docs/script.sql`](Docs/script.sql) |
+| Massa de dados | [`Docs/massa_de_dados.sql`](Docs/massa_de_dados.sql) |
+| Comprovante visita tecnica | [`Comprovante visita`](comprovante_visita.jpeg) |
 
 ---
 
@@ -410,54 +463,3 @@ Para cada uso relevante de ferramenta de IA (ChatGPT, Claude, Gemini, Perplexity
 **Uso de IA observado e não declarado será penalizado.**
 
 ---
-
-## 7\. Apresentação Corporativa Final
-
-*(pitch cronometrado de **8 minutos** — vale 15%, maior peso individual da Dimensão Procedimental)*
-
-Formato: slides com estética limpa e minimalista — **proibida a leitura de blocos longos de texto**.
-
-O pitch deve conter, nesta ordem:
-
-1. **Contextualização do problema institucional/organizacional** solucionado  
-2. **Apresentação da solução** proposta  
-3. **Apresentação do modelo lógico**  
-4. **Demonstração da implementação** (SQL rodando)  
-5. **Demonstração de consultas** (gerenciais/auditoria)  
-6. **Potencial para BI e IA**  
-7. **Benefícios diretos** para a tomada de decisão da organização
-
-**Defesa do modelo lógico:** logo após o pitch, fora do tempo cronometrado, o grupo responde às perguntas do professor e da turma. **Cada pergunta deve ser respondida exclusivamente pelo aluno a quem foi dirigida** — os colegas não podem responder por ele.
-
-**Regras da apresentação:**
-
-- **Participação:** não é necessário e nem recomendável que todos os integrantes falem durante o pitch, mas é **obrigatório que todos participem** da apresentação e estejam presentes para a defesa.  
-- **Ausência:** o integrante ausente na apresentação terá **nota reduzida**, exceto em casos com justificativa legal (ex.: doença que impeça o comparecimento, com atestado).  
-- **Apresentação pessoal:** será avaliada. Postura e vestimenta adequadas a uma apresentação corporativa. Não são adequados bonés, bermudas, chinelos, camisas de time, roupas esportivas ou semelhantes.
-
----
-
-## Critérios Atitudinais (20%)
-
-**Estes critérios NÃO constam explicitamente como item de entrega nos artefatos do grupo.** Eles são avaliados por meio de **Avaliação 360º entre os integrantes do grupo** (cada membro avalia os colegas de equipe) e, no caso da colaboração, também pela **colaboração equilibrada no histórico de commits** do repositório GitHub (Seção 5\) e pela conduta do grupo na **Apresentação Corporativa Final** (seção 7\) — não pela leitura do relatório:
-
-- **Participação e colaboração (5%):** participação técnica ativa \+ colaboração com o grupo, incluindo colaboração equilibrada no histórico de commits do repositório GitHub.  
-- **Responsabilidade (5%):** cumprimento de prazos \+ entrega dos itens sob sua responsabilidade.  
-- **Postura profissional (5%):** comunicação profissional \+ conduta ética.  
-- **Autonomia e resolução de problemas (5%):** buscar soluções independentes \+ propor melhorias.
-
----
-
-## Resumo dos Pesos
-
-| Dimensão | Peso total | Itens principais |
-| :---- | :---- | :---- |
-| Conceitual | 30% | Conversão conceitual→lógico (7,5%), Normalização (7,5%), Justificativas técnicas (7,5%), Análise BI/IA (7,5%) |
-| Procedimental | 50% | Modelo lógico (10%), Implementação SQL (12%), Documentação/repositório (13%), Apresentação final (15%) |
-| Atitudinal | 20% | Participação/colaboração, responsabilidade, postura profissional, autonomia |
-
-&nbsp;
-
-**Entrega final:** Relatório Técnico \+ Dicionário de Dados \+ Modelo Conceitual \+ Modelo Lógico \+ Script SQL \+ Massa de Dados \+ Repositório GitHub, seguidos da Apresentação Corporativa Final perante o professor e a turma.
-
-&nbsp;
