@@ -361,74 +361,69 @@ O modelo lógico foi desenvolvido com o Brmodelo.
 
 ## 3\. Script SQL Completo
 
-*(arquivo `.sql` — vale 12% na Dimensão Procedimental)*
+**SGBD:** MySQL 8.0.16+ (`utf8mb4`). O SQL contém, em sequência, `DROP DATABASE IF EXISTS`, `CREATE DATABASE`, 14 `CREATE TABLE`, PK/FK/`CHECK`/`UNIQUE`, dados fictícios, exemplos `SELECT` com `JOIN`, operações `UPDATE` e `DELETE` demonstradas em transação com `ROLLBACK`, 5 consultas gerenciais `G01`–`G05`, 5 consultas de auditoria `A01`–`A05` e contagens de registros.
 
-O script completo é **um arquivo no formato `.sql` disponível no repositório**, de preferência numa pasta chamada **`docs`** (ex.: `docs/script.sql`), com link no README. Script colado só no README, em PDF, em imagem ou em outro formato não é aceito.
+Arquivo para a branch `main`: [`docs/script.sql`](docs/script.sql).
 
-**SGBD:** MySQL — o disponível no laboratório ou outra instalação equivalente a que o grupo tenha acesso. O script deve executar no MySQL.
+### Consulta gerencial e regra de auditoria
 
-O script deve conter, nesta ordem lógica:
+| Código | Pergunta respondida / verificação |
+| :--- | :--- | :--- |
+| `G01` | Qual o faturamento total e a quantidade de pagamentos por forma de pagamento? |
+| `G02` | Quais produtos e ingredientes estão abaixo do estoque mínimo hoje? |
+| `G03` | Qual o número de comandas atendidas e o valor total vendido por funcionário? |
+| `G04` | Quais são os 5 produtos mais vendidos em receita e volume? |
+| `G05` | Qual o montante de contas a pagar vencidas por fornecedor? |
 
-1. `CREATE DATABASE`  
-2. `CREATE TABLE` (todas as tabelas, com tipos de dados adequados)  
-3. **Constraints** (PK, FK, `NOT NULL`, `UNIQUE`, `CHECK` etc.)  
-4. `INSERT INTO` (carga da massa de dados — ver seção 4\)  
-5. `SELECT` com `JOIN` (consultas que cruzam múltiplas tabelas)  
-6. `UPDATE`  
-7. `DELETE`  
-8. **Consultas gerenciais** (que respondem perguntas de gestão, ex.: faturamento/arrecadação por período, número de atendimentos/beneficiários)  
-9. **Consultas de auditoria** (que verificam consistência/integridade dos dados)
+Auditorias de integridade:
 
-Cada **consulta gerencial** e cada **consulta de auditoria** deve ter um cabeçalho em comentário com um código (`G01`, `G02`… para gerenciais; `A01`, `A02`… para auditoria), a pergunta que ela responde em português e o que ela atende:
-
-```sql
--- G03 — Quais bebidas estão abaixo do estoque mínimo hoje?
--- Atende: P1 (ruptura de estoque de bebidas)
-SELECT ...
-
--- A02 — Existe pedido registrado sem nenhum item?
--- Verifica: RN04 (todo pedido tem ao menos um item)
-SELECT ...
-```
-
-&nbsp;
-
-- **Consultas gerenciais** respondem aos problemas declarados e aos KPIs da seção 1.6 — pelo menos uma por problema declarado e por KPI.  
-- **Consultas de auditoria** verificam regras de negócio, citando o código da regra (`RNxx`) que cada uma confere.  
-- Essas mesmas consultas são as usadas na demonstração da apresentação final (seção 7).
-
-*Teste o script do zero (banco vazio) antes de entregar, para garantir que ele executa sem erros.*
-
----
+| Código | Inconsistência pesquisada |
+| :--- | :--- | :--- |
+| `A01` | Existe venda registrada sem nenhum item vinculado? |
+| `A02` | O valor total da Nota Fiscal diverge da soma dos itens da venda? |
+| `A03` | Existem notas fiscais emitidas cujo valor pago (descontando troco) diverge do valor da nota? |
+| `A04` | Existem comandas marcadas como `aberta` que já possuem pagamento confirmado? |
+| `A05` | O valor da Conta a Pagar diverge do valor total registrado no Abastecimento? |
 
 ## 4\. Massa de Dados
 
-*(incluída no script ou em arquivo separado — parte da nota de Implementação SQL, 12%)*
+**Arquivo na branch `main`:** [`docs/massa_de_dados.sql`](./docs/massa_de_dados.sql) *(compatível com MySQL 8.0+ / `utf8mb4`, executado na sequência direta da criação das tabelas do [`docs/script.sql`](./docs/script.sql))*.
 
-Se a massa de dados ficar em arquivo separado, ele deve seguir a mesma regra do script: **um arquivo no formato `.sql` no repositório**, de preferência na pasta **`docs`** (ex.: `docs/massa_de_dados.sql`), com link no README.
+> **Conformidade e Privacidade (LGPD — RN13):** Todos os dados inseridos neste script são **integralmente fictícios**. Nomes de clientes e colaboradores, CPFs, CNPJs, telefones, endereços, e-mails e chaves de acesso de notas fiscais foram gerados sinteticamente para fins acadêmicos, sem utilizar dados reais de clientes, funcionários ou fornecedores da Padaria Forno Lusitano.
 
-- **Dados reais da organização (nomes de clientes, fiéis, beneficiários, doadores, valores reais etc.) não devem ser utilizados, em respeito à privacidade dessas informações.** A massa de dados deve ser **fictícia**, mas **coerente com as operações modeladas** (mesmos tipos de processo, volumes e regras observados na organização real).  
-- Volume de registros **coerente com a realidade da organização** (nada de 3 linhas de exemplo — mas também nada artificialmente inflado sem sentido).  
-- **Explique como o volume real da organização** — os números informados em *Contexto e porte* (seção 1.1), como clientes ativos, pedidos por mês, atendimentos por semana, itens no estoque — **justifica a quantidade de registros de cada tabela** da massa de dados.  
-- Dados consistentes o suficiente para validar os processos organizacionais modelados (ex.: pedidos que referenciam clientes e produtos existentes, ou doações que referenciam doadores e campanhas existentes).  
-- **Variedade e quantidade coerentes com a organização, para que os testes sejam possíveis:** os dados devem cobrir as situações reais — não só o caso comum, mas também pedidos cancelados, clientes sem compras, produtos abaixo do estoque mínimo, pagamentos em formas diferentes, registros em períodos diferentes. Sem essa variedade, as consultas gerenciais e de auditoria (seção 3\) não têm o que mostrar: uma consulta de produtos abaixo do estoque mínimo que retorna vazio não demonstra nada.  
-- **Documente o uso de LLMs** para gerar essa massa de dados na seção 6 (**Uso de Inteligência Artificial**), incluindo ferramentas, prompts e ajustes feitos manualmente.
+A quantidade de registros em cada uma das tabelas foi dimensionada diretamente a partir do levantamento de campo realizado na **Padaria Forno Lusitano** (Seções 1.1 e 1.3), refletindo a operação diária de 15 horas ininterruptas (07:00h às 22:00h):
+
+| Ordem de Carga | Tabela | Qtd. de Registros | Justificativa baseada no contexto e porte real da organização |
+| :--- | :--- | :---: | :--- |
+| **1º** | `Funcionario` | **25** | Espelha exatamente o quadro efetivo real de **25 colaboradores** levantado na entrevista (Seção 1.1 e Processo 10), distribuídos em: 1 gerente, 6 atendentes (IDs 2 a 7), 4 operadores de caixa (IDs 8 a 11), 3 padeiros, 2 confeiteiros, 3 cozinheiros, 2 auxiliares de cozinha, 2 auxiliares de limpeza e 2 estoquistas. |
+| **2º** | `Categoria` | **10** | Representa a compartimentação física dos setores da padaria e restaurante (Seção 1.1 e Processo 4): *Pães, Bolos e Tortas, Doces e Confeitaria, Salgados, Bebidas, Laticínios e Frios, Self-service, Café da Manhã, Mercearia* e *Sobremesas Geladas*. |
+| **3º** | `Fornecedor` | **30** | Dimensionado para cobrir a carteira de distribuidores e atacadistas de farinhas, laticínios, frios, carnes, embalagens e bebidas de revenda (Processo 8). |
+| **4º** | `Ingrediente` | **50** | Contempla os insumos básicos e perecíveis estocados para a produção própria de panificação, confeitaria e cozinha do buffet *self-service* (Processos 5 e 7). |
+| **5º** | `Produto` | **60** | Abrange o catálogo comercial ativo e histórico de itens produzidos internamente e mercadorias de revenda nos balcões, copa e buffet (Processo 4). |
+| **6º** | `Produto_Ingrediente` | **40** | Mapeia as fichas técnicas (receitas padronizadas) que relacionam os produtos de fabricação própria aos seus respectivos insumos e frações consumidas (Processo 7). |
+| **7º** | `Abastecimento` | **40** | Simula o histórico de entradas de notas de compra e reposição de lotes de insumos ao longo de quatro meses (agosto a novembro de 2026 — Processos 8 e 9). |
+| **8º** | `Contas_pagar` | **40** | Reflete a geração obrigatória de um título financeiro para cada abastecimento recebido (relação 1:1 com `Abastecimento`, conforme **RN14**). |
+| **9º** | `Cliente` | **Média de 500** | Baseado diretamente na circulação diária estimada de **500 pessoas** no estabelecimento (Seção 1.1) e na base acumulada de consumidores cadastrados para *delivery* e encomendas (Processo 6 e **RF01**). |
+| **10º** | `Comanda` | **Média de 500** | Coerente com o fluxo diário de aproximadamente **350 atendimentos efetivos por dia** (Seção 1.1), representando uma amostra consolidada de múltiplos turnos operacionais entre novembro e dezembro de 2026 (Processos 1 e 2, **RF05**). |
+| **11º** | `Venda` | **Média de 500** | Registra os lançamentos de consumo vinculados às comandas abertas no salão e balcão ao longo dos turnos da manhã, almoço e tarde/noite (**RN04** e **RF06**). |
+| **12º** | `Item_venda` | **Média de 500** | Detalha os produtos comercializados em cada venda, com suporte a quantidades inteiras (unidades) e pesagem fracionada em quilos para pães e *self-service* (**RN08**). |
+| **13º** | `Nota_Fiscal` | **Média de 500** | Comprova o faturamento fiscal emitido para cada venda finalizada (cardinalidade 1:1 com `Venda`, atendendo à **RN12** e **RN16**). |
+| **14º** | `Pagamento` | **Média de 500** | Registra a liquidação financeira das notas fiscais no caixa nas quatro modalidades aceitas pela casa (Processo 3, **RN03** e **RN06**). |
 
 ---
 
 ## 5\. Repositório GitHub
 
-*(vale 13% — Documentação e Repositório)*
-
-O repositório deve conter:
-
-- Relatório Técnico (no `README.md`)  
-- **Dicionário de Dados** atualizado, no modelo do arquivo `02-03g_Exemplo_Dicionario_Dados.pdf` e com as restrições de integridade de cada coluna (obrigatoriedade, unicidade, valores permitidos, valor padrão), em **um único arquivo HTML** no repositório. **Exceção — turma de GTI:** o dicionário é apresentado em **um único arquivo Markdown (`.md`) separado do README**, seguindo o mesmo modelo do `02-03g_Exemplo_Dicionario_Dados.pdf`.  
-- Diagramas (DER revisado e modelo lógico)  
-- Levantamento (pasta `levantamento`, recomendada) e evidências da organização e da entrevista (fotos JPG ou PNG)  
-- Script SQL completo em arquivo `.sql` (de preferência na pasta `docs`)  
-- **Histórico de commits** que evidencie o desenvolvimento ao longo do tempo (evite um único commit final)  
-- **Evidências de colaboração entre os membros do grupo:** é a listagem de commits do repositório, que deve estar **equilibrada entre os integrantes** — a quantidade de commits deve se distribuir de forma proporcional entre todos os membros do grupo, cada um fazendo commits com a própria conta do GitHub. O integrante precisa ser **identificável na conta do GitHub**: o nome configurado na conta deve ser compatível com o nome do aluno na tabela de Integrantes, onde também deve constar o usuário do GitHub de cada um
+| Artefato | Arquivo |
+| :--- | :--- |
+|Relatório Técnico final | [`README.md`](README.md) |
+| DER conceitual, criado no brModelo | [`modelo_conceitual.jpg`](modelo_conceitual.jpg) |
+| Modelo lógico, criado no brModelo | [`modelo_logico.jpeg`](modelo_logico.jpg) |
+| Dicionário de dados | [`dicionario_dados_petshop.html`](Dicionario.html) |
+| Levantamento da entrevista | [`levantamento/levantamento.md`](levantamento/levantamento.md) |
+| Script SQL completo e massa de dados | [`Docs/script.sql`](Docs/script.sql) |
+| Massa de dados | [`Docs/massa_de_dados.sql`](Docs/massa_de_dados.sql) |
+| Comprovante visita tecnica | [`Comprovante visita`](comprovante_visita.jpeg) |
 
 ---
 
@@ -456,54 +451,3 @@ Para cada uso relevante de ferramenta de IA (ChatGPT, Claude, Gemini, Perplexity
 **Uso de IA observado e não declarado será penalizado.**
 
 ---
-
-## 7\. Apresentação Corporativa Final
-
-*(pitch cronometrado de **8 minutos** — vale 15%, maior peso individual da Dimensão Procedimental)*
-
-Formato: slides com estética limpa e minimalista — **proibida a leitura de blocos longos de texto**.
-
-O pitch deve conter, nesta ordem:
-
-1. **Contextualização do problema institucional/organizacional** solucionado  
-2. **Apresentação da solução** proposta  
-3. **Apresentação do modelo lógico**  
-4. **Demonstração da implementação** (SQL rodando)  
-5. **Demonstração de consultas** (gerenciais/auditoria)  
-6. **Potencial para BI e IA**  
-7. **Benefícios diretos** para a tomada de decisão da organização
-
-**Defesa do modelo lógico:** logo após o pitch, fora do tempo cronometrado, o grupo responde às perguntas do professor e da turma. **Cada pergunta deve ser respondida exclusivamente pelo aluno a quem foi dirigida** — os colegas não podem responder por ele.
-
-**Regras da apresentação:**
-
-- **Participação:** não é necessário e nem recomendável que todos os integrantes falem durante o pitch, mas é **obrigatório que todos participem** da apresentação e estejam presentes para a defesa.  
-- **Ausência:** o integrante ausente na apresentação terá **nota reduzida**, exceto em casos com justificativa legal (ex.: doença que impeça o comparecimento, com atestado).  
-- **Apresentação pessoal:** será avaliada. Postura e vestimenta adequadas a uma apresentação corporativa. Não são adequados bonés, bermudas, chinelos, camisas de time, roupas esportivas ou semelhantes.
-
----
-
-## Critérios Atitudinais (20%)
-
-**Estes critérios NÃO constam explicitamente como item de entrega nos artefatos do grupo.** Eles são avaliados por meio de **Avaliação 360º entre os integrantes do grupo** (cada membro avalia os colegas de equipe) e, no caso da colaboração, também pela **colaboração equilibrada no histórico de commits** do repositório GitHub (Seção 5\) e pela conduta do grupo na **Apresentação Corporativa Final** (seção 7\) — não pela leitura do relatório:
-
-- **Participação e colaboração (5%):** participação técnica ativa \+ colaboração com o grupo, incluindo colaboração equilibrada no histórico de commits do repositório GitHub.  
-- **Responsabilidade (5%):** cumprimento de prazos \+ entrega dos itens sob sua responsabilidade.  
-- **Postura profissional (5%):** comunicação profissional \+ conduta ética.  
-- **Autonomia e resolução de problemas (5%):** buscar soluções independentes \+ propor melhorias.
-
----
-
-## Resumo dos Pesos
-
-| Dimensão | Peso total | Itens principais |
-| :---- | :---- | :---- |
-| Conceitual | 30% | Conversão conceitual→lógico (7,5%), Normalização (7,5%), Justificativas técnicas (7,5%), Análise BI/IA (7,5%) |
-| Procedimental | 50% | Modelo lógico (10%), Implementação SQL (12%), Documentação/repositório (13%), Apresentação final (15%) |
-| Atitudinal | 20% | Participação/colaboração, responsabilidade, postura profissional, autonomia |
-
-&nbsp;
-
-**Entrega final:** Relatório Técnico \+ Dicionário de Dados \+ Modelo Conceitual \+ Modelo Lógico \+ Script SQL \+ Massa de Dados \+ Repositório GitHub, seguidos da Apresentação Corporativa Final perante o professor e a turma.
-
-&nbsp;
