@@ -340,6 +340,12 @@ Também poderão ser desenvolvidas recomendações para reposição de estoque, 
 
 Essas aplicações dependem da disponibilidade de dados históricos consistentes e de uma futura implementação de ferramentas analíticas.
 
+**1.10.5 — Tabela de Rastreabilidade**
+
+**1.10.6 — Utilização de Inteligência Artificial (IA)**
+
+Foi utilizada a ferramenta ChatGPT como apoio na pesquisa e identificação de indicadores de desempenho (KPIs), possibilidades de aplicação de Business Intelligence (BI) e Inteligência Artificial (IA) para o contexto de uma padaria. A ferramenta também auxiliou na organização das propostas e na análise de quais indicadores poderiam ser relacionados ao modelo de dados desenvolvido. As sugestões foram avaliadas pela equipe, considerando as características do estabelecimento e a estrutura do banco de dados.
+
 ---
 
 ## 2\. Modelo Lógico Relacional
