@@ -127,8 +127,9 @@ Nesta seção, descrevem-se os principais fluxos operacionais mapeados na rotina
 
 | Apontamento da correção da E1 | O que mudou no trabalho | Por quê |
 | :---- | :---- | :---- |
-| *a* | *criada a entidade associativa ITEM\_PEDIDO com quantidade e preço praticado* | *sem ela não é possível saber quanto de cada produto foi vendido* |
-| *ex.: chaves estrangeiras desenhadas no DER* | *removidas — passam a aparecer só no modelo lógico (seção 2\)* | *FK é decisão do modelo lógico, não do conceitual* |
+| Ausência da entidade `fornecedor` no DER | foi adicionada a entidade `fornecedor` com atributos de `id`, `nome`, `telefone`, `CNPJ`,`email`, `ativo`. | Sem ela não é possvel identificar quem abastece o local e nem ter informações de contato. |
+| Dissolvida a tabela `pedido` | Foi adicionada a entidade associativa `venda` com atributos de `data_hora_lancamento`, `subtotal`,`preco_unitario` e `quantidade_vendida`. | Foi adicionada a entidade associativa como forma de resolver relacionamentos (N:N) |
+|
 
 &nbsp;
 
@@ -328,7 +329,18 @@ Também poderão ser desenvolvidas recomendações para reposição de estoque, 
 
 Essas aplicações dependem da disponibilidade de dados históricos consistentes e de uma futura implementação de ferramentas analíticas.
 
-**Tabela de Rastreabilidade**
+### 1.10.5 — Tabela de Rastreabilidade
+
+A tabela a seguir relaciona os problemas identificados na Padaria Forno Lusitano aos indicadores propostos e às estruturas do banco de dados que permitem acompanhar cada situação.
+
+| Problema identificado | KPI relacionado | Evidência no banco de dados e nas consultas |
+|---|---|---|
+| **P01 — Controle manual de comandas** | G02 — Quantidade de vendas realizadas | As tabelas `Comanda`, `Venda` e `Item_venda` permitem registrar e consultar as vendas realizadas. |
+| **P02 — Dificuldade no acompanhamento do faturamento** | G01 — Faturamento por período; G03 — Ticket médio; G05 — Faturamento por categoria | As tabelas `Nota_Fiscal`, `Pagamento`, `Venda`, `Item_venda`, `Produto` e `Categoria` permitem analisar receitas e valores de vendas. |
+| **P03 — Inconsistências no controle de estoque** | G07 — Produtos no estoque mínimo | A consulta gerencial G02 identifica produtos e ingredientes abaixo do estoque mínimo, utilizando as tabelas `Produto` e `Ingrediente`. |
+| **P04 — Dificuldade no controle de compras e fornecedores** | G06 — Compras por fornecedor; G08 — Contas a pagar em aberto | As tabelas `Abastecimento`, `Fornecedor`, e `Contas_pagar` permitem acompanhar compras, fornecedores e obrigações financeiras. |
+| **P05 — Sobrecarga operacional** | Sem KPI específico definido | A consulta gerencial G03 permite acompanhar as comandas atendidas e o faturamento gerado por funcionário. |
+| **P06 — Informações descentralizadas** | Sem KPI específico definido | Os relacionamentos entre as tabelas permitem centralizar informações de vendas, clientes, funcionários, produtos, fornecedores e registros financeiros. |
 
 **Utilização de Inteligência Artificial (IA)**
 
