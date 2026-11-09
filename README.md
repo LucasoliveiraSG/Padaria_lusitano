@@ -29,7 +29,7 @@
   (11) 91858-4285
   - **Instagram:**  https://www.instagram.com/padarialusitano/
   - **Registros da visita:**
-  - [registro da visita.](comprovante_visita.jpeg)
+  - [`registro da visita.`](comprovante_visita.jpeg)
 
 
 **Quem**
@@ -41,8 +41,6 @@
 - **Achados da Observação Presencial vs. Respostas:**
   - *O que foi dito:* O gerente explicou a rotina geral de atendimento, fluxo de comandas e divisão dos turnos dos colaboradores.
   - *O que foi observado:* A equipe presenciou o alto movimento no balcão e no buffet de almoço self-service, a dependência de anotações manuais em blocos de papel para controle interno secundário, e a agilidade necessária no leitor de código de barras das comandas para evitar filas no caixa.
-- **Foto da Visita:**  
-  ![Foto da Entrevista no Local](comprovante_visita.jpeg)  
 
 **O Que Foi Levantado**
 O levantamento de requisitos mapeou os processos operacionais, regras de negócio, volumetria diária e os gargalos do estabelecimento.
