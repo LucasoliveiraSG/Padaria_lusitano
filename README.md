@@ -309,6 +309,37 @@ Com base na caracterização organizacional da Padaria Forno Lusitano, foram ide
 - P05 — Sobrecarga operacional: quadro reduzido de funcionários, ocasionando acúmulo de atividades e necessidade de apoio do gerente em outras funções.
 - P06 — Informações descentralizadas: utilização de documentos físicos e planilhas separadas, aumentando o risco de erros e inconsistências nos registros.
 
+**1.10.2 — Indicadores-chave de desempenho (KPIs)**
+
+Para apoiar a gestão da Padaria Forno Lusitano, foram propostos os seguintes indicadores:
+
+- G01 — Faturamento por período: permite acompanhar o valor total das vendas em períodos específicos.
+- G02 — Quantidade de vendas realizadas: permite identificar o volume de vendas em determinado período.
+- G03 — Ticket médio: representa o valor médio obtido por venda, auxiliando na análise do consumo dos clientes.
+- G04 — Produtos mais vendidos: identifica os produtos com maior quantidade comercializada.
+- G05 — Faturamento por categoria: permite comparar a receita gerada pelas diferentes categorias de produtos.
+- G06 — Compras por fornecedor: permite acompanhar os valores gastos com cada fornecedor.
+- G07 — Produtos no estoque mínimo: identifica produtos cuja quantidade disponível está igual ou abaixo do estoque mínimo definido.
+- G08 — Contas a pagar em aberto: permite acompanhar o valor das obrigações financeiras ainda pendentes.
+
+**1.10.3 — Potencial de Business Intelligence (BI)**
+
+A estrutura do banco de dados possibilita a utilização de ferramentas de Business Intelligence (BI) para transformar os dados operacionais da Padaria Forno Lusitano em informações estratégicas.
+
+Com os dados de vendas, produtos, categorias, estoque, fornecedores e contas a pagar, será possível desenvolver dashboards e relatórios gerenciais.
+
+Esses recursos poderão apresentar indicadores como faturamento por período, ticket médio, produtos mais vendidos, níveis de estoque e despesas com fornecedores, facilitando o acompanhamento dos resultados e apoiando a tomada de decisões da gestão.
+
+**1.10.4 — Aplicações de Analytics e Inteligência Artificial**
+
+A utilização de Analytics e Inteligência Artificial poderá contribuir para melhorar o planejamento e a eficiência operacional da Padaria Forno Lusitano.
+
+A partir do histórico de vendas, será possível aplicar análises preditivas para estimar a demanda de produtos e identificar períodos de maior movimento.
+
+Também poderão ser desenvolvidas recomendações para reposição de estoque, identificação de padrões de consumo e planejamento de compras, contribuindo para reduzir desperdícios e evitar a falta de produtos.
+
+Essas aplicações dependem da disponibilidade de dados históricos consistentes e de uma futura implementação de ferramentas analíticas.
+
 ---
 
 ## 2\. Modelo Lógico Relacional
