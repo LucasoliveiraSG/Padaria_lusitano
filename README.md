@@ -349,7 +349,7 @@ A tabela a seguir relaciona os problemas identificados na Padaria Forno Lusitano
 | **P01 — Controle manual de comandas** | G02 — Quantidade de vendas realizadas | As tabelas `Comanda`, `Venda` e `Item_venda` permitem registrar e consultar as vendas realizadas. |
 | **P02 — Dificuldade no acompanhamento do faturamento** | G01 — Faturamento por período; G03 — Ticket médio; G05 — Faturamento por categoria | As tabelas `Nota_Fiscal`, `Pagamento`, `Venda`, `Item_venda`, `Produto` e `Categoria` permitem analisar receitas e valores de vendas. |
 | **P03 — Inconsistências no controle de estoque** | G07 — Produtos no estoque mínimo | A consulta gerencial G02 identifica produtos e ingredientes abaixo do estoque mínimo, utilizando as tabelas `Produto` e `Ingrediente`. |
-| **P04 — Dificuldade no controle de compras e fornecedores** | G06 — Compras por fornecedor; G08 — Contas a pagar em aberto | As tabelas `Abastecimento`, `Fornecedor` e `Contas_pagar` permitem acompanhar compras, fornecedores e obrigações financeiras. |
+| **P04 — Dificuldade no controle de compras e fornecedores** | G06 — Compras por fornecedor; G08 — Contas a pagar em aberto | As tabelas `Abastecimento`, `Fornecedor`, e `Contas_pagar` permitem acompanhar compras, fornecedores e obrigações financeiras. |
 | **P05 — Sobrecarga operacional** | Sem KPI específico definido | A consulta gerencial G03 permite acompanhar as comandas atendidas e o faturamento gerado por funcionário. |
 | **P06 — Informações descentralizadas** | Sem KPI específico definido | Os relacionamentos entre as tabelas permitem centralizar informações de vendas, clientes, funcionários, produtos, fornecedores e registros financeiros. |
 
