@@ -45,7 +45,9 @@
 - **Quem:** nome e função do entrevistado e quais integrantes do grupo participaram.  
 - **Quando e onde:** data e local — a entrevista deve ser realizada **no ambiente da organização**. A **observação presencial** da rotina é parte importante do levantamento de requisitos: o que o grupo vê acontecer no local (como um pedido é anotado, onde o estoque é controlado, que papéis e planilhas circulam) muitas vezes difere do que é dito na entrevista. **Destaque os achados obtidos pela observação**, separados dos obtidos pelas respostas do entrevistado.  
 - **Comprovação:** ao menos uma foto da entrevista no local, como arquivo JPG ou PNG no repositório.  
-- **O que foi levantado:** o que foi perguntado, o que foi confirmado e, se houve nova visita, o que mudou em relação à Entrega 1 (processos, regras, volumes, problemas). O levantamento completo fica em **um arquivo Markdown (`.md`) à parte no repositório**, com link no README — **recomenda-se fortemente** colocá-lo numa pasta chamada **`levantamento`** (ex.: `levantamento/levantamento.md`). Esse arquivo é um **texto organizado, escrito pelo grupo**, sobre o que foi levantado — **não** é um vídeo ou áudio da entrevista, nem a transcrição crua de formulários ou de perguntas e respostas. **No README, apresente um resumo do levantamento.**
+- **O que foi levantado:** O levantamento de requisitos foi realizado por meio de entrevista presencial com a gerência da **Padaria Forno Lusitano**, mapeando os processos operacionais, a volumetria diária e os gargalos do estabelecimento.
+
+- **Documento Completo:** [Acesse o Relatório de Levantamento Detalhado](./levantamento/levantamento.md)
 
 
 **Processos de negócio (todos os grupos)**
