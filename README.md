@@ -127,8 +127,9 @@ Nesta seção, descrevem-se os principais fluxos operacionais mapeados na rotina
 
 | Apontamento da correção da E1 | O que mudou no trabalho | Por quê |
 | :---- | :---- | :---- |
-| *a* | *criada a entidade associativa ITEM\_PEDIDO com quantidade e preço praticado* | *sem ela não é possível saber quanto de cada produto foi vendido* |
-| *ex.: chaves estrangeiras desenhadas no DER* | *removidas — passam a aparecer só no modelo lógico (seção 2\)* | *FK é decisão do modelo lógico, não do conceitual* |
+| Ausência da entidade `fornecedor` no DER | foi adicionada a entidade `fornecedor` com atributos de `id`, `nome`, `telefone`, `CNPJ`,`email`, `ativo`. | Sem ela não é possvel identificar quem abastece o local e nem ter informações de contato. |
+| Dissolvida a tabela `pedido` | Foi adicionada a entidade associativa `venda` com atributos de `data_hora_lancamento`, `subtotal`,`preco_unitario` e `quantidade_vendida`. | Foi adicionada a entidade associativa como forma de resolver relacionamentos (N:N) |
+|
 
 &nbsp;
 
