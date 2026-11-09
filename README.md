@@ -342,9 +342,13 @@ Essas aplicações dependem da disponibilidade de dados históricos consistentes
 
 **1.10.5 — Tabela de Rastreabilidade**
 
-**1.10.6 — Utilização de Inteligência Artificial (IA)**
+**1.10.6 —  Utilização de Inteligência Artificial (IA)**
 
-Foi utilizada a ferramenta ChatGPT como apoio na pesquisa e identificação de indicadores de desempenho (KPIs), possibilidades de aplicação de Business Intelligence (BI) e Inteligência Artificial (IA) para o contexto de uma padaria. A ferramenta também auxiliou na organização das propostas e na análise de quais indicadores poderiam ser relacionados ao modelo de dados desenvolvido. As sugestões foram avaliadas pela equipe, considerando as características do estabelecimento e a estrutura do banco de dados.
+Foi utilizada a ferramenta ChatGPT como apoio na identificação e análise de indicadores-chave de desempenho (KPIs) aplicáveis ao contexto da Padaria Forno Lusitano, considerando indicadores utilizados em estabelecimentos do mesmo segmento.
+
+A ferramenta também auxiliou no levantamento de possibilidades de aplicação de Business Intelligence (BI), Analytics e Inteligência Artificial (IA), como análise de vendas, previsão de demanda e recomendações para reposição de estoque.
+
+As sugestões foram avaliadas considerando as necessidades operacionais da padaria e os dados disponíveis no modelo de banco de dados. A equipe também considerou a necessidade de validar cada KPI por meio de consultas SQL, garantindo que os indicadores propostos possam ser efetivamente calculados.
 
 ---
 
