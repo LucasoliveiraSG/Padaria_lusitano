@@ -38,19 +38,29 @@
 
 
 
-**Relato da entrevista (todos os grupos)**
+### 1.2 Relato da Entrevista
 
-*Relate a entrevista com o responsável pela organização. A entrevista da Entrega 1 pode ser reaproveitada se atender a todos os itens abaixo — inclusive ter sido feita no ambiente da organização, com foto — e se tiver levantado o necessário para os processos, requisitos e regras desta etapa. Se algo precisou ser confirmado depois (ex.: processos típicos levantados por pesquisa), relate também a nova visita.*
+### 1. Quem
+- **Entrevistado:** Severino (Gerente da Padaria Forno Lusitano)
+- **Integrantes Participantes:** Alex (Vitória) Christini dos Santos e Lucas Oliveira da Silva
 
-- **Quem:** nome e função do entrevistado e quais integrantes do grupo participaram.  
-- **Quando e onde:** data e local — a entrevista deve ser realizada **no ambiente da organização**. A **observação presencial** da rotina é parte importante do levantamento de requisitos: o que o grupo vê acontecer no local (como um pedido é anotado, onde o estoque é controlado, que papéis e planilhas circulam) muitas vezes difere do que é dito na entrevista. **Destaque os achados obtidos pela observação**, separados dos obtidos pelas respostas do entrevistado.  
-- **Comprovação:** ao menos uma foto da entrevista no local, como arquivo JPG ou PNG no repositório.  
-- **O que foi levantado:** O levantamento de requisitos foi realizado por meio de entrevista presencial com a gerência da **Padaria Forno Lusitano**, mapeando os processos operacionais, a volumetria diária e os gargalos do estabelecimento.
+### 2. Quando e Onde (Observação no Local)
+- **Data e Local:** Entrevista realizada presencialmente nas dependências da **Padaria Forno Lusitano**, durante o horário de atendimento da equipe.
+- **Achados da Observação Presencial vs. Respostas:**
+  - *O que foi dito:* O gerente explicou a rotina geral de atendimento, fluxo de comandas e divisão dos turnos dos colaboradores.
+  - *O que foi observado:* A equipe presenciou o alto movimento no balcão e no buffet de almoço self-service, a dependência de anotações manuais em blocos de papel para controle interno secundário, e a agilidade necessária no leitor de código de barras das comandas para evitar filas no caixa.
 
-- **Documento Completo:** [Acesse o Relatório de Levantamento Detalhado](./levantamento/levantamento.md)
+### 3. Comprovação
+- **Foto da Visita:**  
+  ![Foto da Entrevista no Local](comprovante_visita.jpg)  
+
+### 4. O Que Foi Levantado
+O levantamento de requisitos mapeou os processos operacionais, regras de negócio, volumetria diária e os gargalos do estabelecimento.
+
+**Documento Completo:** [Acesse o Relatório de Levantamento Detalhado](./levantamento/levantamento.md)
 
 
-**Processos de negócio (todos os grupos)**
+### 1.3 Processos de negócio (todos os grupos)
 
 Nesta seção, descrevem-se os principais fluxos operacionais mapeados na rotina da **Forno Lusitano**, os quais servem como base empírica para a modelagem relacional do banco de dados:
 
@@ -87,7 +97,7 @@ Nesta seção, descrevem-se os principais fluxos operacionais mapeados na rotina
 11. **Controle de validade e perdas:**
    Rotina de verificação periódica das datas de validade dos produtos e insumos estocados, com atenção especial aos perecíveis (laticínios, frios, pães e doces). Itens vencidos, danificados ou produzidos em excesso e não vendidos são retirados de circulação e registrados como perda, com produto, quantidade, data e motivo. Esse registro dá baixa no estoque e fornece dados para ajustar compras e produção, reduzindo o desperdício.
 
-**Requisitos (todos os grupos)**
+### 1.4 Requisitos (todos os grupos)
 
 ### Requisitos Funcionais
 - **RF01- Cadastrar o cliente:** O sistema deve permitir que haja o cadastro de informações dos clientes, com CPF, endereço, nome. 
@@ -105,7 +115,7 @@ Nesta seção, descrevem-se os principais fluxos operacionais mapeados na rotina
 - **RFN04- Portabilidade:** O sistema deve ser compatível com o navegador utilizado. 
 - **RFN05- Disponibilidade:** O sistema deve funcionar em horários comerciais e em caso de manutenções exibir informações prévias aos usuários. 
 
-**Regras de negócio (todos os grupos)**
+### 1.5 Regras de negócio (todos os grupos)
 
 - **Regras operacionais:** 
 
@@ -142,7 +152,7 @@ Nesta seção, descrevem-se os principais fluxos operacionais mapeados na rotina
 
 *Use a correção da Entrega 1 do grupo como guia dos erros a não repetir, mesmo sendo outra organização.*
 
-### 1.2 Conversão do Modelo Conceitual para o Modelo Lógico
+### 1.6 Conversão do Modelo Conceitual para o Modelo Lógico
 
 O modelo lógico foi obtido no BRModelo a partir do modelo conceitual da padaria e depois revisado, para que cada atributo, relacionamento e cardinalidade do conceitual tenha correspondência exata em colunas, chaves e tabelas.
 
@@ -240,7 +250,7 @@ Uma relação N:N não pode ser representada por uma única FK, então cada uma 
 
 O modelo conceitual **não possui** generalização nem especialização: todas as entidades são independentes e nenhuma herda atributos de outra. Por isso não foi necessário escolher uma estratégia de conversão (tabela única, uma tabela por entidade ou apenas as especializadas), e cada entidade virou uma tabela própria.
 
-### 1.3 Definição de Chaves Primárias e Estrangeiras
+### 1.7 Definição de Chaves Primárias e Estrangeiras
 
 | Tabela	| Chave primária | Chaves estrangeiras |
 | :---- | :---- | :---- |
@@ -258,7 +268,7 @@ O modelo conceitual **não possui** generalização nem especialização: todas 
 | Abastecimento | `id_abastecimento` | id_ingrediente → Ingrediente, id_fornecedor → Fornecedor |
 | Contas_pagar | `id_conta` |	id_abastecimento → Abastecimento |
 
-### 1.4 Processo de Normalização (1FN, 2FN e 3FN)
+### 1.8 Processo de Normalização (1FN, 2FN e 3FN)
 ----
 ### 1FN: Eliminação de grupos repetitivos/atributos multivalorados.
 - O atributo composto `endereco` foi separado por colunas `numero`, `CEP`,  `logradouro`,    `cidade`, `bairro`. Sua separação ocorreu pois a inserção dos elementos em novas colunas permite uma consulta mais eficiente e rápida.
@@ -272,7 +282,7 @@ O modelo conceitual **não possui** generalização nem especialização: todas 
 ### 3FN: Eliminação de dependências transitivas.
 - Não foi identificado elementos que estivessem fora da 3FN
 
-### 1.5 Justificativas Técnicas das Decisões
+### 1.9 Justificativas Técnicas das Decisões
 
 - **PKs:** identificadores inteiros próprios (`id_<entidade>`) nas entidades principais e chave composta em `Produto_Ingrediente`, evitando depender de CPF, CNPJ, número de nota ou código de barras, que podem mudar ou faltar. `Comanda` tem id próprio porque a comanda física numerada é reaproveitada após o pagamento total (RN06). `Venda` e `Abastecimento` têm chave própria para permitir o mesmo produto ou ingrediente repetido.
 - **FKs:** implementam as correspondências entre cliente, funcionário e comanda; comanda, produto e venda (RN04, RN05); venda e nota fiscal (RN12); nota fiscal e pagamento; categoria e produto; produto e ingrediente; ingrediente, fornecedor e abastecimento; abastecimento e conta a pagar. `ON DELETE RESTRICT` impede excluir um registro pai que tenha dependentes, o que preserva o histórico.
@@ -286,7 +296,7 @@ O modelo conceitual **não possui** generalização nem especialização: todas 
 - **Regras que dependem de rotina:** RN05 (baixa do estoque na mesma transação da venda) e RN06 (soma dos pagamentos igual ao total antes de liberar a comanda) exigem transação ou gatilho, porque um `CHECK` não compara tabelas diferentes.
 - **Regras sem tabela no modelo atual:** RN02 e RN03 (caixa), RN07 (multa), RN09 (entrega) e RN10 e RN11 (perdas, validade e lotes) só ficam garantidas pelo banco com as tabelas propostas `Caixa`, `Multa`, `Entrega` e `Perda`, mais `lote` e `data_validade` em `Abastecimento`.
 
-### 1.6 Proposta de Arquitetura Analítica para BI e IA
+### 1.10 Proposta de Arquitetura Analítica para BI e IA
 
 *(vale 7,5%)*
 
