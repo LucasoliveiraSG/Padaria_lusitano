@@ -298,7 +298,7 @@ O modelo conceitual **não possui** generalização nem especialização: todas 
 
 ### 1.10 Proposta de Arquitetura Analítica para BI e IA
 
-1.10.1 — Problemas identificados
+**1.10.1 — Problemas identificados**
 
 Com base na caracterização organizacional da Padaria Forno Lusitano, foram identificados os seguintes problemas operacionais:
 
