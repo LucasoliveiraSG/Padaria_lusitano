@@ -298,27 +298,16 @@ O modelo conceitual **não possui** generalização nem especialização: todas 
 
 ### 1.10 Proposta de Arquitetura Analítica para BI e IA
 
-*(vale 7,5%)*
+1.10.1 — Problemas identificados
 
-- **Informações estratégicas** que podem ser extraídas dos dados para a gestão da organização.  
-- **Indicadores e métricas gerenciais** propostos (KPIs).  
-- **Potencial dos dados para BI:** como a estrutura apoia dashboards/relatórios.  
-- **Aplicações analíticas e de IA:** como o modelo pode alimentar análises preditivas, recomendações etc.
+Com base na caracterização organizacional da Padaria Forno Lusitano, foram identificados os seguintes problemas operacionais:
 
-**Rastreabilidade:** inclua uma tabela que ligue cada problema declarado na caracterização da organização e cada KPI proposto às tabelas que o sustentam e à consulta do script SQL que o responde (pelo código da consulta — ver seção 3):
-
-| Problema ou KPI | Tabelas envolvidas | Consulta no script |
-| :---- | :---- | :---- |
-| *ex.: P1 — ruptura de estoque de bebidas* | *PRODUTO, MOVIMENTACAO\_ESTOQUE* | *G03* |
-| *ex.: ticket médio por ambiente* | *PEDIDO, ITEM\_PEDIDO, AMBIENTE* | *G05* |
-
-&nbsp;
-
-*KPI sem consulta no script que o calcule não é considerado KPI. Cada problema declarado deve ter pelo menos uma consulta que o responda.*
-
-> **O que é KPI:** *Key Performance Indicator* (indicador-chave de desempenho) é um número que mostra, de forma objetiva, se a organização está indo bem em algo que importa para a gestão dela. Um KPI tem **fórmula** (como é calculado), **período** (por dia, semana, mês) e, de preferência, uma **meta** para comparação. Exemplos: ticket médio por venda, taxa de cancelamento de pedidos, produtos abaixo do estoque mínimo, tempo médio de atendimento, número de beneficiários atendidos por mês, percentual de doações recorrentes. "Melhorar o atendimento" não é KPI; "tempo médio entre o pedido e a entrega, por semana" é.
-
-> **Como levantar:** é recomendável usar pesquisas e ferramentas de IA para descobrir quais indicadores são usados por organizações do mesmo tipo (ex.: "principais KPIs de uma pizzaria", "indicadores de gestão de uma ONG de doação de alimentos") e quais análises de BI e de IA costumam ser aplicadas a elas. Depois, **filtre pelo que o seu banco consegue calcular**: um KPI só vale se as tabelas do modelo tiverem os dados necessários e se houver uma consulta no script que o calcule (ver *Rastreabilidade*, abaixo). Se possível, confirme com o responsável pela organização quais indicadores seriam úteis para ele. Registre esse uso de IA na seção 6\.
+- P01 — Controle manual de comandas: utilização de comandas físicas e registros em papel para controlar pedidos e consumo dos clientes.
+- P02 — Dificuldade no acompanhamento do faturamento: dificuldade para centralizar e analisar as receitas e os resultados financeiros.
+- P03 — Inconsistências no controle de estoque: dificuldades para acompanhar as quantidades disponíveis e identificar necessidades de reposição.
+- P04 — Dificuldade no controle de compras e fornecedores: necessidade de melhorar o acompanhamento das compras, dos fornecedores e das contas a pagar.
+- P05 — Sobrecarga operacional: quadro reduzido de funcionários, ocasionando acúmulo de atividades e necessidade de apoio do gerente em outras funções.
+- P06 — Informações descentralizadas: utilização de documentos físicos e planilhas separadas, aumentando o risco de erros e inconsistências nos registros.
 
 ---
 
