@@ -383,7 +383,7 @@ O modelo lógico foi desenvolvido com o Brmodelo.
 
 Arquivo para a branch `main`: [`Docs/script.sql`](Docs/script.sql).
 
-### Consulta gerencial e regra de auditoria
+### Consultas gerenciais e auditorias de integridade
 
 | Código | Pergunta respondida / verificação |
 | :--- | :--- |
