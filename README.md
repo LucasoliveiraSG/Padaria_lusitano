@@ -126,6 +126,7 @@ Nesta seção, descrevem-se os principais fluxos operacionais mapeados na rotina
  - RN14: Compra recebida gera conta a pagar com vencimento não anterior à emissão.
  - RN15: estoque no mínimo entra na lista de reposição.
  - RN16: nota fiscal emitida não é excluída, apenas cancelada.
+ - RN17: Controle do estoque deve conter entrada e saída.
 ---
 
 | Apontamento da correção da E1 | O que mudou no trabalho | Por quê |
@@ -447,25 +448,45 @@ A quantidade de registros em cada uma das tabelas foi dimensionada diretamente a
 
 ## 6\. Uso de Inteligência Artificial
 
-*(documentação obrigatória — não é opcional se o grupo usou IA em qualquer etapa: pesquisa, levantamento de processos, requisitos e regras típicos, escrita, organização de ideias, revisão de texto, geração de massa de dados ou apoio a scripts SQL)*
+### 6.1 Claude — apoio à definição dos atributos do modelo conceitual
 
-Para cada uso relevante de ferramenta de IA (ChatGPT, Claude, Gemini, Perplexity etc.), registre:
+| Item | Registro |
+|---|---|
+| **Ferramenta e etapa** | Claude (Anthropic), em 06/11/2026, durante a modelagem conceitual no BRModelo: levantamento dos atributos que faltavam em cada entidade. |
+| **Motivação** | Cruzar os processos descritos (comanda, caixa, produtos, estoque, delivery) com cada entidade do modelo para identificar lacunas, já que várias entidades tinham poucos atributos ou apenas atributos genéricos. |
+| **Prompt(s) utilizados** | “com base nas seguintes informações e nos atributos faltando, quais são os atributos que devem ser adicionada em cada entidade”, seguido da descrição dos seis processos do estabelecimento e do PDF do modelo anexado. |
+| **Resposta recebida** | Lista por entidade, com os atributos já existentes e os novos (ex.: logradouro e bairro em Cliente; codigo_barras, unidade_medida e estoque_minimo em Produto; numero_nota, serie e chave_acesso em Nota Fiscal; forma_pagamento e valor_troco em Pagamento). Apontou ainda a falta de uma entidade Caixa e sugeriu uma entidade associativa Receita. |
+| **Fontes consultadas e verificadas** | A IA não citou fontes externas. Cada atributo foi conferido contra a descrição dos processos; Fornecedor, Abastecimento e Contas_pagar não têm processo no enunciado, então não puderam ser conferidos. |
+| **Trechos rejeitados ou corrigidos** | Não adotados: numero_comanda, valor_total e tipo_atendimento em Comanda; turno e data_admissao em Funcionário; bandeira do cartão em Pagamento; entidade Caixa. Corrigidos depois: Venda sem chave primária (criado id_venda), id_categoria redundante em Produto, Nota Fiscal ligada à Comanda e não à Venda, e tipos de dados do script SQL (CPF como CHAR(11), valores como DECIMAL). |
+| **Justificativa da escolha final** | Foram mantidos só os atributos com origem direta em algum processo descrito, para manter o modelo enxuto; Venda e Abastecimento ganharam chave própria para evitar chave composta. |
+| **Reflexão crítica** | A IA tende a inflar o modelo. Sugeriu muitos atributos "por precaução". Sem a filtragem contra o enunciado, o modelo ficaria maior e mais difícil de manter do que o problema exige. |
 
-| Item | O que registrar |
-| :---- | :---- |
-| **Ferramenta e etapa** | Qual IA foi usada e em qual parte do trabalho (ex.: normalização, geração da massa de dados, escrita de queries SQL, redação do relatório, preparação dos slides). |
-| **Motivação** | Por que o grupo recorreu à IA nesse ponto específico. |
-| **Prompt(s) utilizados** | Texto exato (ou muito próximo) do que foi perguntado/pedido à IA. |
-| **Resposta recebida** | Resumo ou trecho relevante da resposta da IA. |
-| **Fontes consultadas e verificadas** | Se a IA citou fontes/dados, quais foram checadas pelo grupo e como. |
-| **Trechos rejeitados ou corrigidos** | O que da resposta da IA foi descartado, editado ou corrigido manualmente (ex.: query SQL ajustada, dado fictício alterado), e por quê. |
-| **Justificativa da escolha final** | Por que o grupo manteve, adaptou ou rejeitou o que a IA sugeriu. |
-| **Reflexão crítica** | Limites, vieses ou erros identificados no uso da IA nessa etapa (ex.: normalização incorreta sugerida pela IA, script SQL com erro de sintaxe, dado fictício incoerente com o volume real da organização). |
+### 6.1 Claude — Criação das massas de dados
 
-&nbsp;
+| Item | Registro |
+|---|---|
+| **Ferramenta e etapa** | Claude (Anthropic). |
+| **Motivação** | Cruzar os processos descritos (comanda, caixa, produtos, estoque, delivery) com cada entidade do modelo para identificar lacunas, já que várias entidades tinham poucos atributos ou apenas atributos genéricos. |
+| **Prompt(s) utilizados** | “com base nas seguintes informações e nos atributos faltando, quais são os atributos que devem ser adicionada em cada entidade”, seguido da descrição dos seis processos do estabelecimento e do PDF do modelo anexado. |
+| **Resposta recebida** | Lista por entidade, com os atributos já existentes e os novos (ex.: logradouro e bairro em Cliente; codigo_barras, unidade_medida e estoque_minimo em Produto; numero_nota, serie e chave_acesso em Nota Fiscal; forma_pagamento e valor_troco em Pagamento). Apontou ainda a falta de uma entidade Caixa e sugeriu uma entidade associativa Receita. |
+| **Fontes consultadas e verificadas** | A IA não citou fontes externas. Cada atributo foi conferido contra a descrição dos processos; Fornecedor, Abastecimento e Contas_pagar não têm processo no enunciado, então não puderam ser conferidos. |
+| **Trechos rejeitados ou corrigidos** | Não adotados: numero_comanda, valor_total e tipo_atendimento em Comanda; turno e data_admissao em Funcionário; bandeira do cartão em Pagamento; entidade Caixa. Corrigidos depois: Venda sem chave primária (criado id_venda), id_categoria redundante em Produto, Nota Fiscal ligada à Comanda e não à Venda, e tipos de dados do script SQL (CPF como CHAR(11), valores como DECIMAL). |
+| **Justificativa da escolha final** | Foram mantidos só os atributos com origem direta em algum processo descrito, para manter o modelo enxuto; Venda e Abastecimento ganharam chave própria para evitar chave composta. |
+| **Reflexão crítica** | A IA tende a inflar o modelo. Sugeriu muitos atributos "por precaução". Sem a filtragem contra o enunciado, o modelo ficaria maior e mais difícil de manter do que o problema exige. |
 
-*Se o grupo não usou nenhuma ferramenta de IA em alguma dessas etapas, declare isso explicitamente.*
+## 6. Uso de Inteligência Artificial
 
-**Uso de IA observado e não declarado será penalizado.**
+### 6.2 Claude — geração da massa de dados fictícia em SQL
+
+| Item | Registro |
+|---|---|
+| **Ferramenta e etapa** | Claude (Anthropic), na etapa de geração da massa de dados fictícia (INSERTs em MySQL) para as 14 tabelas do modelo lógico, a partir do script CREATE TABLE já corrigido. |
+| **Motivação** | Popular o banco com um volume de dados suficiente para testar as relações entre as tabelas, sem digitar centenas de registros à mão e mantendo a coerência entre chaves estrangeiras, valores e datas. |
+| **Prompt(s) utilizados** | “com base em todas as tabelas, crie uma massa de dados fictícia para cada tabela, cada uma delas contendo um total de 15 cadastro, usando como base a linguagem do MySql”; junto foi enviado tanto a imagem do modelo lógico, tanto o sctipt do SQL contendo os create table. |
+| **Resposta recebida** | Arquivo `.sql` com um INSERT por tabela, na ordem das chaves estrangeiras. Os dados seguem as regras do modelo: subtotal = quantidade × preço, valor da nota = soma dos itens da comanda, troco só em pagamento em dinheiro, chave de acesso de 44 dígitos e contas a pagar pagas, abertas e vencidas.|
+| **Fontes consultadas e verificadas** | A IA não usou fontes externas; os nomes, CPFs, CNPJs, telefones e e-mails são inventados. A conferência foi feita por script: contagem de linhas por tabela, ids em sequência, chaves estrangeiras sem registro órfão, valores únicos sem repetição e contas de subtotal, total da nota, troco e abastecimento.|
+| **Trechos rejeitados ou corrigidos** | Houveram tabelas em que tinha certas ids que não existiam em outros tabelas, sendo usadas como chave estrangeira, foram colocadas manualmente as ids corretas para a correção. |
+| **Justificativa da escolha final** | Foram mantidos dados simples e rastreáveis (um item por comanda, valores redondos, datas de out. e nov. de 2026) para que as contas fechem e qualquer erro de chave apareça logo; os casos de cancelamento, estorno e conta vencida foram incluídos de propósito para exercitar os status. |
+| **Reflexão crítica** | Usar a IA para fazer a massa de dados facilitou muito, já que criar uma massa de dados enorme como essa demoraria um bom tempo, porém, por conter muitos dados, houveram algumas repetições de dados e erros de ids alocadas erradas, então mesmo que ao usar a IA tenha  facilitado com os dados, ainda tivemos que mexer nele manualmente. Isso mostra que mesmo a IA sendo muito boa, ela também comete erros. |
 
 ---
