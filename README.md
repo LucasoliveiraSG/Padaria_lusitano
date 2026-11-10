@@ -453,21 +453,6 @@ A massa de dados foi elaborada com registros fictícios para simular o funcionam
 | **Justificativa da escolha final** | Foram mantidos só os atributos com origem direta em algum processo descrito, para manter o modelo enxuto; Venda e Abastecimento ganharam chave própria para evitar chave composta. |
 | **Reflexão crítica** | A IA tende a inflar o modelo. Sugeriu muitos atributos "por precaução". Sem a filtragem contra o enunciado, o modelo ficaria maior e mais difícil de manter do que o problema exige. |
 
-## 6. Uso de Inteligência Artificial
-
-### 6.1 Claude — apoio à definição dos atributos do modelo conceitual
-
-| Item | Registro |
-|---|---|
-| **Ferramenta e etapa** | Claude (Anthropic), em 06/11/2026, durante a modelagem conceitual no BRModelo, para auxiliar no levantamento dos atributos de cada entidade. |
-| **Motivação** | Relacionar os processos descritos (comanda, caixa, produtos, estoque e delivery) às entidades do modelo, identificando possíveis lacunas, pois algumas entidades apresentavam poucos atributos ou atributos genéricos. |
-| **Prompt(s) utilizados** | "Com base nas seguintes informações e nos atributos faltantes, quais são os atributos que devem ser adicionados em cada entidade?", acompanhado da descrição dos seis processos do estabelecimento e do PDF do modelo conceitual. |
-| **Resposta recebida** | Lista de atributos existentes e sugestões de novos atributos por entidade (ex.: logradouro e bairro em Cliente; código de barras, unidade de medida e estoque mínimo em Produto; número da nota, série e chave de acesso em Nota Fiscal; forma de pagamento e valor do troco em Pagamento). Também apontou a ausência de uma entidade Caixa e sugeriu uma entidade associativa Receita. |
-| **Fontes consultadas e verificadas** | A IA não citou fontes externas. Os atributos sugeridos foram conferidos com base na descrição dos processos. Fornecedor, Abastecimento e Contas_pagar não possuíam processos detalhados no enunciado, portanto não puderam ser validados da mesma forma. |
-| **Trechos rejeitados ou corrigidos** | Não foram adotados: numero_comanda, valor_total e tipo_atendimento em Comanda; turno e data_admissao em Funcionário; bandeira do cartão em Pagamento; e a entidade Caixa. Também foram realizados ajustes posteriores, como a criação de id_venda como chave primária de Venda, a retirada de id_categoria redundante em Produto, o relacionamento de Nota Fiscal com Venda e a correção de tipos de dados no script SQL, como CPF em CHAR(11) e valores monetários em DECIMAL. |
-| **Justificativa da escolha final** | Foram mantidos os atributos com relação direta aos processos descritos, buscando preservar um modelo objetivo e adequado às necessidades do estabelecimento. Venda e Abastecimento receberam chaves próprias para evitar o uso de chaves compostas. |
-| **Reflexão crítica** | A IA tende a ampliar o modelo com atributos sugeridos por precaução. Sem a análise e a filtragem das sugestões com base no enunciado, o modelo poderia ficar maior e mais complexo do que o necessário. |
-
 ### 6.2 Claude — geração da massa de dados fictícia em SQL
 
 | Item | Registro |
