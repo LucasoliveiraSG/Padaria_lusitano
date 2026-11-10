@@ -427,9 +427,9 @@ A quantidade de registros em cada uma das tabelas foi dimensionada diretamente a
 | DER conceitual, criado no brModelo | [`modelo_conceitual.jpg`](modelo_conceitual.jpg) |
 | Modelo lógico, criado no brModelo | [`modelo_logico.jpg`](modelo_logico.jpg) |
 | Dicionário de dados | [`Dicionario.html`](Dicionario.html) |
-| Levantamento da entrevista | [`levantamento/levantamento.md`](Levantamento/levantamento.md) |
-| Script SQL completo e massa de dados | [`Docs/script.sql`](Docs/script.sql) |
-| Massa de dados | [`Docs/massa_de_dados.sql`](Docs/massa_de_dados.sql) |
+| Levantamento | [`levantamento.md`](Levantamento/levantamento.md) |
+| Script SQL | [`script.sql`](Docs/script.sql) |
+| Massa de dados | [`massa_de_dados.sql`](Docs/massa_de_dados.sql) |
 | Comprovante da visita técnica | [`comprovante_visita.jpeg`](comprovante_visita.jpeg) |
 
 ---
