@@ -309,14 +309,14 @@ Com base na caracterização organizacional da Padaria Forno Lusitano, foram ide
 
 Para apoiar a gestão da Padaria Forno Lusitano, foram propostos os seguintes indicadores:
 
-- KPI01 — Faturamento por período: permite acompanhar o valor total das vendas em períodos específicos.
-- KPI02 — Quantidade de vendas realizadas: permite identificar o volume de vendas em determinado período.
-- KPI03 — Ticket médio: representa o valor médio obtido por venda, auxiliando na análise do consumo dos clientes.
-- KPI04 — Produtos mais vendidos: identifica os produtos com maior quantidade comercializada.
-- KPI05 — Faturamento por categoria: permite comparar a receita gerada pelas diferentes categorias de produtos.
-- KPI06 — Compras por fornecedor: permite acompanhar os valores gastos com cada fornecedor.
-- KPI07 — Produtos abaixo do estoque mínimo: identifica produtos cuja quantidade disponível está inferior ao estoque mínimo definido.
-- KPI08 — Contas a pagar em aberto: permite acompanhar o valor das obrigações financeiras ainda pendentes.
+- **KPI01 — Faturamento por período:** permite acompanhar o valor total das vendas em períodos específicos.
+- **KPI02 — Quantidade de vendas realizadas:** permite identificar o volume de vendas em determinado período.
+- **KPI03 — Ticket médio:** representa o valor médio obtido por venda, auxiliando na análise do consumo dos clientes.
+- **KPI04 — Produtos mais vendidos:** identifica os produtos com maior quantidade comercializada.
+- **KPI05 — Faturamento por categoria:** permite comparar a receita gerada pelas diferentes categorias de produtos.
+- **KPI06 — Compras por fornecedor:** permite acompanhar os valores gastos com cada fornecedor.
+- **KPI07 — Produtos abaixo do estoque mínimo:** identifica produtos cuja quantidade disponível está abaixo do estoque mínimo definido.
+- **KPI08 — Contas a pagar em aberto:** permite acompanhar o valor das obrigações financeiras ainda pendentes.
 
 **Potencial de Business Intelligence (BI)**
 
