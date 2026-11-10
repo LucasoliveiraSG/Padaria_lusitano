@@ -309,14 +309,14 @@ Com base na caracterização organizacional da Padaria Forno Lusitano, foram ide
 
 Para apoiar a gestão da Padaria Forno Lusitano, foram propostos os seguintes indicadores:
 
-- G01 — Faturamento por período: permite acompanhar o valor total das vendas em períodos específicos.
-- G02 — Quantidade de vendas realizadas: permite identificar o volume de vendas em determinado período.
-- G03 — Ticket médio: representa o valor médio obtido por venda, auxiliando na análise do consumo dos clientes.
-- G04 — Produtos mais vendidos: identifica os produtos com maior quantidade comercializada.
-- G05 — Faturamento por categoria: permite comparar a receita gerada pelas diferentes categorias de produtos.
-- G06 — Compras por fornecedor: permite acompanhar os valores gastos com cada fornecedor.
-- G07 — Produtos no estoque mínimo: identifica produtos cuja quantidade disponível está igual ou abaixo do estoque mínimo definido.
-- G08 — Contas a pagar em aberto: permite acompanhar o valor das obrigações financeiras ainda pendentes.
+- KPI01 — Faturamento por período: permite acompanhar o valor total das vendas em períodos específicos.
+- KPI02 — Quantidade de vendas realizadas: permite identificar o volume de vendas em determinado período.
+- KPI03 — Ticket médio: representa o valor médio obtido por venda, auxiliando na análise do consumo dos clientes.
+- KPI04 — Produtos mais vendidos: identifica os produtos com maior quantidade comercializada.
+- KPI05 — Faturamento por categoria: permite comparar a receita gerada pelas diferentes categorias de produtos.
+- KPI06 — Compras por fornecedor: permite acompanhar os valores gastos com cada fornecedor.
+- KPI07 — Produtos abaixo do estoque mínimo: identifica produtos cuja quantidade disponível está inferior ao estoque mínimo definido.
+- KPI08 — Contas a pagar em aberto: permite acompanhar o valor das obrigações financeiras ainda pendentes.
 
 **Potencial de Business Intelligence (BI)**
 
@@ -342,11 +342,11 @@ A tabela a seguir relaciona os problemas identificados na Padaria Forno Lusitano
 
 | Problema identificado | KPI relacionado | Evidência no banco de dados e nas consultas |
 |---|---|---|
-| **P01 — Controle manual de comandas** | G02 — Quantidade de vendas realizadas | As tabelas `Comanda`, `Venda` e `Item_venda` permitem registrar e consultar as vendas realizadas. |
-| **P02 — Dificuldade no acompanhamento do faturamento** | G01 — Faturamento por período; G03 — Ticket médio; G05 — Faturamento por categoria | As tabelas `Nota_Fiscal`, `Pagamento`, `Venda`, `Item_venda`, `Produto` e `Categoria` permitem analisar receitas e valores de vendas. |
-| **P03 — Inconsistências no controle de estoque** | G07 — Produtos no estoque mínimo | A consulta gerencial G02 identifica produtos e ingredientes abaixo do estoque mínimo, utilizando as tabelas `Produto` e `Ingrediente`. |
-| **P04 — Dificuldade no controle de compras e fornecedores** | G06 — Compras por fornecedor; G08 — Contas a pagar em aberto | As tabelas `Abastecimento`, `Fornecedor`, e `Contas_pagar` permitem acompanhar compras, fornecedores e obrigações financeiras. |
-| **P05 — Sobrecarga operacional** | Sem KPI específico definido | A consulta gerencial G03 permite acompanhar as comandas atendidas e o faturamento gerado por funcionário. |
+| **P01 — Controle manual de comandas** | KPI02 — Quantidade de vendas realizadas | As tabelas `Comanda`, `Venda` e `Item_venda` permitem registrar e consultar as vendas realizadas. |
+| **P02 — Dificuldade no acompanhamento do faturamento** | KPI01 — Faturamento por período; KPI03 — Ticket médio; KPI05 — Faturamento por categoria | As tabelas `Nota_Fiscal`, `Pagamento`, `Venda`, `Item_venda`, `Produto` e `Categoria` fornecem os dados necessários para calcular esses indicadores. As consultas `G01`, `G03` e `G04` apresentam análises complementares. |
+| **P03 — Inconsistências no controle de estoque** | KPI07 — Produtos abaixo do estoque mínimo | A consulta `G02` identifica produtos e ingredientes abaixo do estoque mínimo, utilizando as tabelas `Produto` e `Ingrediente`. |
+| **P04 — Dificuldade no controle de compras e fornecedores** | KPI06 — Compras por fornecedor; KPI08 — Contas a pagar em aberto | As tabelas `Abastecimento`, `Fornecedor` e `Contas_pagar` permitem acompanhar compras e obrigações financeiras. A consulta `G05` apresenta contas vencidas por fornecedor, não abrangendo todas as contas em aberto. |
+| **P05 — Sobrecarga operacional** | Sem KPI específico definido | A consulta `G03` permite acompanhar as comandas atendidas e o faturamento por funcionário. |
 | **P06 — Informações descentralizadas** | Sem KPI específico definido | Os relacionamentos entre as tabelas permitem centralizar informações de vendas, clientes, funcionários, produtos, fornecedores e registros financeiros. |
 
 **Utilização de Inteligência Artificial (IA)**
