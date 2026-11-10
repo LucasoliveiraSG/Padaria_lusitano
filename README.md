@@ -68,7 +68,7 @@ Nesta seção, descrevem-se os principais fluxos operacionais mapeados na rotina
    Rotina de gerenciamento e verificação periódica dos insumos e produtos prontos estocados nos diferentes setores (copa, bebidas, pães, doces e laticínios). O processo visa monitorar a disponibilidade de mercadorias para assegurar o abastecimento contínuo e evitar rupturas durante as 15 horas diárias de funcionamento (das 07:00h às 22:00h).
 
 6. **Cadastro de Clientes para Entregas:**
-   Processo voltado para o atendimento na modalidade de *delivery* ou encomendas externas. Quando o cliente solicita um pedido fora do salão, a equipe realiza o registro dos dados cadastrais essenciais: **nome, telefone de contato e endereço completo**, garantindo a rastreabilidade logística e o histórico de atendimento.
+   Processo voltado para o atendimento na modalidade de *delivery* ou encomendas externas. Quando o cliente solicita um pedido fora do salão, a equipe realiza o registro dos dados cadastrais essenciais: **nome, telefone de contato e endereço completo**, garantindo a rastreabilidade logística e o histórico de atendimento. O processo de entrega é delimitado apenas aos arredores da região, a taxa de entrega é cobrada pelo aplicativo de *delivery*.
 
 7. **Produção própria de pães e doces:**
    Processo operacional realizado na cozinha e na área de panificação, responsável por transformar insumos em produtos prontos para venda. A produção segue receitas padronizadas que definem os ingredientes e as quantidades necessárias para cada item. A equipe registra o que foi produzido, a quantidade e a data, e os ingredientes consumidos são baixados do estoque. Os produtos fabricados entram no estoque de pães e doces, ficando disponíveis para o atendimento no salão e no balcão.
@@ -84,6 +84,9 @@ Nesta seção, descrevem-se os principais fluxos operacionais mapeados na rotina
 
 11. **Controle de validade e perdas:**
    Rotina de verificação periódica das datas de validade dos produtos e insumos estocados, com atenção especial aos perecíveis (laticínios, frios, pães e doces). Itens vencidos, danificados ou produzidos em excesso e não vendidos são retirados de circulação e registrados como perda, com produto, quantidade, data e motivo. Esse registro dá baixa no estoque e fornece dados para ajustar compras e produção, reduzindo o desperdício.
+
+12. **Pesagem e cobrança do Self-Service**
+   O cliente recebe uma comanda ao entrar e monta seu prato à vontade. A balança é regulada e desconta o peso do prato e multiplica o peso liquido pelo preço do quilo. bebidas e sobremesas contém preço fixo e são adicionadas a comanda.
 
 ### Requisitos (todos os grupos)
 
@@ -137,6 +140,14 @@ Nesta seção, descrevem-se os principais fluxos operacionais mapeados na rotina
 |Ausência da Regra de Negócio "Normas sanitárias"|Foi adicionada a Regra de Negócio que estabelece normas sanitárias `RN11`| Foi adicionada pois garante que os alimentos sejam preparadas de forma segura.
 |Ausência da Regra de Negócio "Emissão de cupom fiscal"|Foi adicionada a Regra de Negócio que justifica a emissão de cupom fiscal `RN16`|Foi adicionada pois é considerada uma obrigação legal e toda venda precisa ser registrada.
 |Ausência da Regra de Negócio "LGPD para CPF e endereço de clientes"|Foi adicionada a Regra de Negócio que estabelece a proteção de dados de CPF e endereço `RN13`|Foi adicionada pois são dados sensíveis de identificação de clientes e devem ser protegidas.
+|Ausência de Processo de negócio de pesagem e cobrança do Self-Service| Foi adicionado processo de negócio que estabelece a pesagem e cobrança do Self-Service | Foi adicionada pois define o calculo do peso líquido multiplicado pelo quilo.
+|Parcialidade do Processo de negócio de encomendas e entrega| Foi adicionado processo de negócio que estabelece encomendas e entregas| Foi adicionada para delimitar o raio e taxa de entregas pela região
+|Ausência de Processo de negócio de produção própria de pães e doces | Foi adicionado processo de negócio que estabelece a produção própria de pães e doces | Foi adicionada para estabelecer o seguimento de receitas padronizadas que definem os ingredientes e quantidades necessárias para cada item.
+|Ausência de Processo de negócio de controle de estoque | Foi adicionado processo de negócio que estabelece o controle de estoque| Foi adicionada para definir data e horário de movimentações no estoque.
+|Ausência de Processo de negócio de compra de insumos e cadastro de fornecedores| Foi adicionado processo de negócio que estabelece a compra de insumos e cadastros de fornecedores| Foi adicionada pois estabelece o processo administrativo de reposição de matérias-primas e mercadorias de revenda .
+|Ausência de Processo de negócio de recebimento da mercadoria| Foi adicionado processo de negócio que estabelece o recebimento da mercadoria| Foi adicionada pois registraos itens recebidos com o pedido de compra e a nota fiscal do fornecedor, verificando quantidade, qualidade, temperatura (quando aplicável) e prazo de validade.
+|Ausência de Processo de negócio de escala de turno dos 25 colaboradores| Foi adicionado processo de negócio que estabelece a escala de turno dos 25 colaboradores| Foi adicionada o processo de gestão de pessoal que organiza a jornada dos 25 colaboradores de modo a cobrir as 15 horas diárias de funcionamento.
+|Ausência de Processo de negócio de controle de validade e perdas| Foi adicionado processo de negócio que estabelece o controle de validade e perdas|Foi adicionada por conter a rotina de verificação periódica das datas de validade dos produtos e insumos estocados, com atenção especial aos perecíveis (laticínios, frios, pães e doces).
 
 
 &nbsp;
@@ -310,14 +321,14 @@ Com base na caracterização organizacional da Padaria Forno Lusitano, foram ide
 
 Para apoiar a gestão da Padaria Forno Lusitano, foram propostos os seguintes indicadores:
 
-- G01 — Faturamento por período: permite acompanhar o valor total das vendas em períodos específicos.
-- G02 — Quantidade de vendas realizadas: permite identificar o volume de vendas em determinado período.
-- G03 — Ticket médio: representa o valor médio obtido por venda, auxiliando na análise do consumo dos clientes.
-- G04 — Produtos mais vendidos: identifica os produtos com maior quantidade comercializada.
-- G05 — Faturamento por categoria: permite comparar a receita gerada pelas diferentes categorias de produtos.
-- G06 — Compras por fornecedor: permite acompanhar os valores gastos com cada fornecedor.
-- G07 — Produtos no estoque mínimo: identifica produtos cuja quantidade disponível está igual ou abaixo do estoque mínimo definido.
-- G08 — Contas a pagar em aberto: permite acompanhar o valor das obrigações financeiras ainda pendentes.
+- **KPI01 — Faturamento por período:** permite acompanhar o valor total das vendas em períodos específicos.
+- **KPI02 — Quantidade de vendas realizadas:** permite identificar o volume de vendas em determinado período.
+- **KPI03 — Ticket médio:** representa o valor médio obtido por venda, auxiliando na análise do consumo dos clientes.
+- **KPI04 — Produtos mais vendidos:** identifica os produtos com maior quantidade comercializada.
+- **KPI05 — Faturamento por categoria:** permite comparar a receita gerada pelas diferentes categorias de produtos.
+- **KPI06 — Compras por fornecedor:** permite acompanhar os valores gastos com cada fornecedor.
+- **KPI07 — Produtos abaixo do estoque mínimo:** identifica produtos cuja quantidade disponível está abaixo do estoque mínimo definido.
+- **KPI08 — Contas a pagar em aberto:** permite acompanhar o valor das obrigações financeiras ainda pendentes.
 
 **Potencial de Business Intelligence (BI)**
 
@@ -343,11 +354,11 @@ A tabela a seguir relaciona os problemas identificados na Padaria Forno Lusitano
 
 | Problema identificado | KPI relacionado | Evidência no banco de dados e nas consultas |
 |---|---|---|
-| **P01 — Controle manual de comandas** | G02 — Quantidade de vendas realizadas | As tabelas `Comanda`, `Venda` e `Item_venda` permitem registrar e consultar as vendas realizadas. |
-| **P02 — Dificuldade no acompanhamento do faturamento** | G01 — Faturamento por período; G03 — Ticket médio; G05 — Faturamento por categoria | As tabelas `Nota_Fiscal`, `Pagamento`, `Venda`, `Item_venda`, `Produto` e `Categoria` permitem analisar receitas e valores de vendas. |
-| **P03 — Inconsistências no controle de estoque** | G07 — Produtos no estoque mínimo | A consulta gerencial G02 identifica produtos e ingredientes abaixo do estoque mínimo, utilizando as tabelas `Produto` e `Ingrediente`. |
-| **P04 — Dificuldade no controle de compras e fornecedores** | G06 — Compras por fornecedor; G08 — Contas a pagar em aberto | As tabelas `Abastecimento`, `Fornecedor`, e `Contas_pagar` permitem acompanhar compras, fornecedores e obrigações financeiras. |
-| **P05 — Sobrecarga operacional** | Sem KPI específico definido | A consulta gerencial G03 permite acompanhar as comandas atendidas e o faturamento gerado por funcionário. |
+| **P01 — Controle manual de comandas** | KPI02 — Quantidade de vendas realizadas | As tabelas `Comanda`, `Venda` e `Item_venda` permitem registrar e consultar as vendas realizadas. |
+| **P02 — Dificuldade no acompanhamento do faturamento** | KPI01 — Faturamento por período; KPI03 — Ticket médio; KPI05 — Faturamento por categoria | As tabelas `Nota_Fiscal`, `Pagamento`, `Venda`, `Item_venda`, `Produto` e `Categoria` fornecem os dados necessários para calcular esses indicadores. As consultas `G01`, `G03` e `G04` apresentam análises complementares. |
+| **P03 — Inconsistências no controle de estoque** | KPI07 — Produtos abaixo do estoque mínimo | A consulta `G02` identifica produtos e ingredientes abaixo do estoque mínimo, utilizando as tabelas `Produto` e `Ingrediente`. |
+| **P04 — Dificuldade no controle de compras e fornecedores** | KPI06 — Compras por fornecedor; KPI08 — Contas a pagar em aberto | As tabelas `Abastecimento`, `Fornecedor` e `Contas_pagar` permitem acompanhar compras e obrigações financeiras. A consulta `G05` apresenta contas vencidas por fornecedor, não abrangendo todas as contas em aberto. |
+| **P05 — Sobrecarga operacional** | Sem KPI específico definido | A consulta `G03` permite acompanhar as comandas atendidas e o faturamento por funcionário. |
 | **P06 — Informações descentralizadas** | Sem KPI específico definido | Os relacionamentos entre as tabelas permitem centralizar informações de vendas, clientes, funcionários, produtos, fornecedores e registros financeiros. |
 
 **Utilização de Inteligência Artificial (IA)**
@@ -373,7 +384,7 @@ O modelo lógico foi desenvolvido com o Brmodelo.
 
 Arquivo para a branch `main`: [`Docs/script.sql`](Docs/script.sql).
 
-### Consulta gerencial e regra de auditoria
+### Consultas gerenciais e auditorias de integridade
 
 | Código | Pergunta respondida / verificação |
 | :--- | :--- |
@@ -426,12 +437,12 @@ A quantidade de registros em cada uma das tabelas foi dimensionada diretamente a
 | :--- | :--- |
 |Relatório Técnico final | [`README.md`](README.md) |
 | DER conceitual, criado no brModelo | [`modelo_conceitual.jpg`](modelo_conceitual.jpg) |
-| Modelo lógico, criado no brModelo | [`modelo_logico.jpeg`](modelo_logico.jpg) |
-| Dicionário de dados | [`dicionario_dados_petshop.html`](Dicionario.html) |
-| Levantamento da entrevista | [`levantamento/levantamento.md`](Levantamento/levantamento.md) |
-| Script SQL completo e massa de dados | [`Docs/script.sql`](Docs/script.sql) |
-| Massa de dados | [`Docs/massa_de_dados.sql`](Docs/massa_de_dados.sql) |
-| Comprovante visita tecnica | [`Comprovante visita`](comprovante_visita.jpeg) |
+| Modelo lógico, criado no brModelo | [`modelo_logico.jpg`](modelo_logico.jpg) |
+| Dicionário de dados | [`Dicionario.html`](Dicionario.html) |
+| Levantamento | [`levantamento.md`](Levantamento/levantamento.md) |
+| Script SQL | [`script.sql`](Docs/script.sql) |
+| Massa de dados | [`massa_de_dados.sql`](Docs/massa_de_dados.sql) |
+| Comprovante da visita técnica | [`comprovante_visita.jpeg`](comprovante_visita.jpeg) |
 
 ---
 
