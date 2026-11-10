@@ -45,7 +45,7 @@
 **O Que Foi Levantado**
 O levantamento de requisitos mapeou os processos operacionais, regras de negócio, volumetria diária e os gargalos do estabelecimento.
 
-**Documento Completo:** [Acesse o Relatório de Levantamento Detalhado](./levantamento/levantamento.md)
+**Documento Completo:** [Acesse o Relatório de Levantamento Detalhado](/Levantamento/levantamento.md)
 
 
 ### Processos de negócio (todos os grupos)
@@ -320,14 +320,14 @@ Com base na caracterização organizacional da Padaria Forno Lusitano, foram ide
 
 Para apoiar a gestão da Padaria Forno Lusitano, foram propostos os seguintes indicadores:
 
-- G01 — Faturamento por período: permite acompanhar o valor total das vendas em períodos específicos.
-- G02 — Quantidade de vendas realizadas: permite identificar o volume de vendas em determinado período.
-- G03 — Ticket médio: representa o valor médio obtido por venda, auxiliando na análise do consumo dos clientes.
-- G04 — Produtos mais vendidos: identifica os produtos com maior quantidade comercializada.
-- G05 — Faturamento por categoria: permite comparar a receita gerada pelas diferentes categorias de produtos.
-- G06 — Compras por fornecedor: permite acompanhar os valores gastos com cada fornecedor.
-- G07 — Produtos no estoque mínimo: identifica produtos cuja quantidade disponível está igual ou abaixo do estoque mínimo definido.
-- G08 — Contas a pagar em aberto: permite acompanhar o valor das obrigações financeiras ainda pendentes.
+- **KPI01 — Faturamento por período:** permite acompanhar o valor total das vendas em períodos específicos.
+- **KPI02 — Quantidade de vendas realizadas:** permite identificar o volume de vendas em determinado período.
+- **KPI03 — Ticket médio:** representa o valor médio obtido por venda, auxiliando na análise do consumo dos clientes.
+- **KPI04 — Produtos mais vendidos:** identifica os produtos com maior quantidade comercializada.
+- **KPI05 — Faturamento por categoria:** permite comparar a receita gerada pelas diferentes categorias de produtos.
+- **KPI06 — Compras por fornecedor:** permite acompanhar os valores gastos com cada fornecedor.
+- **KPI07 — Produtos abaixo do estoque mínimo:** identifica produtos cuja quantidade disponível está abaixo do estoque mínimo definido.
+- **KPI08 — Contas a pagar em aberto:** permite acompanhar o valor das obrigações financeiras ainda pendentes.
 
 **Potencial de Business Intelligence (BI)**
 
@@ -347,17 +347,17 @@ Também poderão ser desenvolvidas recomendações para reposição de estoque, 
 
 Essas aplicações dependem da disponibilidade de dados históricos consistentes e de uma futura implementação de ferramentas analíticas.
 
-### 1.10.5 — Tabela de Rastreabilidade
+### Tabela de Rastreabilidade
 
 A tabela a seguir relaciona os problemas identificados na Padaria Forno Lusitano aos indicadores propostos e às estruturas do banco de dados que permitem acompanhar cada situação.
 
 | Problema identificado | KPI relacionado | Evidência no banco de dados e nas consultas |
 |---|---|---|
-| **P01 — Controle manual de comandas** | G02 — Quantidade de vendas realizadas | As tabelas `Comanda`, `Venda` e `Item_venda` permitem registrar e consultar as vendas realizadas. |
-| **P02 — Dificuldade no acompanhamento do faturamento** | G01 — Faturamento por período; G03 — Ticket médio; G05 — Faturamento por categoria | As tabelas `Nota_Fiscal`, `Pagamento`, `Venda`, `Item_venda`, `Produto` e `Categoria` permitem analisar receitas e valores de vendas. |
-| **P03 — Inconsistências no controle de estoque** | G07 — Produtos no estoque mínimo | A consulta gerencial G02 identifica produtos e ingredientes abaixo do estoque mínimo, utilizando as tabelas `Produto` e `Ingrediente`. |
-| **P04 — Dificuldade no controle de compras e fornecedores** | G06 — Compras por fornecedor; G08 — Contas a pagar em aberto | As tabelas `Abastecimento`, `Fornecedor`, e `Contas_pagar` permitem acompanhar compras, fornecedores e obrigações financeiras. |
-| **P05 — Sobrecarga operacional** | Sem KPI específico definido | A consulta gerencial G03 permite acompanhar as comandas atendidas e o faturamento gerado por funcionário. |
+| **P01 — Controle manual de comandas** | KPI02 — Quantidade de vendas realizadas | As tabelas `Comanda`, `Venda` e `Item_venda` permitem registrar e consultar as vendas realizadas. |
+| **P02 — Dificuldade no acompanhamento do faturamento** | KPI01 — Faturamento por período; KPI03 — Ticket médio; KPI05 — Faturamento por categoria | As tabelas `Nota_Fiscal`, `Pagamento`, `Venda`, `Item_venda`, `Produto` e `Categoria` fornecem os dados necessários para calcular esses indicadores. As consultas `G01`, `G03` e `G04` apresentam análises complementares. |
+| **P03 — Inconsistências no controle de estoque** | KPI07 — Produtos abaixo do estoque mínimo | A consulta `G02` identifica produtos e ingredientes abaixo do estoque mínimo, utilizando as tabelas `Produto` e `Ingrediente`. |
+| **P04 — Dificuldade no controle de compras e fornecedores** | KPI06 — Compras por fornecedor; KPI08 — Contas a pagar em aberto | As tabelas `Abastecimento`, `Fornecedor` e `Contas_pagar` permitem acompanhar compras e obrigações financeiras. A consulta `G05` apresenta contas vencidas por fornecedor, não abrangendo todas as contas em aberto. |
+| **P05 — Sobrecarga operacional** | Sem KPI específico definido | A consulta `G03` permite acompanhar as comandas atendidas e o faturamento por funcionário. |
 | **P06 — Informações descentralizadas** | Sem KPI específico definido | Os relacionamentos entre as tabelas permitem centralizar informações de vendas, clientes, funcionários, produtos, fornecedores e registros financeiros. |
 
 **Utilização de Inteligência Artificial (IA)**
@@ -381,7 +381,7 @@ O modelo lógico foi desenvolvido com o Brmodelo.
 
 **SGBD:** MySQL 8.0.16+ (`utf8mb4`). O SQL contém, em sequência, `DROP DATABASE IF EXISTS`, `CREATE DATABASE`, 14 `CREATE TABLE`, PK/FK/`CHECK`/`UNIQUE`, dados fictícios, exemplos `SELECT` com `JOIN`, operações `UPDATE` e `DELETE` demonstradas em transação com `ROLLBACK`, 5 consultas gerenciais `G01`–`G05`, 5 consultas de auditoria `A01`–`A05` e contagens de registros.
 
-Arquivo para a branch `main`: [`docs/script.sql`](docs/script.sql).
+Arquivo para a branch `main`: [`Docs/script.sql`](Docs/script.sql).
 
 ### Consulta gerencial e regra de auditoria
 
@@ -405,7 +405,7 @@ Auditorias de integridade:
 
 ## 4\. Massa de Dados
 
-**Arquivo na branch `main`:** [`docs/massa_de_dados.sql`](./docs/massa_de_dados.sql) *(compatível com MySQL 8.0+ / `utf8mb4`, executado na sequência direta da criação das tabelas do [`docs/script.sql`](./docs/script.sql))*.
+**Arquivo na branch `main`:** [`docs/massa_de_dados.sql`](Docs/massa_de_dados.sql) *(compatível com MySQL 8.0+ / `utf8mb4`, executado na sequência direta da criação das tabelas do [`docs/script.sql`](Docs/script.sql))*.
 
 > **Conformidade e Privacidade (LGPD — RN13):** Todos os dados inseridos neste script são **integralmente fictícios**. Nomes de clientes e colaboradores, CPFs, CNPJs, telefones, endereços, e-mails e chaves de acesso de notas fiscais foram gerados sinteticamente para fins acadêmicos, sem utilizar dados reais de clientes, funcionários ou fornecedores da Padaria Forno Lusitano.
 
@@ -436,12 +436,12 @@ A quantidade de registros em cada uma das tabelas foi dimensionada diretamente a
 | :--- | :--- |
 |Relatório Técnico final | [`README.md`](README.md) |
 | DER conceitual, criado no brModelo | [`modelo_conceitual.jpg`](modelo_conceitual.jpg) |
-| Modelo lógico, criado no brModelo | [`modelo_logico.jpeg`](modelo_logico.jpg) |
-| Dicionário de dados | [`dicionario_dados_petshop.html`](Dicionario.html) |
-| Levantamento da entrevista | [`levantamento/levantamento.md`](levantamento/levantamento.md) |
-| Script SQL completo e massa de dados | [`Docs/script.sql`](Docs/script.sql) |
-| Massa de dados | [`Docs/massa_de_dados.sql`](Docs/massa_de_dados.sql) |
-| Comprovante visita tecnica | [`Comprovante visita`](comprovante_visita.jpeg) |
+| Modelo lógico, criado no brModelo | [`modelo_logico.jpg`](modelo_logico.jpg) |
+| Dicionário de dados | [`Dicionario.html`](Dicionario.html) |
+| Levantamento | [`levantamento.md`](Levantamento/levantamento.md) |
+| Script SQL | [`script.sql`](Docs/script.sql) |
+| Massa de dados | [`massa_de_dados.sql`](Docs/massa_de_dados.sql) |
+| Comprovante da visita técnica | [`comprovante_visita.jpeg`](comprovante_visita.jpeg) |
 
 ---
 
