@@ -461,21 +461,6 @@ A quantidade de registros em cada uma das tabelas foi dimensionada diretamente a
 | **Justificativa da escolha final** | Foram mantidos só os atributos com origem direta em algum processo descrito, para manter o modelo enxuto; Venda e Abastecimento ganharam chave própria para evitar chave composta. |
 | **Reflexão crítica** | A IA tende a inflar o modelo. Sugeriu muitos atributos "por precaução". Sem a filtragem contra o enunciado, o modelo ficaria maior e mais difícil de manter do que o problema exige. |
 
-### 6.1 Claude — Criação das massas de dados
-
-| Item | Registro |
-|---|---|
-| **Ferramenta e etapa** | Claude (Anthropic). |
-| **Motivação** | Cruzar os processos descritos (comanda, caixa, produtos, estoque, delivery) com cada entidade do modelo para identificar lacunas, já que várias entidades tinham poucos atributos ou apenas atributos genéricos. |
-| **Prompt(s) utilizados** | “com base nas seguintes informações e nos atributos faltando, quais são os atributos que devem ser adicionada em cada entidade”, seguido da descrição dos seis processos do estabelecimento e do PDF do modelo anexado. |
-| **Resposta recebida** | Lista por entidade, com os atributos já existentes e os novos (ex.: logradouro e bairro em Cliente; codigo_barras, unidade_medida e estoque_minimo em Produto; numero_nota, serie e chave_acesso em Nota Fiscal; forma_pagamento e valor_troco em Pagamento). Apontou ainda a falta de uma entidade Caixa e sugeriu uma entidade associativa Receita. |
-| **Fontes consultadas e verificadas** | A IA não citou fontes externas. Cada atributo foi conferido contra a descrição dos processos; Fornecedor, Abastecimento e Contas_pagar não têm processo no enunciado, então não puderam ser conferidos. |
-| **Trechos rejeitados ou corrigidos** | Não adotados: numero_comanda, valor_total e tipo_atendimento em Comanda; turno e data_admissao em Funcionário; bandeira do cartão em Pagamento; entidade Caixa. Corrigidos depois: Venda sem chave primária (criado id_venda), id_categoria redundante em Produto, Nota Fiscal ligada à Comanda e não à Venda, e tipos de dados do script SQL (CPF como CHAR(11), valores como DECIMAL). |
-| **Justificativa da escolha final** | Foram mantidos só os atributos com origem direta em algum processo descrito, para manter o modelo enxuto; Venda e Abastecimento ganharam chave própria para evitar chave composta. |
-| **Reflexão crítica** | A IA tende a inflar o modelo. Sugeriu muitos atributos "por precaução". Sem a filtragem contra o enunciado, o modelo ficaria maior e mais difícil de manter do que o problema exige. |
-
-## 6. Uso de Inteligência Artificial
-
 ### 6.2 Claude — geração da massa de dados fictícia em SQL
 
 | Item | Registro |
