@@ -410,7 +410,7 @@ Auditorias de integridade:
 
 > **Conformidade e Privacidade (LGPD — RN13):** Todos os dados inseridos neste script são **integralmente fictícios**. Nomes de clientes e colaboradores, CPFs, CNPJs, telefones, endereços, e-mails e chaves de acesso de notas fiscais foram gerados sinteticamente para fins acadêmicos, sem utilizar dados reais de clientes, funcionários ou fornecedores da Padaria Forno Lusitano.
 
-A quantidade de registros em cada uma das tabelas foi dimensionada diretamente a partir do levantamento de campo realizado na **Padaria Forno Lusitano** (Seções 1.1 e 1.3), refletindo a operação diária de 15 horas ininterruptas (07:00h às 22:00h):
+A massa de dados foi elaborada com registros fictícios para simular o funcionamento da Padaria Forno Lusitano, considerando as informações obtidas no levantamento de campo (Seções 1.1 e 1.3), incluindo seu horário de funcionamento de 15 horas diárias (07:00h às 22:00h). A quantidade de registros representa uma amostra acadêmica da operação, não o volume total de atendimentos realizados pelo estabelecimento.
 
 | Ordem de Carga | Tabela | Qtd. de Registros | Justificativa baseada no contexto e porte real da organização |
 | :--- | :--- | :---: | :--- |
@@ -422,12 +422,12 @@ A quantidade de registros em cada uma das tabelas foi dimensionada diretamente a
 | **6º** | `Produto_Ingrediente` | **40** | Mapeia as fichas técnicas (receitas padronizadas) que relacionam os produtos de fabricação própria aos seus respectivos insumos e frações consumidas (Processo 7). |
 | **7º** | `Abastecimento` | **40** | Simula o histórico de entradas de notas de compra e reposição de lotes de insumos ao longo de quatro meses (agosto a novembro de 2026 — Processos 8 e 9). |
 | **8º** | `Contas_pagar` | **40** | Reflete a geração obrigatória de um título financeiro para cada abastecimento recebido (relação 1:1 com `Abastecimento`, conforme **RN14**). |
-| **9º** | `Cliente` | **Média de 500** | Baseado diretamente na circulação diária estimada de **500 pessoas** no estabelecimento (Seção 1.1) e na base acumulada de consumidores cadastrados para *delivery* e encomendas (Processo 6 e **RF01**). |
-| **10º** | `Comanda` | **Média de 500** | Coerente com o fluxo diário de aproximadamente **350 atendimentos efetivos por dia** (Seção 1.1), representando uma amostra consolidada de múltiplos turnos operacionais entre novembro e dezembro de 2026 (Processos 1 e 2, **RF05**). |
-| **11º** | `Venda` | **Média de 500** | Registra os lançamentos de consumo vinculados às comandas abertas no salão e balcão ao longo dos turnos da manhã, almoço e tarde/noite (**RN04** e **RF06**). |
-| **12º** | `Item_venda` | **Média de 500** | Detalha os produtos comercializados em cada venda, com suporte a quantidades inteiras (unidades) e pesagem fracionada em quilos para pães e *self-service* (**RN08**). |
-| **13º** | `Nota_Fiscal` | **Média de 500** | Comprova o faturamento fiscal emitido para cada venda finalizada (cardinalidade 1:1 com `Venda`, atendendo à **RN12** e **RN16**). |
-| **14º** | `Pagamento` | **Média de 500** | Registra a liquidação financeira das notas fiscais no caixa nas quatro modalidades aceitas pela casa (Processo 3, **RN03** e **RN06**). |
+| **9º** | `Cliente` | **130** | Representa uma amostra fictícia de clientes cadastrados para simular os atendimentos, delivery e encomendas da padaria. |
+| **10º** | `Comanda` | **130** | Simula os registros de comandas em diferentes turnos e dias de funcionamento, considerando o fluxo de atendimento do estabelecimento. |
+| **11º** | `Venda` | **130** | Registra as vendas vinculadas às comandas, simulando operações realizadas entre novembro e dezembro de 2026. |
+| **12º** | `Item_venda` | **130** | Detalha os produtos comercializados em cada venda, incluindo quantidades inteiras e fracionadas em quilos. |
+| **13º** | `Nota_Fiscal` | **130** | Representa uma nota fiscal para cada venda registrada, respeitando a relação 1:1 definida no banco de dados. |
+| **14º** | `Pagamento` | **130** | Registra os pagamentos vinculados às notas fiscais, contemplando as modalidades de pagamento utilizadas nos exemplos do projeto. |
 
 ---
 
