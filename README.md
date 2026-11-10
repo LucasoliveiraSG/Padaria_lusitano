@@ -141,8 +141,8 @@ Nesta seção, descrevem-se os principais fluxos operacionais mapeados na rotina
 | :---- | :---- | :---- |
 | Ausência da entidade `fornecedor` no DER | foi adicionada a entidade `fornecedor` com atributos de `id`, `nome`, `telefone`, `CNPJ`,`email`, `ativo`. | Sem ela não é possvel identificar quem abastece o local e nem ter informações de contato. |
 | Dissolvida a tabela `pedido` | Foi adicionada a entidade associativa `venda` com atributos de `data_hora_lancamento`, `subtotal`,`preco_unitario` e `quantidade_vendida`. | Foi adicionada a entidade associativa como forma de resolver relacionamentos (N:N) |
-|Ausência da Regra de Negócio "Multa por perda de comanda"|Foi adicionada a Regra de Negócio que estabelece a multa por perda de comanda `RN07`| Foi adicionada por 
-|Ausência da Regra de Negócio Preço por quilo so "Self-Service" RN08| Foi adicionada a Regra de Negócio que estabelece o preço por quilo do Self-Service `RN08`|
+|Ausência da Regra de Negócio "Multa por perda de comanda"|Foi adicionada a Regra de Negócio que estabelece a multa por perda de comanda `RN07`| Foi adicionada pois ao perder a comanda não é possível identificar oque o cliente consumiu, portanto a multa cobra o prejuízo.
+|Ausência da Regra de Negócio "Preço por quilo do Self-Service"| Foi adicionada a Regra de Negócio que estabelece o preço por quilo do Self-Service `RN08`| 
 |Ausência da Regra de Negócio "Taxa e raio de entrega"|Foi adicionada a Regra de Negócio que estabelece a taxa e raio da entrega `RN09`|
 |Ausência da Regra de Negócio "Descarte de produtos vencidos"|Foi adicionada a Regra de Negócio que exige o Descarte de produtos vencidos `RN10`|
 |Ausência da Regra de "Negócio Normas sanitárias"|Foi adicionada a Regra de Negócio que estabelece normas sanitárias `RN11`|
