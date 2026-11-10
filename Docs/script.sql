@@ -314,85 +314,129 @@ INNER JOIN Ingrediente i ON ab.id_ingrediente = i.id_ingrediente;
 
 -- Consultas Gerenciais.
 
--- G01 — Qual o faturamento total e a quantidade de pagamentos por forma de pagamento?
--- Atende: P1 (controle financeiro e conciliação de caixa por modalidade)
+-- G01 — Qual o faturamento total por período (mês/ano)?
+-- Atende: P02 (dificuldade no acompanhamento do faturamento) e P06 (informações descentralizadas)
 SELECT 
-    forma_pagamento,
-    COUNT(id_pagamento) AS total_transacoes,
-    SUM(valor_pago - IFNULL(valor_troco, 0)) AS receita_liquida
-FROM Pagamento
-WHERE status_pagamento = 'confirmado'
-GROUP BY forma_pagamento
-ORDER BY receita_liquida DESC;
+    DATE_FORMAT(nf.data_emissao, '%Y-%m') AS periodo_mes,
+    COUNT(nf.id_nota_fiscal) AS qtd_notas_emitidas,
+    SUM(nf.valor_total) AS faturamento_total
+FROM Nota_Fiscal nf
+WHERE nf.status = 'emitida'
+GROUP BY DATE_FORMAT(nf.data_emissao, '%Y-%m')
+ORDER BY periodo_mes;
 
--- G02 — Quais produtos e ingredientes estão abaixo do estoque mínimo hoje?
--- Atende: P2 (prevenção de ruptura de estoque e planejamento de compras)
+-- G02 — Qual a quantidade de vendas e comandas atendidas por período e funcionário?
+-- Atende: P01 (controle manual de comandas) e P05 (sobrecarga operacional da equipe)
 SELECT 
-    'Produto' AS tipo_item,
-    p.id_produto AS id,
-    p.nome_produto AS item,
-    IFNULL(c.descricao, 'Sem Categoria') AS categoria,
-    p.quantidade AS estoque_atual,
-    p.estoque_minimo
-FROM Produto p
-LEFT JOIN Categoria c ON p.id_categoria = c.id_categoria
-WHERE p.quantidade < p.estoque_minimo AND p.ativo = TRUE
-UNION ALL
-SELECT 
-    'Ingrediente' AS tipo_item,
-    i.id_ingrediente AS id,
-    i.nome_ingrediente AS item,
-    'Insumo de Produção' AS categoria,
-    i.quantidade_estoque AS estoque_atual,
-    i.estoque_minimo
-FROM Ingrediente i
-WHERE i.quantidade_estoque < i.estoque_minimo;
-
--- G03 — Qual o número de comandas atendidas e o valor total vendido por funcionário?
--- Atende: P3 (avaliação de desempenho da equipe de atendimento)
-SELECT 
+    DATE_FORMAT(v.data_hora_lancamento, '%Y-%m') AS periodo_mes,
     f.id_funcionario,
     f.nome_funcionario,
     f.cargo,
-    COUNT(DISTINCT c.id_comanda) AS total_comandas_atendidas,
-    SUM(nf.valor_total) AS faturamento_gerado
-FROM Funcionario f
-INNER JOIN Comanda c ON f.id_funcionario = c.id_funcionario
-INNER JOIN Venda v ON c.id_comanda = v.id_comanda
-INNER JOIN Nota_Fiscal nf ON v.id_venda = nf.id_venda
-WHERE nf.status = 'emitida'
-GROUP BY f.id_funcionario, f.nome_funcionario, f.cargo
-ORDER BY faturamento_gerado DESC;
+    COUNT(DISTINCT c.id_comanda) AS comandas_atendidas,
+    COUNT(v.id_venda) AS quantidade_vendas_realizadas
+FROM Venda v
+INNER JOIN Comanda c ON v.id_comanda = c.id_comanda
+INNER JOIN Funcionario f ON c.id_funcionario = f.id_funcionario
+GROUP BY DATE_FORMAT(v.data_hora_lancamento, '%Y-%m'), f.id_funcionario, f.nome_funcionario, f.cargo
+ORDER BY periodo_mes, quantidade_vendas_realizadas DESC;
 
--- G04 — Quais são os 5 produtos mais vendidos em receita e volume?
--- Atende: P4 (análise de giro de cardápio e curva ABC de produtos)
+-- G03 — Qual o ticket médio obtido por venda em cada período?
+-- Atende: P02 (dificuldade no acompanhamento do faturamento e análise de consumo)
+SELECT 
+    DATE_FORMAT(nf.data_emissao, '%Y-%m') AS periodo_mes,
+    COUNT(nf.id_venda) AS total_vendas,
+    ROUND(AVG(nf.valor_total), 2) AS ticket_medio,
+    MIN(nf.valor_total) AS menor_venda,
+    MAX(nf.valor_total) AS maior_venda
+FROM Nota_Fiscal nf
+WHERE nf.status = 'emitida'
+GROUP BY DATE_FORMAT(nf.data_emissao, '%Y-%m')
+ORDER BY periodo_mes;
+
+-- G04 — Quais são os produtos mais vendidos em quantidade e receita?
+-- Atende: P03 (inconsistências no controle de estoque e giro de mercadorias) e P02 (faturamento)
 SELECT 
     p.id_produto,
     p.nome_produto,
-    c.descricao AS categoria,
-    SUM(iv.quantidade_vendida) AS volume_total_vendido,
-    ROUND(SUM(iv.quantidade_vendida * iv.preco_unitario), 2) AS receita_total
+    p.unidade_medida,
+    SUM(iv.quantidade_vendida) AS quantidade_total_comercializada,
+    ROUND(SUM(iv.quantidade_vendida * iv.preco_unitario), 2) AS receita_gerada
 FROM Item_venda iv
 INNER JOIN Produto p ON iv.id_produto = p.id_produto
-LEFT JOIN Categoria c ON p.id_categoria = c.id_categoria
-GROUP BY p.id_produto, p.nome_produto, c.descricao
-ORDER BY receita_total DESC
-LIMIT 5;
+GROUP BY p.id_produto, p.nome_produto, p.unidade_medida
+ORDER BY quantidade_total_comercializada DESC, receita_gerada DESC
+LIMIT 10;
 
--- G05 — Qual o montante de contas a pagar vencidas por fornecedor?
--- Atende: P5 (gestão de inadimplência e controle de passivos com fornecedores)
+-- G05 — Qual o faturamento gerado por cada categoria de produto?
+-- Atende: P02 (dificuldade no acompanhamento do faturamento) e P06 (informações descentralizadas)
 SELECT 
+    IFNULL(cat.id_categoria, 0) AS id_categoria,
+    IFNULL(cat.descricao, 'Sem Categoria') AS categoria,
+    COUNT(iv.id_item_venda) AS qtd_itens_vendidos,
+    ROUND(SUM(iv.quantidade_vendida * iv.preco_unitario), 2) AS faturamento_categoria
+FROM Item_venda iv
+INNER JOIN Produto p ON iv.id_produto = p.id_produto
+LEFT JOIN Categoria cat ON p.id_categoria = cat.id_categoria
+GROUP BY cat.id_categoria, cat.descricao
+ORDER BY faturamento_categoria DESC;
+
+-- G06 — Qual o volume de compras e o valor total gasto com cada fornecedor?
+-- Atende: P04 (dificuldade no controle de compras e fornecedores)
+SELECT 
+    forn.id_fornecedor,
     forn.nome_fornecedor,
-    COUNT(cp.id_conta) AS qtd_boletos_vencidos,
-    SUM(cp.valor) AS divida_acumulada,
-    MIN(cp.data_vencimento) AS vencimento_mais_antigo
+    forn.CNPJ,
+    COUNT(ab.id_abastecimento) AS total_abastecimentos,
+    SUM(ab.valor_total) AS total_gasto_compras
+FROM Fornecedor forn
+INNER JOIN Abastecimento ab ON forn.id_fornecedor = ab.id_fornecedor
+GROUP BY forn.id_fornecedor, forn.nome_fornecedor, forn.CNPJ
+ORDER BY total_gasto_compras DESC;
+
+-- G07 — Quais produtos e ingredientes estão com quantidade igual ou abaixo do estoque mínimo?
+-- Atende: P03 (inconsistências no controle de estoque e identificação de reposição - RN15)
+SELECT 
+    'Produto' AS tipo_item,
+    p.id_produto AS codigo,
+    p.nome_produto AS descricao,
+    p.unidade_medida,
+    p.quantidade AS estoque_atual,
+    p.estoque_minimo,
+    (p.estoque_minimo - p.quantidade) AS deficit_reposicao
+FROM Produto p
+WHERE p.quantidade <= p.estoque_minimo AND p.ativo = TRUE
+UNION ALL
+SELECT 
+    'Ingrediente' AS tipo_item,
+    i.id_ingrediente AS codigo,
+    i.nome_ingrediente AS descricao,
+    i.unidade_medida,
+    i.quantidade_estoque AS estoque_atual,
+    i.estoque_minimo,
+    (i.estoque_minimo - i.quantidade_estoque) AS deficit_reposicao
+FROM Ingrediente i
+WHERE i.quantidade_estoque <= i.estoque_minimo
+ORDER BY tipo_item, deficit_reposicao DESC;
+
+-- G08 — Quais são as contas a pagar em aberto e o montante pendente por situação de vencimento?
+-- Atende: P04 (dificuldade no controle de compras, fornecedores e contas a pagar)
+SELECT 
+    cp.id_conta,
+    forn.nome_fornecedor,
+    i.nome_ingrediente,
+    cp.valor,
+    cp.data_emissao,
+    cp.data_vencimento,
+    CASE 
+        WHEN cp.data_vencimento < CURDATE() THEN 'Vencida'
+        ELSE 'A vencer'
+    END AS situacao_vencimento
 FROM Contas_pagar cp
 INNER JOIN Abastecimento ab ON cp.id_abastecimento = ab.id_abastecimento
 INNER JOIN Fornecedor forn ON ab.id_fornecedor = forn.id_fornecedor
-WHERE cp.status = 'pendente' 
-  AND cp.data_vencimento < CURDATE()
-GROUP BY forn.id_fornecedor, forn.nome_fornecedor
-ORDER BY divida_acumulada DESC;
+INNER JOIN Ingrediente i ON ab.id_ingrediente = i.id_ingrediente
+WHERE cp.status = 'pendente'
+ORDER BY cp.data_vencimento ASC;
 
 -- Consultas de Auditoria.
 

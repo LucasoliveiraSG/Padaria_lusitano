@@ -45,7 +45,7 @@
 **O Que Foi Levantado**
 O levantamento de requisitos mapeou os processos operacionais, regras de negócio, volumetria diária e os gargalos do estabelecimento.
 
-**Documento Completo:** [Acesse o Relatório de Levantamento Detalhado](./levantamento/levantamento.md)
+**Documento Completo:** [Acesse o Relatório de Levantamento Detalhado](/Levantamento/levantamento.md)
 
 
 ### Processos de negócio (todos os grupos)
@@ -336,7 +336,7 @@ Também poderão ser desenvolvidas recomendações para reposição de estoque, 
 
 Essas aplicações dependem da disponibilidade de dados históricos consistentes e de uma futura implementação de ferramentas analíticas.
 
-### 1.10.5 — Tabela de Rastreabilidade
+### Tabela de Rastreabilidade
 
 A tabela a seguir relaciona os problemas identificados na Padaria Forno Lusitano aos indicadores propostos e às estruturas do banco de dados que permitem acompanhar cada situação.
 
@@ -370,7 +370,7 @@ O modelo lógico foi desenvolvido com o Brmodelo.
 
 **SGBD:** MySQL 8.0.16+ (`utf8mb4`). O SQL contém, em sequência, `DROP DATABASE IF EXISTS`, `CREATE DATABASE`, 14 `CREATE TABLE`, PK/FK/`CHECK`/`UNIQUE`, dados fictícios, exemplos `SELECT` com `JOIN`, operações `UPDATE` e `DELETE` demonstradas em transação com `ROLLBACK`, 5 consultas gerenciais `G01`–`G05`, 5 consultas de auditoria `A01`–`A05` e contagens de registros.
 
-Arquivo para a branch `main`: [`docs/script.sql`](docs/script.sql).
+Arquivo para a branch `main`: [`Docs/script.sql`](Docs/script.sql).
 
 ### Consulta gerencial e regra de auditoria
 
@@ -394,7 +394,7 @@ Auditorias de integridade:
 
 ## 4\. Massa de Dados
 
-**Arquivo na branch `main`:** [`docs/massa_de_dados.sql`](./docs/massa_de_dados.sql) *(compatível com MySQL 8.0+ / `utf8mb4`, executado na sequência direta da criação das tabelas do [`docs/script.sql`](./docs/script.sql))*.
+**Arquivo na branch `main`:** [`docs/massa_de_dados.sql`](Docs/massa_de_dados.sql) *(compatível com MySQL 8.0+ / `utf8mb4`, executado na sequência direta da criação das tabelas do [`docs/script.sql`](Docs/script.sql))*.
 
 > **Conformidade e Privacidade (LGPD — RN13):** Todos os dados inseridos neste script são **integralmente fictícios**. Nomes de clientes e colaboradores, CPFs, CNPJs, telefones, endereços, e-mails e chaves de acesso de notas fiscais foram gerados sinteticamente para fins acadêmicos, sem utilizar dados reais de clientes, funcionários ou fornecedores da Padaria Forno Lusitano.
 
@@ -427,7 +427,7 @@ A quantidade de registros em cada uma das tabelas foi dimensionada diretamente a
 | DER conceitual, criado no brModelo | [`modelo_conceitual.jpg`](modelo_conceitual.jpg) |
 | Modelo lógico, criado no brModelo | [`modelo_logico.jpeg`](modelo_logico.jpg) |
 | Dicionário de dados | [`dicionario_dados_petshop.html`](Dicionario.html) |
-| Levantamento da entrevista | [`levantamento/levantamento.md`](levantamento/levantamento.md) |
+| Levantamento da entrevista | [`levantamento/levantamento.md`](Levantamento/levantamento.md) |
 | Script SQL completo e massa de dados | [`Docs/script.sql`](Docs/script.sql) |
 | Massa de dados | [`Docs/massa_de_dados.sql`](Docs/massa_de_dados.sql) |
 | Comprovante visita tecnica | [`Comprovante visita`](comprovante_visita.jpeg) |
