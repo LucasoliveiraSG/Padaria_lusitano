@@ -425,12 +425,12 @@ A quantidade de registros em cada uma das tabelas foi dimensionada diretamente a
 | :--- | :--- |
 |Relatório Técnico final | [`README.md`](README.md) |
 | DER conceitual, criado no brModelo | [`modelo_conceitual.jpg`](modelo_conceitual.jpg) |
-| Modelo lógico, criado no brModelo | [`modelo_logico.jpeg`](modelo_logico.jpg) |
-| Dicionário de dados | [`dicionario_dados_petshop.html`](Dicionario.html) |
+| Modelo lógico, criado no brModelo | [`modelo_logico.jpg`](modelo_logico.jpg) |
+| Dicionário de dados | [`Dicionario.html`](Dicionario.html) |
 | Levantamento da entrevista | [`levantamento/levantamento.md`](Levantamento/levantamento.md) |
 | Script SQL completo e massa de dados | [`Docs/script.sql`](Docs/script.sql) |
 | Massa de dados | [`Docs/massa_de_dados.sql`](Docs/massa_de_dados.sql) |
-| Comprovante visita tecnica | [`Comprovante visita`](comprovante_visita.jpeg) |
+| Comprovante da visita técnica | [`comprovante_visita.jpeg`](comprovante_visita.jpeg) |
 
 ---
 
