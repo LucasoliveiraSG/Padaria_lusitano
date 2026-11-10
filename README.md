@@ -68,7 +68,7 @@ Nesta seção, descrevem-se os principais fluxos operacionais mapeados na rotina
    Rotina de gerenciamento e verificação periódica dos insumos e produtos prontos estocados nos diferentes setores (copa, bebidas, pães, doces e laticínios). O processo visa monitorar a disponibilidade de mercadorias para assegurar o abastecimento contínuo e evitar rupturas durante as 15 horas diárias de funcionamento (das 07:00h às 22:00h).
 
 6. **Cadastro de Clientes para Entregas:**
-   Processo voltado para o atendimento na modalidade de *delivery* ou encomendas externas. Quando o cliente solicita um pedido fora do salão, a equipe realiza o registro dos dados cadastrais essenciais: **nome, telefone de contato e endereço completo**, garantindo a rastreabilidade logística e o histórico de atendimento.
+   Processo voltado para o atendimento na modalidade de *delivery* ou encomendas externas. Quando o cliente solicita um pedido fora do salão, a equipe realiza o registro dos dados cadastrais essenciais: **nome, telefone de contato e endereço completo**, garantindo a rastreabilidade logística e o histórico de atendimento. O processo de entrega é delimitado apenas aos arredores da região, a taxa de entrega é cobrada pelo aplicativo de *delivery*.
 
 7. **Produção própria de pães e doces:**
    Processo operacional realizado na cozinha e na área de panificação, responsável por transformar insumos em produtos prontos para venda. A produção segue receitas padronizadas que definem os ingredientes e as quantidades necessárias para cada item. A equipe registra o que foi produzido, a quantidade e a data, e os ingredientes consumidos são baixados do estoque. Os produtos fabricados entram no estoque de pães e doces, ficando disponíveis para o atendimento no salão e no balcão.
@@ -84,6 +84,9 @@ Nesta seção, descrevem-se os principais fluxos operacionais mapeados na rotina
 
 11. **Controle de validade e perdas:**
    Rotina de verificação periódica das datas de validade dos produtos e insumos estocados, com atenção especial aos perecíveis (laticínios, frios, pães e doces). Itens vencidos, danificados ou produzidos em excesso e não vendidos são retirados de circulação e registrados como perda, com produto, quantidade, data e motivo. Esse registro dá baixa no estoque e fornece dados para ajustar compras e produção, reduzindo o desperdício.
+
+12. **Pesagem e cobrança do Self-Service**
+   O cliente recebe uma comanda ao entrar e monta seu prato à vontade. A balança é regulada e desconta o peso do prato e multiplica o peso liquido pelo preço do quilo. bebidas e sobremesas contém preço fixo e são adicionadas a comanda.
 
 ### Requisitos (todos os grupos)
 
@@ -136,6 +139,14 @@ Nesta seção, descrevem-se os principais fluxos operacionais mapeados na rotina
 |Ausência da Regra de Negócio "Normas sanitárias"|Foi adicionada a Regra de Negócio que estabelece normas sanitárias `RN11`| Foi adicionada pois garante que os alimentos sejam preparadas de forma segura.
 |Ausência da Regra de Negócio "Emissão de cupom fiscal"|Foi adicionada a Regra de Negócio que justifica a emissão de cupom fiscal `RN16`|Foi adicionada pois é considerada uma obrigação legal e toda venda precisa ser registrada.
 |Ausência da Regra de Negócio "LGPD para CPF e endereço de clientes"|Foi adicionada a Regra de Negócio que estabelece a proteção de dados de CPF e endereço `RN13`|Foi adicionada pois são dados sensíveis de identificação de clientes e devem ser protegidas.
+|Ausência de Processo de negócio de pesagem e cobrança do Self-Service| Foi adicionado processo de negócio que estabelece a pesagem e cobrança do Self-Service | Foi adicionada pois define o calculo do peso líquido multiplicado pelo quilo.
+|Parcialidade do Processo de negócio de encomendas e entrega| Foi adicionado processo de negócio que estabelece encomendas e entregas| Foi adicionada para delimitar o raio e taxa de entregas pela região
+|Ausência de Processo de negócio de produção própria de pães e doces | Foi adicionado processo de negócio que estabelece a produção própria de pães e doces | Foi adicionada para estabelecer o seguimento de receitas padronizadas que definem os ingredientes e quantidades necessárias para cada item.
+|Ausência de Processo de negócio de controle de estoque | Foi adicionado processo de negócio que estabelece o controle de estoque| Foi adicionada para definir data e horário de movimentações no estoque.
+|Ausência de Processo de negócio de compra de insumos e cadastro de fornecedores| Foi adicionado processo de negócio que estabelece a compra de insumos e cadastros de fornecedores| Foi adicionada pois estabelece o processo administrativo de reposição de matérias-primas e mercadorias de revenda .
+|Ausência de Processo de negócio de recebimento da mercadoria| Foi adicionado processo de negócio que estabelece o recebimento da mercadoria| Foi adicionada pois registraos itens recebidos com o pedido de compra e a nota fiscal do fornecedor, verificando quantidade, qualidade, temperatura (quando aplicável) e prazo de validade.
+|Ausência de Processo de negócio de escala de turno dos 25 colaboradores| Foi adicionado processo de negócio que estabelece a escala de turno dos 25 colaboradores| Foi adicionada o processo de gestão de pessoal que organiza a jornada dos 25 colaboradores de modo a cobrir as 15 horas diárias de funcionamento.
+|Ausência de Processo de negócio de controle de validade e perdas| Foi adicionado processo de negócio que estabelece o controle de validade e perdas|Foi adicionada por conter a rotina de verificação periódica das datas de validade dos produtos e insumos estocados, com atenção especial aos perecíveis (laticínios, frios, pães e doces).
 
 
 &nbsp;
