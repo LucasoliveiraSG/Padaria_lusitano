@@ -361,14 +361,6 @@ A tabela a seguir relaciona os problemas identificados na Padaria Forno Lusitano
 | **P05 — Sobrecarga operacional** | Sem KPI específico definido | A consulta `G03` permite acompanhar as comandas atendidas e o faturamento por funcionário. |
 | **P06 — Informações descentralizadas** | Sem KPI específico definido | Os relacionamentos entre as tabelas permitem centralizar informações de vendas, clientes, funcionários, produtos, fornecedores e registros financeiros. |
 
-**Utilização de Inteligência Artificial (IA)**
-
-Foi utilizada a ferramenta ChatGPT como apoio na identificação e análise de indicadores-chave de desempenho (KPIs) aplicáveis ao contexto da Padaria Forno Lusitano, considerando indicadores utilizados em estabelecimentos do mesmo segmento.
-
-A ferramenta também auxiliou no levantamento de possibilidades de aplicação de Business Intelligence (BI), Analytics e Inteligência Artificial (IA), como análise de vendas, previsão de demanda e recomendações para reposição de estoque.
-
-As sugestões foram avaliadas considerando as necessidades operacionais da padaria e os dados disponíveis no modelo de banco de dados. A equipe também considerou a necessidade de validar cada KPI por meio de consultas SQL, garantindo que os indicadores propostos possam ser efetivamente calculados.
-
 ---
 
 ## 2\. Modelo Lógico Relacional
