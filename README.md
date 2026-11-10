@@ -129,7 +129,14 @@ Nesta seção, descrevem-se os principais fluxos operacionais mapeados na rotina
 | :---- | :---- | :---- |
 | Ausência da entidade `fornecedor` no DER | foi adicionada a entidade `fornecedor` com atributos de `id`, `nome`, `telefone`, `CNPJ`,`email`, `ativo`. | Sem ela não é possvel identificar quem abastece o local e nem ter informações de contato. |
 | Dissolvida a tabela `pedido` | Foi adicionada a entidade associativa `venda` com atributos de `data_hora_lancamento`, `subtotal`,`preco_unitario` e `quantidade_vendida`. | Foi adicionada a entidade associativa como forma de resolver relacionamentos (N:N) |
-|
+|Ausência da Regra de Negócio "Multa por perda de comanda"|Foi adicionada a Regra de Negócio que estabelece a multa por perda de comanda `RN07`| Foi adicionada pois ao perder a comanda não é possível identificar oque o cliente consumiu, portanto a multa cobra o prejuízo.
+|Ausência da Regra de Negócio "Preço por quilo do Self-Service"| Foi adicionada a Regra de Negócio que estabelece o preço por quilo do Self-Service `RN08`| Foi adicionada pois o valor da refeição depende do pesodo prato, o preço por quilo garante uma cobrança proporcional.
+|Ausência da Regra de Negócio "Taxa e raio de entrega"|Foi adicionada a Regra de Negócio que estabelece a taxa e raio da entrega `RN09`| Foi adicionada pois delimita até onde a padaria consegue atender. 
+|Ausência da Regra de Negócio "Descarte de produtos vencidos"|Foi adicionada a Regra de Negócio que exige o Descarte de 'produtos' vencidos `RN10`| Foi adicionada pois garante que não há futuras complicações com a vigilância sanitária e proteja a saúde do cliente.
+|Ausência da Regra de Negócio "Normas sanitárias"|Foi adicionada a Regra de Negócio que estabelece normas sanitárias `RN11`| Foi adicionada pois garante que os alimentos sejam preparadas de forma segura.
+|Ausência da Regra de Negócio "Emissão de cupom fiscal"|Foi adicionada a Regra de Negócio que justifica a emissão de cupom fiscal `RN16`|Foi adicionada pois é considerada uma obrigação legal e toda venda precisa ser registrada.
+|Ausência da Regra de Negócio "LGPD para CPF e endereço de clientes"|Foi adicionada a Regra de Negócio que estabelece a proteção de dados de CPF e endereço `RN13`|Foi adicionada pois são dados sensíveis de identificação de clientes e devem ser protegidas.
+
 
 &nbsp;
 
