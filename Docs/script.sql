@@ -503,3 +503,37 @@ SELECT
 FROM Contas_pagar cp
 INNER JOIN Abastecimento ab ON cp.id_abastecimento = ab.id_abastecimento
 WHERE cp.valor <> ab.valor_total;
+
+-- 1. Reajuste de preço de um produto específico (ex: Pão Francês)
+-- Atende: RF04 (alteração de preços de produtos) e manutenção de cardápio
+UPDATE Produto 
+SET preco = 17.90 
+WHERE id_produto = 1 AND ativo = TRUE;
+
+-- 2. Atualização do estoque mínimo e quantidade de um ingrediente crítico
+-- Atende: Gestão de insumos e controle preventivo de rupturas
+UPDATE Ingrediente 
+SET quantidade_estoque = quantidade_estoque + 50, 
+    estoque_minimo = 70 
+WHERE id_ingrediente = 4;
+
+-- 3. Alteração do status de uma comanda para 'paga' e registro do horário de fechamento
+-- Atende: RN01 e RN04 (encerramento do consumo no momento do pagamento)
+UPDATE Comanda 
+SET status_comanda = 'paga', 
+    horario_fechamento = CURRENT_TIMESTAMP 
+WHERE id_comanda = 3 AND status_comanda = 'aberta';
+
+-- 4. Atualização de dados cadastrais (telefone e logradouro) de um cliente
+-- Atende: Atualização de cadastro para entregas (delivery)
+UPDATE Cliente 
+SET telefone = '(11) 98999-8888', 
+    logradouro = 'Rua das Margaridas, 450' 
+WHERE id_cliente = 1;
+
+-- 5. Inativação lógica de um fornecedor que encerrou as atividades
+-- Atende: Gestão de parceiros comerciais sem violar restrições de FK em Abastecimento
+UPDATE Fornecedor 
+SET ativo = FALSE, 
+    email = NULL 
+WHERE id_fornecedor = 14;
