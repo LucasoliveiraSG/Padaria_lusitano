@@ -361,14 +361,6 @@ A tabela a seguir relaciona os problemas identificados na Padaria Forno Lusitano
 | **P05 — Sobrecarga operacional** | Sem KPI específico definido | A consulta `G03` permite acompanhar as comandas atendidas e o faturamento por funcionário. |
 | **P06 — Informações descentralizadas** | Sem KPI específico definido | Os relacionamentos entre as tabelas permitem centralizar informações de vendas, clientes, funcionários, produtos, fornecedores e registros financeiros. |
 
-**Utilização de Inteligência Artificial (IA)**
-
-Foi utilizada a ferramenta ChatGPT como apoio na identificação e análise de indicadores-chave de desempenho (KPIs) aplicáveis ao contexto da Padaria Forno Lusitano, considerando indicadores utilizados em estabelecimentos do mesmo segmento.
-
-A ferramenta também auxiliou no levantamento de possibilidades de aplicação de Business Intelligence (BI), Analytics e Inteligência Artificial (IA), como análise de vendas, previsão de demanda e recomendações para reposição de estoque.
-
-As sugestões foram avaliadas considerando as necessidades operacionais da padaria e os dados disponíveis no modelo de banco de dados. A equipe também considerou a necessidade de validar cada KPI por meio de consultas SQL, garantindo que os indicadores propostos possam ser efetivamente calculados.
-
 ---
 
 ## 2\. Modelo Lógico Relacional
@@ -466,13 +458,25 @@ A massa de dados foi elaborada com registros fictícios para simular o funcionam
 
 | Item | Registro |
 |---|---|
-| **Ferramenta e etapa** | Claude (Anthropic), na etapa de geração da massa de dados fictícia (INSERTs em MySQL) para as 14 tabelas do modelo lógico, a partir do script CREATE TABLE já corrigido. |
-| **Motivação** | Popular o banco com um volume de dados suficiente para testar as relações entre as tabelas, sem digitar centenas de registros à mão e mantendo a coerência entre chaves estrangeiras, valores e datas. |
-| **Prompt(s) utilizados** | “com base em todas as tabelas, crie uma massa de dados fictícia para cada tabela, cada uma delas contendo um total de 15 cadastro, usando como base a linguagem do MySql”; junto foi enviado tanto a imagem do modelo lógico, tanto o sctipt do SQL contendo os create table. |
-| **Resposta recebida** | Arquivo `.sql` com um INSERT por tabela, na ordem das chaves estrangeiras. Os dados seguem as regras do modelo: subtotal = quantidade × preço, valor da nota = soma dos itens da comanda, troco só em pagamento em dinheiro, chave de acesso de 44 dígitos e contas a pagar pagas, abertas e vencidas.|
-| **Fontes consultadas e verificadas** | A IA não usou fontes externas; os nomes, CPFs, CNPJs, telefones e e-mails são inventados. A conferência foi feita por script: contagem de linhas por tabela, ids em sequência, chaves estrangeiras sem registro órfão, valores únicos sem repetição e contas de subtotal, total da nota, troco e abastecimento.|
-| **Trechos rejeitados ou corrigidos** | Houveram tabelas em que tinha certas ids que não existiam em outros tabelas, sendo usadas como chave estrangeira, foram colocadas manualmente as ids corretas para a correção. |
-| **Justificativa da escolha final** | Foram mantidos dados simples e rastreáveis (um item por comanda, valores redondos, datas de out. e nov. de 2026) para que as contas fechem e qualquer erro de chave apareça logo; os casos de cancelamento, estorno e conta vencida foram incluídos de propósito para exercitar os status. |
-| **Reflexão crítica** | Usar a IA para fazer a massa de dados facilitou muito, já que criar uma massa de dados enorme como essa demoraria um bom tempo, porém, por conter muitos dados, houveram algumas repetições de dados e erros de ids alocadas erradas, então mesmo que ao usar a IA tenha  facilitado com os dados, ainda tivemos que mexer nele manualmente. Isso mostra que mesmo a IA sendo muito boa, ela também comete erros. |
+| **Ferramenta e etapa** | Claude (Anthropic), durante a geração da massa de dados fictícia em SQL (INSERTs) para as 14 tabelas do modelo lógico, utilizando como referência o script CREATE TABLE corrigido. |
+| **Motivação** | Gerar um volume de dados suficiente para testar os relacionamentos entre as tabelas, reduzindo a necessidade de inserir centenas de registros manualmente e mantendo a coerência entre chaves estrangeiras, valores e datas. |
+| **Prompt(s) utilizados** | "Com base em todas as tabelas, crie uma massa de dados fictícia para cada tabela, cada uma delas contendo um total de 15 cadastros, usando como base a linguagem MySQL". Também foram fornecidos a imagem do modelo lógico e o script SQL contendo os comandos CREATE TABLE. |
+| **Resposta recebida** | Arquivo `.sql` com comandos INSERT para as tabelas, respeitando a ordem das dependências entre as chaves estrangeiras. A solicitação inicial foi de 15 registros por tabela, mas a massa de dados passou por ajustes posteriores para atender às necessidades de teste e validação do projeto. Os dados foram elaborados considerando regras de consistência, como subtotal igual à quantidade multiplicada pelo preço, valor da nota correspondente à soma dos itens, troco somente em pagamentos em dinheiro, chave de acesso com 44 dígitos e contas a pagar com diferentes situações. |
+| **Fontes consultadas e verificadas** | A IA não utilizou fontes externas. Nomes, CPFs, CNPJs, telefones e e-mails foram criados ficticiamente. A conferência foi realizada por meio de verificações no script, incluindo contagem de registros, sequência de IDs, integridade das chaves estrangeiras e consistência dos valores de subtotal, nota fiscal, troco e abastecimento. |
+| **Trechos rejeitados ou corrigidos** | Foram identificados registros que utilizavam IDs inexistentes em outras tabelas como chaves estrangeiras. Esses relacionamentos precisaram ser corrigidos manualmente, substituindo as IDs incorretas por referências válidas. |
+| **Justificativa da escolha final** | Foram mantidos dados simples e rastreáveis, com valores e datas organizados para facilitar a validação das operações. Também foram incluídos exemplos de cancelamento, estorno e contas vencidas para testar diferentes situações e status do sistema. |
+| **Reflexão crítica** | A utilização da IA facilitou a criação da massa de dados, que exigiria bastante tempo se fosse elaborada manualmente. Entretanto, devido ao grande volume de registros, ocorreram repetições e erros na atribuição de IDs. Por isso, foi necessário revisar e corrigir parte dos dados manualmente. Isso demonstra que, mesmo sendo uma ferramenta útil, a IA não elimina a necessidade de conferência humana. |
 
+### 6.3 ChatGPT — apoio à elaboração da proposta de arquitetura analítica para BI e IA
+
+| Item | Registro |
+|---|---|
+| **Ferramenta e etapa** | ChatGPT (OpenAI), em 09/11/2026, durante a elaboração e revisão da seção 1.10 — Proposta de Arquitetura Analítica para BI e IA. |
+| **Motivação** | Auxiliar na organização da proposta analítica do projeto, relacionando os problemas identificados no levantamento do estabelecimento aos indicadores de desempenho (KPIs), às consultas gerenciais do banco de dados e às possíveis aplicações de Business Intelligence (BI) e Inteligência Artificial (IA). |
+| **Prompt(s) utilizados** | Foram realizadas solicitações para analisar os problemas identificados no levantamento, propor indicadores adequados à realidade da padaria, relacionar os KPIs às consultas gerenciais e às tabelas do banco de dados e revisar a coerência da arquitetura analítica apresentada no README. |
+| **Resposta recebida** | Sugestões para estruturar a proposta analítica, organizar os problemas identificados, definir e descrever os KPIs, relacionar indicadores às consultas gerenciais G01–G05 e elaborar a tabela de rastreabilidade. Também foram fornecidas orientações para diferenciar o uso de BI, Analytics e IA dentro da realidade do estabelecimento. |
+| **Fontes consultadas e verificadas** | Não foram utilizadas fontes externas pela IA. A análise foi realizada com base nas informações do levantamento, na estrutura do banco de dados, nas consultas SQL e nos conteúdos do README compartilhados durante a elaboração da seção. |
+| **Trechos rejeitados ou corrigidos** | As sugestões não foram aceitas automaticamente. Foram revisadas as relações entre problemas, indicadores e consultas, evitando afirmar que uma consulta atendia diretamente a um KPI quando sua finalidade era apenas complementar. Também foram ajustadas a numeração da seção, a organização dos tópicos e a correspondência entre os indicadores e a estrutura do banco de dados. |
+| **Justificativa da escolha final** | Foram aproveitadas as sugestões que apresentavam coerência com os processos da padaria e com as informações disponíveis no banco de dados. A proposta final foi organizada para apresentar indicadores mensuráveis e aplicações analíticas compatíveis com o contexto do projeto. |
+| **Reflexão crítica** | O ChatGPT contribuiu para organizar as ideias e facilitar a construção da proposta de BI e IA. Entretanto, foi necessário avaliar as sugestões, conferir sua compatibilidade com as tabelas e consultas existentes e realizar ajustes para evitar indicadores ou funcionalidades sem sustentação nos dados disponíveis. A ferramenta atuou como apoio à elaboração, não substituindo a análise e as decisões dos integrantes do grupo. |
 ---
