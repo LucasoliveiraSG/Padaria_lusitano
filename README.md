@@ -435,6 +435,7 @@ A massa de dados foi elaborada com registros fictícios para simular o funcionam
 | Script SQL | [`script.sql`](Docs/script.sql) |
 | Massa de dados | [`massa_de_dados.sql`](Docs/massa_de_dados.sql) |
 | Comprovante da visita técnica | [`comprovante_visita.jpeg`](comprovante_visita.jpeg) |
+| Apresentação final | [`Apresentação_padaria_lusitano.pdf`](Apresentação_padaria_lusitano.pdf) |
 
 ---
 
